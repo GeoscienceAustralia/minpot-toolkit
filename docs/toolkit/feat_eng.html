@@ -1,0 +1,2186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>toolkit.feat_eng API documentation</title>
+<meta name="description" content="Feature Engineering module
+This module is used to create mappable proxies from geophysical models …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>toolkit.feat_eng</code></h1>
+</header>
+<section id="section-intro">
+<h2 id="feature-engineering-module">Feature Engineering Module</h2>
+<p>This module is used to create mappable proxies from geophysical models.</p>
+<h2 id="contacts">Contacts</h2>
+<p>Lachlan Adams
+- Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Feature Engineering module
+-----------------
+This module is used to create mappable proxies from geophysical models.
+
+
+Contacts
+--------
+Lachlan Adams
+    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
+    
+    
+&#34;&#34;&#34;
+
+import numpy as np
+import numba, time
+import toolkit.functions as fn
+import toolkit.plotting as pt
+from scipy.interpolate import RegularGridInterpolator
+from scipy import signal
+
+class FeatureManager():    
+    def __init__(self, commandList, features):
+        &#34;&#34;&#34;
+        A class to facilitate the generation of features from input geophysical 
+        models, given input commands from xml configuration file.
+        
+        
+        Parameters
+        ----------
+        model_dict: dictionary
+            A dictionary of the geophysical models which are available for use.
+        
+        commandList: list
+            A list of commands read from XML config file.
+        
+        features: xml.ElementTree node
+            Nodes of the XML config file which describe features that are to be
+            generated.
+            
+        
+        Calls
+        -----
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        self.features = features
+        
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        
+        #Compile distance calculation function
+        a = np.array([0, 1]).astype(&#34;float32&#34;)
+        _ = cosdist_to_feat(a, a, a, a, a, a, a, a, a, a)
+        _ = sindist_to_feat(a, a, a, a, a, a, a, a, a, a, a, a)
+    #end func
+    
+    def Process(self, model_dict):
+        &#34;&#34;&#34;
+        Generates a &#34;feature&#34; object for each feature defined in the xml config 
+        file.
+        
+        
+        Calls
+        -----
+        feature_object
+        
+        feature_object.operate_on_existing_features
+        
+        feature_object.generate_feature
+        
+        feature_object.distance_to_feature
+        
+        
+        &#34;&#34;&#34;
+        self.feature_dict = {}
+        for feature in self.features:
+            t0 = time.time()
+            key = feature.attrib[&#34;name&#34;]
+            if &#34;use_existing_features&#34; in feature.attrib:
+                use_existing_features = \
+                    fn.changetype(feature.attrib[&#34;use_existing_features&#34;], 
+                                  bool)
+            else:
+                use_existing_features = False
+            #end if
+            if use_existing_features:
+                feat = feature_object(feature)
+                feat.operate_on_existing_features(self.feature_dict)
+                feat.distance_to_feature()
+            else:
+                feat = feature_object(feature)
+                feat.generate_feature(model_dict)
+                feat.distance_to_feature()
+            #end if
+            self.feature_dict[key] = feat
+            print(key, time.time() - t0)
+        #end for
+    #end func    
+#end class
+    
+class feature_object():    
+    def __init__(self, feature):
+        &#34;&#34;&#34;
+        A class to facilitate the engineering of a feature using input 
+        geophysical models. 
+        
+        
+        Parameters
+        ----------
+        feature: xml.ElementTree node
+            A node which contains information and criteria required to generate
+            the feature from the input geophysical models.
+            
+        model_dict: dictionary
+            A dictionary containing the required input geophysical models. 
+            Optional if feature is to be generated from already existing 
+            features.
+            
+        feature_dict: dictionary
+            A dictionary containing already generated features. Optional if the
+            feature has criteria which only depend on geophysical models.
+            
+        generate_plots: boolean
+            Flag to allow the generation of a figure which represents the 
+            feature.
+            
+            
+        Calls
+        -----
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        self.feature = feature
+        self.name = feature.attrib[&#34;name&#34;]
+        if &#34;generate_plots&#34; in feature.attrib:
+            self.generate_plots = \
+                fn.changetype(feature.attrib[&#34;generate_plots&#34;], bool)
+        else:
+            self.generate_plots = False
+        #end if
+    #end func
+    
+    def generate_feature(self, model_dict):
+        &#34;&#34;&#34;
+        Routine to calculate function values for the type of feature under 
+        investigation e.g. original values, gradient, etc. 
+        
+        
+        Calls
+        -----
+        functions.changetype
+        
+        project_onto_surface
+        
+        project_from_surface
+        
+        truth_array_from_gradient_sph
+        
+        truth_array_from_values
+        
+        
+        &#34;&#34;&#34;
+        
+        arrays = []
+        isfinite_list = []
+        criteria = self.feature.findall(&#34;criterion&#34;)
+        truth_list = list()
+        for criterion in criteria:
+            truth_list.append(&#34;project_to_surface&#34; in criterion.attrib)
+        #end for
+        if np.all(truth_list) or ~np.any(truth_list):
+            proj_from_surface = False
+        else:
+            proj_from_surface = True
+        #end if
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            model_type = criterion.attrib[&#34;model_type&#34;]
+            attribute, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            proj_to_surface = &#34;project_to_surface&#34; in criterion.attrib
+            
+            model = model_dict[model_type]
+            print(name, model_type, attribute, target_range, target_value)
+            self.gclon, self.gclat = np.meshgrid(model[&#39;longitude&#39;], 
+                                                 model[&#39;latitude&#39;])
+            self.gcz = model[&#39;depth&#39;]
+            values = model[&#39;values&#39;]
+            
+            if attribute == &#39;Value&#39;:
+                arr, isfinite = truth_array_from_values(values, target_range, 
+                                                        target_value)
+            elif attribute == &#39;Gradient&#39;:
+                arr, isfinite = \
+                    truth_array_from_gradient_sph(self.gclon, self.gclat, 
+                                                  self.gcz, values, 
+                                                  target_range, target_value)
+            #end if
+            
+            if proj_to_surface:
+                min_depth, max_depth = \
+                    fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                                  &#34;array&#34;, dtype=float)
+                arr = project_onto_surface(arr, self.gcz, min_depth=min_depth,
+                                           max_depth=max_depth)
+                isfinite = project_onto_surface(isfinite, self.gcz, 
+                                                min_depth=min_depth, 
+                                                max_depth=max_depth)
+            #end if
+            if proj_from_surface:
+                arr = project_from_surface(arr, self.gcz)
+                isfinite = project_from_surface(isfinite, self.gcz)
+            #end if
+            
+            arrays.append(arr)
+            isfinite_list.append(isfinite)
+        #end if
+        vals = np.all(arrays, axis=0)*1.0
+        if vals.shape[-1] == 1:
+            self.gcz = np.array([0])
+        #end if
+        isfinite = np.all(isfinite_list, axis=0)
+        vals[~isfinite] = np.nan
+        self.feature_values = vals
+    #end func
+    
+    def operate_on_existing_features(self, feature_dict):
+        &#34;&#34;&#34;
+        Routine to examine existing features and combine characteristics of 
+        them, e.g. to look at magnetite/haematite boundaries. 
+        
+        
+        Calls
+        -----
+        project_onto_surface
+        
+        project_from_surface
+        
+        truth_array_from_values
+        
+        
+        &#34;&#34;&#34;
+        
+        arrays = []
+        isfinite_list = []
+        criteria = self.feature.findall(&#34;criterion&#34;)
+        truth_list = list()
+        for criterion in criteria:
+            truth_list.append(&#34;project_to_surface&#34; in criterion.attrib)
+        #end for
+        if np.all(truth_list) or ~np.any(truth_list):
+            proj_from_surface = False
+        else:
+            proj_from_surface = True
+        #end if
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            feature_name = criterion.attrib[&#34;feature_name&#34;]
+            value, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            proj_to_surface = &#34;project_to_surface&#34; in criterion.attrib
+            
+            model = feature_dict[feature_name]
+            if not hasattr(self, &#39;gcz&#39;):
+                self.gclon, self.gclat = model.gclon, model.gclat
+                self.gcz = model.gcz
+            #end if
+            
+            print(name, feature_name, &#39;distance&#39;, target_range, target_value)
+            
+            distances = model.distances
+            
+            arr, isfinite = \
+                truth_array_from_values(distances, target_range, target_value)
+            
+            if proj_to_surface:
+                min_depth, max_depth = \
+                    fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                                  &#34;array&#34;, dtype=float)
+                arr = project_onto_surface(arr, self.gcz, min_depth=min_depth,
+                                           max_depth=max_depth)
+                isfinite = project_onto_surface(isfinite, self.gcz, 
+                                                min_depth=min_depth, 
+                                                max_depth=max_depth)
+            #end if
+            if proj_from_surface:
+                arr = project_from_surface(arr, self.gcz)
+                isfinite = project_from_surface(isfinite, self.gcz)
+            #end if
+            
+            arrays.append(arr)
+            isfinite_list.append(isfinite)
+        #end if
+        vals = np.all(arrays, axis=0)*1.0
+        if vals.shape[-1] == 1:
+            self.gcz = np.array([0])
+        #end if
+        isfinite = np.all(isfinite_list, axis=0)
+        vals[~isfinite] = np.nan
+        self.feature_values = vals
+    #end func
+    
+    def distance_to_feature(self):
+        &#34;&#34;&#34;
+        Finds the points on the edges of the feature, and computes the great
+        circle distance of every grid point to the closest point on the edge of
+        the feature.
+        
+        
+        Calls
+        -----
+        gcdist_to_feat
+        
+        functions.gradient
+        
+        
+        &#34;&#34;&#34;
+        lon = self.gclon
+        lat = self.gclat
+        if (lon[0,1] - lon[0,0] &lt;= 0.025) or (lat[1,0] - lat[0,0] &lt;= 0.025):
+            spacing = &#34;small&#34;
+        else:
+            spacing = &#34;large&#34;
+        #end if
+        depth = self.gcz
+        vals = self.feature_values
+        isnan = np.isnan(vals)
+        arr = (vals &gt; 0)
+        grad = fn.gradient(lon, lat, depth, vals)
+        grad = (grad &gt; 0)
+        grad = ~arr*grad
+        kernel = np.array([[[0], [1], [0]], 
+                           [[1], [1], [1]], 
+                           [[0], [1], [0]]])
+        grad = signal.fftconvolve(grad*1, kernel, mode=&#34;same&#34;)
+        grad = (grad &gt;= 0.5)
+        grad = arr*grad
+        distances = np.empty((lon.shape[0], lon.shape[1], depth.shape[0]))
+        for i in range(len(depth)):
+            gradi = grad[:,:,i]
+            edges = np.transpose(np.array([lon[gradi], lat[gradi]]))
+            points = np.vstack([lon.flatten(), lat.flatten()]).T
+            dist = gcdist_to_feat(points, edges, spacing=spacing)
+            dist = np.reshape(dist, gradi.shape)
+            dist[arr[:,:,i]] = -dist[arr[:,:,i]]
+            distances[:,:,i] = dist
+        #end for
+        distances = np.transpose(distances, axes=(1, 0, 2))
+        x = lon[0,:]
+        y = lat[:,0]
+        if len(depth) == 1:
+            fun = RegularGridInterpolator((x, y), distances[:,:,0], 
+                                          bounds_error=False, fill_value=None)
+        else:
+            fun = RegularGridInterpolator((x, y, depth), distances,
+                                          bounds_error=False, fill_value=None)
+        #end if
+        self.fun = fun
+        self.distances = np.copy(np.transpose(distances, axes=(1, 0, 2)))
+        self.distances[isnan] = np.nan
+    #end func
+    
+    def Plots(self, points_dict, wd_images, bgimage=None):
+        &#34;&#34;&#34;
+        Function to generate figure representing feature.
+        
+        
+        Parameters
+        ----------
+        points_dict: dictionary
+            Dictionary which must contain &#39;point_data_filt&#39;, an array of 
+            deposit locations.
+            
+        wd_images: string
+            Path in which to save the figure.
+            
+        bgimage: string, or matplotlib.imread object
+            Background image to overlay the feature figure onto.
+            
+            
+        Calls
+        -----
+        plotting.plot_feature_at_depth_slice
+        
+        
+        &#34;&#34;&#34;
+        if self.generate_plots:
+            pt.plot_feature_at_depth_slice(self, points_dict, self.gcz, 
+                                           wd_images, bgimage=bgimage)
+        #end if
+    #end func
+    
+    def print_description(self):
+        &#34;&#34;&#34;
+        Function to print information about the feature to the console, or to
+        stdout. This function is called to print feature information to an 
+        output file.
+        
+        
+        Calls
+        -----
+        XML
+        
+        
+        Called by
+        ---------
+        IO.OutputManager.print_to_file
+        
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Feature =&#39;, self.name)
+        print(&#39;Model types =&#39;, self.feature.attrib[&#34;model_types&#34;])
+        print(&#39;Criteria:&#39;)
+        criteria = self.feature.findall(&#34;criterion&#34;)
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            value, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            if &#34;model_type&#34; in criterion.attrib:
+                model = criterion.attrib[&#34;model_type&#34;]
+                print(&#39;%s:&#39;%name, model, value, target_range, target_value)
+            elif &#34;feature_name&#34; in criterion.attrib:
+                feature = criterion.attrib[&#34;feature_name&#34;]
+                print(&#39;%s:&#39;%name, value, target_range, target_value, &#39;from&#39;, 
+                      feature)
+            #end if
+            if &#34;project_to_surface&#34; in criterion.attrib:
+                low, high = \
+                    fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                                  list, dtype=str)
+                print(&#39;Depth slices from&#39;, low, &#39;to&#39;, high, 
+                      &#39;projected to surface&#39;)
+            #end if
+        #end for
+    #end func
+#end class
+    
+def truth_array_from_values(values, target_range, target_value):
+    &#34;&#34;&#34;
+    Checks how the values in an array compare to a target value.
+    
+    
+    Parameters
+    ----------
+    values : numpy array
+        3D array of values from a geophysical model
+        
+    target_range : string
+        Either &#39;less than&#39; or &#39;greater than&#39;
+        
+    target_value : float
+        Target value to compare values array to.
+        
+    
+    Returns
+    -------
+    arr : numpy array
+        3D array of boolean values representing whether &#39;values&#39; fulfilled the
+        condition applied.
+        
+    isfinite : numpy array
+        3D array of boolean values representing whether or not &#39;values&#39; 
+        contained finite values.
+        
+    
+    &#34;&#34;&#34;
+    if target_range == &#39;less than&#39;:
+        arr = values &lt;= float(target_value)
+    elif target_range == &#39;greater than&#39;:
+        arr = values &gt;= float(target_value)
+    #end if
+    isfinite = np.isfinite(values)
+    return arr, isfinite
+#end func
+    
+def truth_array_from_gradient_sph(lat, lon, z, values, target_range, 
+                                  target_value):
+    &#34;&#34;&#34;
+    Checks how the the gradient of values in an array compare to a target 
+    value.
+    
+    
+    Parameters
+    ----------
+    values : numpy array
+        3D array of values from a geophysical model
+        
+    target_range : string
+        Either &#39;less than&#39; or &#39;greater than&#39;
+        
+    target_value : float
+        Target value to compare values array to.
+        
+    
+    Returns
+    -------
+    arr : numpy array
+        3D array of boolean values representing whether &#39;values&#39; fulfilled the
+        condition applied.
+        
+    isfinite : numpy array
+        3D array of boolean values representing whether or not &#39;values&#39; 
+        contained finite values.
+        
+    
+    &#34;&#34;&#34;
+    r = 6371000 - z
+    grad = fn.gradient_sph(lon, lat, r, values)
+    if target_range == &#39;less than&#39;:
+        arr = grad &lt;= float(target_value)
+    elif target_range == &#39;greater than&#39;:
+        arr = grad &gt;= float(target_value)
+    #end if
+    isfinite = np.isfinite(grad)
+    return arr, isfinite
+#end func
+    
+def project_onto_surface(vals, depths, min_depth=None, max_depth=None):
+    &#34;&#34;&#34;
+    Function to take all depth slices of a feature between a minimum and 
+    maximum depth value, and generate a single surface with all depth slices
+    projected onto it.
+    
+    
+    Parameters
+    ----------
+    vals: numpy array
+        3D array of boolean values representing the feature at each depth 
+        slice.
+    
+    depths: numpy array
+        1D array of fepth values for each slice.
+        
+    min_depth: float
+        Minimum depth slice to project to the surface.
+        
+    max_depth: float
+        Maximum depth slice to project to the surface.
+        
+    
+    Returns
+    -------
+    arr: numpy array
+        3D numpy array (with 3rd dimension having length 1) representing the 
+        surface to which the feature has been projected.
+        
+    
+    Calls
+    -----
+    functions.nearest_index
+    
+    
+    &#34;&#34;&#34;
+    if min_depth is not None:
+        minind = fn.nearest_index(depths, min_depth)
+    else:
+        minind = 0
+    #end if
+    if max_depth is not None:
+        maxind = fn.nearest_index(depths, max_depth)
+    else:
+        maxind = len(depths)
+    #end if
+    arr = np.expand_dims(np.any(vals[:, :, minind:maxind], axis=2), 3)
+    return arr
+#end func
+    
+def project_from_surface(vals, depths):
+    &#34;&#34;&#34;
+    Function to project a feature from a surface to a set of depths. 
+    
+    
+    Parameters
+    ----------
+    vals: numpy array
+        3D array of boolean values representing feature which has been 
+        projected to a surface. 
+        
+    depths: numpy array
+        1D array of depth values to project the feature values to.
+        
+        
+    Returns
+    -------
+    arr: numpy array
+        3D numpy array representing the surfaces to which the feature has been 
+        projected.
+        
+        
+    &#34;&#34;&#34;
+    ndepths = len(depths)
+    arr = np.repeat(vals, ndepths, axis=2)
+    return arr
+#end func
+
+&#34;&#34;&#34;
+def gcdist_to_feat(points, edges):
+    deg_rad = np.pi/180.0
+    rad_m = 6371000.0
+    lon1, lat1 = points.T*deg_rad
+    lon2, lat2 = edges.T*deg_rad
+    colat1 = np.pi/2 - lat1
+    colat2 = np.pi/2 - lat2
+    min_distances = np.ones(len(points))*np.pi
+    for i in range(len(edges)):
+        cos1 = np.cos(colat1)
+        sin1 = np.sin(colat1)
+        dlon = lon1 - lon2[i]
+        cos2 = np.cos(colat2[i])
+        sin2 = np.sin(colat2[i])
+        cos_dlon = np.cos(dlon)
+        vals = cos1*cos2 + sin1*sin2*cos_dlon
+        vals[vals &gt; 1] = 1
+        vals[vals &lt; -1] = -1
+        distances = np.arccos(vals)
+        min_distances = np.min([min_distances, distances], axis=0)
+    #end for
+    return min_distances*rad_m
+#end func
+&#34;&#34;&#34;
+
+def gcdist_to_feat(points, edges, spacing=&#34;small&#34;):
+    &#34;&#34;&#34;
+    A function to quickly calculate great circle distances from a set of points
+    to the edge of the closest feature to the point.
+    The cosdist_to_feat function is designed to work fast and with low memory
+    usage. Since the time complexity of the algorithm used is 
+    O(dx^(-2)*dy^(-2)) with dx, dy the spacing between grid points in the x and
+    y directions of the geophysical model, every effort is made to reduce the
+    number of calculations performed by the model.
+    
+    
+    Parameters
+    ----------
+    points : numpy.ndarray
+        Numpy array of shape (npoints, 2) of longitude and latitude coordinates
+        of the points under consideration.
+        
+    edges : numpy.ndarray
+        Numpy array of shape (nedges, 2) of longitude and latitude coordinates
+        of the grid points which make up the edges of features in a geophysical
+        model.
+        
+    spacing : string
+        Either &#34;small&#34; or &#34;large&#34; to denote whether or not the distance between
+        grid points is sufficiently large to use a less expensive formula to 
+        calculate great circle distances. If &#34;small&#34;, haversine formula is 
+        used.
+        
+    
+    Returns
+    -------
+    distances : numpy.ndarray
+        Numpy array of shape (npoints) of distances (metres) between each point
+        in points and the closest point in edges.
+        
+    
+    Calls
+    -----
+    cosdist_to_feat
+    
+    sindist_to_feat
+    
+    
+    &#34;&#34;&#34;
+    deg_rad = np.pi/180.0
+    rad_m = 6371000.0
+    lon1, lat1 = points.T*deg_rad
+    lon2, lat2 = edges.T*deg_rad
+    colat1 = np.pi/2 - lat1
+    colat2 = np.pi/2 - lat2  
+    if spacing == &#34;large&#34;:
+        cosp1 = np.cos(lon1).astype(&#34;float32&#34;)
+        cost1 = np.cos(colat1).astype(&#34;float32&#34;)
+        sinp1 = np.sin(lon1).astype(&#34;float32&#34;)
+        sint1 = np.sin(colat1).astype(&#34;float32&#34;)
+        cosp2 = np.cos(lon2).astype(&#34;float32&#34;)
+        cost2 = np.cos(colat2).astype(&#34;float32&#34;)
+        sinp2 = np.sin(lon2).astype(&#34;float32&#34;)
+        sint2 = np.sin(colat2).astype(&#34;float32&#34;)
+        in_array = -1*np.ones(len(points)).astype(&#34;float32&#34;)
+        out_array = cosdist_to_feat(cosp1, cost1, sinp1, sint1, cosp2, cost2, 
+                                    sinp2, sint2, in_array, in_array)
+        out_array = out_array.astype(&#34;float64&#34;)
+        out_array[out_array &gt; 1] = 1
+        distances = np.arccos(out_array)*rad_m
+    elif spacing == &#34;small&#34;:
+        sint1 = np.sin(colat1).astype(&#34;float32&#34;)
+        sint2 = np.sin(colat2).astype(&#34;float32&#34;)
+        cost1_2 = np.cos(colat1/2).astype(&#34;float32&#34;)
+        cost2_2 = np.cos(colat2/2).astype(&#34;float32&#34;)
+        sint1_2 = np.sin(colat1/2).astype(&#34;float32&#34;)
+        sint2_2 = np.sin(colat2/2).astype(&#34;float32&#34;)
+        cosp1_2 = np.cos(lon1/2).astype(&#34;float32&#34;)
+        cosp2_2 = np.cos(lon2/2).astype(&#34;float32&#34;)
+        sinp1_2 = np.sin(lon1/2).astype(&#34;float32&#34;)
+        sinp2_2 = np.sin(lon2/2).astype(&#34;float32&#34;)
+        in_array = np.ones(len(points)).astype(&#34;float32&#34;)
+        out_array = sindist_to_feat(sint1, sint2, cost1_2, sint1_2, cosp1_2, 
+                                    sinp1_2, cost2_2, sint2_2, cosp2_2, sinp2_2, 
+                                    in_array, in_array)
+        out_array = out_array.astype(&#34;float64&#34;)
+        distances = 2*np.arcsin(np.sqrt(out_array))*rad_m
+    else:
+        distances = np.zeros(len(points))
+    #end if
+    return distances
+#end func
+    
+@numba.jit(nopython=True, parallel=True)
+def cosdist_to_feat(cosp1, cost1, sinp1, sint1, cosp2, cost2, sinp2, sint2, 
+                    arr, d):
+    for i in range(len(cosp2)):
+        d = cost1*cost2[i] + sint1*sint2[i]*(cosp1*cosp2[i] + sinp1*sinp2[i])
+        arr[d &gt; arr] = d[d &gt; arr]
+    #end for
+    return arr
+#end func
+    
+@numba.jit(nopython=True, parallel=True)
+def sindist_to_feat(sint1, sint2, cost1_2, sint1_2, cosp1_2, sinp1_2, cost2_2, 
+                    sint2_2, cosp2_2, sinp2_2, arr, d):
+    for i in range(len(sint2)):
+        d = (cost1_2*sint2_2[i] - sint1_2*cost2_2[i])**2 + \
+            (sinp1_2*cosp2_2[i] - cosp1_2*sinp2_2[i])**2*sint1*sint2[i]
+        arr[d &lt; arr] = d[d &lt; arr]
+    #end for
+    return arr
+#end func</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="toolkit.feat_eng.cosdist_to_feat"><code class="name flex">
+<span>def <span class="ident">cosdist_to_feat</span></span>(<span>cosp1, cost1, sinp1, sint1, cosp2, cost2, sinp2, sint2, arr, d)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@numba.jit(nopython=True, parallel=True)
+def cosdist_to_feat(cosp1, cost1, sinp1, sint1, cosp2, cost2, sinp2, sint2, 
+                    arr, d):
+    for i in range(len(cosp2)):
+        d = cost1*cost2[i] + sint1*sint2[i]*(cosp1*cosp2[i] + sinp1*sinp2[i])
+        arr[d &gt; arr] = d[d &gt; arr]
+    #end for
+    return arr</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.gcdist_to_feat"><code class="name flex">
+<span>def <span class="ident">gcdist_to_feat</span></span>(<span>points, edges, spacing='small')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A function to quickly calculate great circle distances from a set of points
+to the edge of the closest feature to the point.
+The cosdist_to_feat function is designed to work fast and with low memory
+usage. Since the time complexity of the algorithm used is
+O(dx^(-2)*dy^(-2)) with dx, dy the spacing between grid points in the x and
+y directions of the geophysical model, every effort is made to reduce the
+number of calculations performed by the model.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>points</code></strong> :&ensp;<code>numpy.ndarray</code></dt>
+<dd>Numpy array of shape (npoints, 2) of longitude and latitude coordinates
+of the points under consideration.</dd>
+<dt><strong><code>edges</code></strong> :&ensp;<code>numpy.ndarray</code></dt>
+<dd>Numpy array of shape (nedges, 2) of longitude and latitude coordinates
+of the grid points which make up the edges of features in a geophysical
+model.</dd>
+<dt><strong><code>spacing</code></strong> :&ensp;<code>string</code></dt>
+<dd>Either "small" or "large" to denote whether or not the distance between
+grid points is sufficiently large to use a less expensive formula to
+calculate great circle distances. If "small", haversine formula is
+used.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>distances</code></strong> :&ensp;<code>numpy.ndarray</code></dt>
+<dd>Numpy array of shape (npoints) of distances (metres) between each point
+in points and the closest point in edges.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>cosdist_to_feat</p>
+<p>sindist_to_feat</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def gcdist_to_feat(points, edges, spacing=&#34;small&#34;):
+    &#34;&#34;&#34;
+    A function to quickly calculate great circle distances from a set of points
+    to the edge of the closest feature to the point.
+    The cosdist_to_feat function is designed to work fast and with low memory
+    usage. Since the time complexity of the algorithm used is 
+    O(dx^(-2)*dy^(-2)) with dx, dy the spacing between grid points in the x and
+    y directions of the geophysical model, every effort is made to reduce the
+    number of calculations performed by the model.
+    
+    
+    Parameters
+    ----------
+    points : numpy.ndarray
+        Numpy array of shape (npoints, 2) of longitude and latitude coordinates
+        of the points under consideration.
+        
+    edges : numpy.ndarray
+        Numpy array of shape (nedges, 2) of longitude and latitude coordinates
+        of the grid points which make up the edges of features in a geophysical
+        model.
+        
+    spacing : string
+        Either &#34;small&#34; or &#34;large&#34; to denote whether or not the distance between
+        grid points is sufficiently large to use a less expensive formula to 
+        calculate great circle distances. If &#34;small&#34;, haversine formula is 
+        used.
+        
+    
+    Returns
+    -------
+    distances : numpy.ndarray
+        Numpy array of shape (npoints) of distances (metres) between each point
+        in points and the closest point in edges.
+        
+    
+    Calls
+    -----
+    cosdist_to_feat
+    
+    sindist_to_feat
+    
+    
+    &#34;&#34;&#34;
+    deg_rad = np.pi/180.0
+    rad_m = 6371000.0
+    lon1, lat1 = points.T*deg_rad
+    lon2, lat2 = edges.T*deg_rad
+    colat1 = np.pi/2 - lat1
+    colat2 = np.pi/2 - lat2  
+    if spacing == &#34;large&#34;:
+        cosp1 = np.cos(lon1).astype(&#34;float32&#34;)
+        cost1 = np.cos(colat1).astype(&#34;float32&#34;)
+        sinp1 = np.sin(lon1).astype(&#34;float32&#34;)
+        sint1 = np.sin(colat1).astype(&#34;float32&#34;)
+        cosp2 = np.cos(lon2).astype(&#34;float32&#34;)
+        cost2 = np.cos(colat2).astype(&#34;float32&#34;)
+        sinp2 = np.sin(lon2).astype(&#34;float32&#34;)
+        sint2 = np.sin(colat2).astype(&#34;float32&#34;)
+        in_array = -1*np.ones(len(points)).astype(&#34;float32&#34;)
+        out_array = cosdist_to_feat(cosp1, cost1, sinp1, sint1, cosp2, cost2, 
+                                    sinp2, sint2, in_array, in_array)
+        out_array = out_array.astype(&#34;float64&#34;)
+        out_array[out_array &gt; 1] = 1
+        distances = np.arccos(out_array)*rad_m
+    elif spacing == &#34;small&#34;:
+        sint1 = np.sin(colat1).astype(&#34;float32&#34;)
+        sint2 = np.sin(colat2).astype(&#34;float32&#34;)
+        cost1_2 = np.cos(colat1/2).astype(&#34;float32&#34;)
+        cost2_2 = np.cos(colat2/2).astype(&#34;float32&#34;)
+        sint1_2 = np.sin(colat1/2).astype(&#34;float32&#34;)
+        sint2_2 = np.sin(colat2/2).astype(&#34;float32&#34;)
+        cosp1_2 = np.cos(lon1/2).astype(&#34;float32&#34;)
+        cosp2_2 = np.cos(lon2/2).astype(&#34;float32&#34;)
+        sinp1_2 = np.sin(lon1/2).astype(&#34;float32&#34;)
+        sinp2_2 = np.sin(lon2/2).astype(&#34;float32&#34;)
+        in_array = np.ones(len(points)).astype(&#34;float32&#34;)
+        out_array = sindist_to_feat(sint1, sint2, cost1_2, sint1_2, cosp1_2, 
+                                    sinp1_2, cost2_2, sint2_2, cosp2_2, sinp2_2, 
+                                    in_array, in_array)
+        out_array = out_array.astype(&#34;float64&#34;)
+        distances = 2*np.arcsin(np.sqrt(out_array))*rad_m
+    else:
+        distances = np.zeros(len(points))
+    #end if
+    return distances</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.project_from_surface"><code class="name flex">
+<span>def <span class="ident">project_from_surface</span></span>(<span>vals, depths)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to project a feature from a surface to a set of depths. </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>vals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of boolean values representing feature which has been
+projected to a surface.</dd>
+<dt><strong><code>depths</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array of depth values to project the feature values to.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>arr</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D numpy array representing the surfaces to which the feature has been
+projected.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def project_from_surface(vals, depths):
+    &#34;&#34;&#34;
+    Function to project a feature from a surface to a set of depths. 
+    
+    
+    Parameters
+    ----------
+    vals: numpy array
+        3D array of boolean values representing feature which has been 
+        projected to a surface. 
+        
+    depths: numpy array
+        1D array of depth values to project the feature values to.
+        
+        
+    Returns
+    -------
+    arr: numpy array
+        3D numpy array representing the surfaces to which the feature has been 
+        projected.
+        
+        
+    &#34;&#34;&#34;
+    ndepths = len(depths)
+    arr = np.repeat(vals, ndepths, axis=2)
+    return arr</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.project_onto_surface"><code class="name flex">
+<span>def <span class="ident">project_onto_surface</span></span>(<span>vals, depths, min_depth=None, max_depth=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to take all depth slices of a feature between a minimum and
+maximum depth value, and generate a single surface with all depth slices
+projected onto it.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>vals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of boolean values representing the feature at each depth
+slice.</dd>
+<dt><strong><code>depths</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array of fepth values for each slice.</dd>
+<dt><strong><code>min_depth</code></strong> :&ensp;<code>float</code></dt>
+<dd>Minimum depth slice to project to the surface.</dd>
+<dt><strong><code>max_depth</code></strong> :&ensp;<code>float</code></dt>
+<dd>Maximum depth slice to project to the surface.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>arr</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D numpy array (with 3rd dimension having length 1) representing the
+surface to which the feature has been projected.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.nearest_index</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def project_onto_surface(vals, depths, min_depth=None, max_depth=None):
+    &#34;&#34;&#34;
+    Function to take all depth slices of a feature between a minimum and 
+    maximum depth value, and generate a single surface with all depth slices
+    projected onto it.
+    
+    
+    Parameters
+    ----------
+    vals: numpy array
+        3D array of boolean values representing the feature at each depth 
+        slice.
+    
+    depths: numpy array
+        1D array of fepth values for each slice.
+        
+    min_depth: float
+        Minimum depth slice to project to the surface.
+        
+    max_depth: float
+        Maximum depth slice to project to the surface.
+        
+    
+    Returns
+    -------
+    arr: numpy array
+        3D numpy array (with 3rd dimension having length 1) representing the 
+        surface to which the feature has been projected.
+        
+    
+    Calls
+    -----
+    functions.nearest_index
+    
+    
+    &#34;&#34;&#34;
+    if min_depth is not None:
+        minind = fn.nearest_index(depths, min_depth)
+    else:
+        minind = 0
+    #end if
+    if max_depth is not None:
+        maxind = fn.nearest_index(depths, max_depth)
+    else:
+        maxind = len(depths)
+    #end if
+    arr = np.expand_dims(np.any(vals[:, :, minind:maxind], axis=2), 3)
+    return arr</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.sindist_to_feat"><code class="name flex">
+<span>def <span class="ident">sindist_to_feat</span></span>(<span>sint1, sint2, cost1_2, sint1_2, cosp1_2, sinp1_2, cost2_2, sint2_2, cosp2_2, sinp2_2, arr, d)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@numba.jit(nopython=True, parallel=True)
+def sindist_to_feat(sint1, sint2, cost1_2, sint1_2, cosp1_2, sinp1_2, cost2_2, 
+                    sint2_2, cosp2_2, sinp2_2, arr, d):
+    for i in range(len(sint2)):
+        d = (cost1_2*sint2_2[i] - sint1_2*cost2_2[i])**2 + \
+            (sinp1_2*cosp2_2[i] - cosp1_2*sinp2_2[i])**2*sint1*sint2[i]
+        arr[d &lt; arr] = d[d &lt; arr]
+    #end for
+    return arr</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.truth_array_from_gradient_sph"><code class="name flex">
+<span>def <span class="ident">truth_array_from_gradient_sph</span></span>(<span>lat, lon, z, values, target_range, target_value)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks how the the gradient of values in an array compare to a target
+value.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>values</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of values from a geophysical model</dd>
+<dt><strong><code>target_range</code></strong> :&ensp;<code>string</code></dt>
+<dd>Either 'less than' or 'greater than'</dd>
+<dt><strong><code>target_value</code></strong> :&ensp;<code>float</code></dt>
+<dd>Target value to compare values array to.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>arr</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of boolean values representing whether 'values' fulfilled the
+condition applied.</dd>
+<dt><strong><code>isfinite</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of boolean values representing whether or not 'values'
+contained finite values.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def truth_array_from_gradient_sph(lat, lon, z, values, target_range, 
+                                  target_value):
+    &#34;&#34;&#34;
+    Checks how the the gradient of values in an array compare to a target 
+    value.
+    
+    
+    Parameters
+    ----------
+    values : numpy array
+        3D array of values from a geophysical model
+        
+    target_range : string
+        Either &#39;less than&#39; or &#39;greater than&#39;
+        
+    target_value : float
+        Target value to compare values array to.
+        
+    
+    Returns
+    -------
+    arr : numpy array
+        3D array of boolean values representing whether &#39;values&#39; fulfilled the
+        condition applied.
+        
+    isfinite : numpy array
+        3D array of boolean values representing whether or not &#39;values&#39; 
+        contained finite values.
+        
+    
+    &#34;&#34;&#34;
+    r = 6371000 - z
+    grad = fn.gradient_sph(lon, lat, r, values)
+    if target_range == &#39;less than&#39;:
+        arr = grad &lt;= float(target_value)
+    elif target_range == &#39;greater than&#39;:
+        arr = grad &gt;= float(target_value)
+    #end if
+    isfinite = np.isfinite(grad)
+    return arr, isfinite</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.truth_array_from_values"><code class="name flex">
+<span>def <span class="ident">truth_array_from_values</span></span>(<span>values, target_range, target_value)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks how the values in an array compare to a target value.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>values</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of values from a geophysical model</dd>
+<dt><strong><code>target_range</code></strong> :&ensp;<code>string</code></dt>
+<dd>Either 'less than' or 'greater than'</dd>
+<dt><strong><code>target_value</code></strong> :&ensp;<code>float</code></dt>
+<dd>Target value to compare values array to.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>arr</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of boolean values representing whether 'values' fulfilled the
+condition applied.</dd>
+<dt><strong><code>isfinite</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D array of boolean values representing whether or not 'values'
+contained finite values.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def truth_array_from_values(values, target_range, target_value):
+    &#34;&#34;&#34;
+    Checks how the values in an array compare to a target value.
+    
+    
+    Parameters
+    ----------
+    values : numpy array
+        3D array of values from a geophysical model
+        
+    target_range : string
+        Either &#39;less than&#39; or &#39;greater than&#39;
+        
+    target_value : float
+        Target value to compare values array to.
+        
+    
+    Returns
+    -------
+    arr : numpy array
+        3D array of boolean values representing whether &#39;values&#39; fulfilled the
+        condition applied.
+        
+    isfinite : numpy array
+        3D array of boolean values representing whether or not &#39;values&#39; 
+        contained finite values.
+        
+    
+    &#34;&#34;&#34;
+    if target_range == &#39;less than&#39;:
+        arr = values &lt;= float(target_value)
+    elif target_range == &#39;greater than&#39;:
+        arr = values &gt;= float(target_value)
+    #end if
+    isfinite = np.isfinite(values)
+    return arr, isfinite</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="toolkit.feat_eng.FeatureManager"><code class="flex name class">
+<span>class <span class="ident">FeatureManager</span></span>
+<span>(</span><span>commandList, features)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class to facilitate the generation of features from input geophysical
+models, given input commands from xml configuration file.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>A dictionary of the geophysical models which are available for use.</dd>
+<dt><strong><code>commandList</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of commands read from XML config file.</dd>
+<dt><strong><code>features</code></strong> :&ensp;<code>xml.ElementTree node</code></dt>
+<dd>Nodes of the XML config file which describe features that are to be
+generated.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.changetype</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FeatureManager():    
+    def __init__(self, commandList, features):
+        &#34;&#34;&#34;
+        A class to facilitate the generation of features from input geophysical 
+        models, given input commands from xml configuration file.
+        
+        
+        Parameters
+        ----------
+        model_dict: dictionary
+            A dictionary of the geophysical models which are available for use.
+        
+        commandList: list
+            A list of commands read from XML config file.
+        
+        features: xml.ElementTree node
+            Nodes of the XML config file which describe features that are to be
+            generated.
+            
+        
+        Calls
+        -----
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        self.features = features
+        
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        
+        #Compile distance calculation function
+        a = np.array([0, 1]).astype(&#34;float32&#34;)
+        _ = cosdist_to_feat(a, a, a, a, a, a, a, a, a, a)
+        _ = sindist_to_feat(a, a, a, a, a, a, a, a, a, a, a, a)
+    #end func
+    
+    def Process(self, model_dict):
+        &#34;&#34;&#34;
+        Generates a &#34;feature&#34; object for each feature defined in the xml config 
+        file.
+        
+        
+        Calls
+        -----
+        feature_object
+        
+        feature_object.operate_on_existing_features
+        
+        feature_object.generate_feature
+        
+        feature_object.distance_to_feature
+        
+        
+        &#34;&#34;&#34;
+        self.feature_dict = {}
+        for feature in self.features:
+            t0 = time.time()
+            key = feature.attrib[&#34;name&#34;]
+            if &#34;use_existing_features&#34; in feature.attrib:
+                use_existing_features = \
+                    fn.changetype(feature.attrib[&#34;use_existing_features&#34;], 
+                                  bool)
+            else:
+                use_existing_features = False
+            #end if
+            if use_existing_features:
+                feat = feature_object(feature)
+                feat.operate_on_existing_features(self.feature_dict)
+                feat.distance_to_feature()
+            else:
+                feat = feature_object(feature)
+                feat.generate_feature(model_dict)
+                feat.distance_to_feature()
+            #end if
+            self.feature_dict[key] = feat
+            print(key, time.time() - t0)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.feat_eng.FeatureManager.Process"><code class="name flex">
+<span>def <span class="ident">Process</span></span>(<span>self, model_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a "feature" object for each feature defined in the xml config
+file.</p>
+<h2 id="calls">Calls</h2>
+<p>feature_object</p>
+<p>feature_object.operate_on_existing_features</p>
+<p>feature_object.generate_feature</p>
+<p>feature_object.distance_to_feature</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Process(self, model_dict):
+    &#34;&#34;&#34;
+    Generates a &#34;feature&#34; object for each feature defined in the xml config 
+    file.
+    
+    
+    Calls
+    -----
+    feature_object
+    
+    feature_object.operate_on_existing_features
+    
+    feature_object.generate_feature
+    
+    feature_object.distance_to_feature
+    
+    
+    &#34;&#34;&#34;
+    self.feature_dict = {}
+    for feature in self.features:
+        t0 = time.time()
+        key = feature.attrib[&#34;name&#34;]
+        if &#34;use_existing_features&#34; in feature.attrib:
+            use_existing_features = \
+                fn.changetype(feature.attrib[&#34;use_existing_features&#34;], 
+                              bool)
+        else:
+            use_existing_features = False
+        #end if
+        if use_existing_features:
+            feat = feature_object(feature)
+            feat.operate_on_existing_features(self.feature_dict)
+            feat.distance_to_feature()
+        else:
+            feat = feature_object(feature)
+            feat.generate_feature(model_dict)
+            feat.distance_to_feature()
+        #end if
+        self.feature_dict[key] = feat
+        print(key, time.time() - t0)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="toolkit.feat_eng.feature_object"><code class="flex name class">
+<span>class <span class="ident">feature_object</span></span>
+<span>(</span><span>feature)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class to facilitate the engineering of a feature using input
+geophysical models. </p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>feature</code></strong> :&ensp;<code>xml.ElementTree node</code></dt>
+<dd>A node which contains information and criteria required to generate
+the feature from the input geophysical models.</dd>
+<dt><strong><code>model_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>A dictionary containing the required input geophysical models.
+Optional if feature is to be generated from already existing
+features.</dd>
+<dt><strong><code>feature_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>A dictionary containing already generated features. Optional if the
+feature has criteria which only depend on geophysical models.</dd>
+<dt><strong><code>generate_plots</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>Flag to allow the generation of a figure which represents the
+feature.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.changetype</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class feature_object():    
+    def __init__(self, feature):
+        &#34;&#34;&#34;
+        A class to facilitate the engineering of a feature using input 
+        geophysical models. 
+        
+        
+        Parameters
+        ----------
+        feature: xml.ElementTree node
+            A node which contains information and criteria required to generate
+            the feature from the input geophysical models.
+            
+        model_dict: dictionary
+            A dictionary containing the required input geophysical models. 
+            Optional if feature is to be generated from already existing 
+            features.
+            
+        feature_dict: dictionary
+            A dictionary containing already generated features. Optional if the
+            feature has criteria which only depend on geophysical models.
+            
+        generate_plots: boolean
+            Flag to allow the generation of a figure which represents the 
+            feature.
+            
+            
+        Calls
+        -----
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        self.feature = feature
+        self.name = feature.attrib[&#34;name&#34;]
+        if &#34;generate_plots&#34; in feature.attrib:
+            self.generate_plots = \
+                fn.changetype(feature.attrib[&#34;generate_plots&#34;], bool)
+        else:
+            self.generate_plots = False
+        #end if
+    #end func
+    
+    def generate_feature(self, model_dict):
+        &#34;&#34;&#34;
+        Routine to calculate function values for the type of feature under 
+        investigation e.g. original values, gradient, etc. 
+        
+        
+        Calls
+        -----
+        functions.changetype
+        
+        project_onto_surface
+        
+        project_from_surface
+        
+        truth_array_from_gradient_sph
+        
+        truth_array_from_values
+        
+        
+        &#34;&#34;&#34;
+        
+        arrays = []
+        isfinite_list = []
+        criteria = self.feature.findall(&#34;criterion&#34;)
+        truth_list = list()
+        for criterion in criteria:
+            truth_list.append(&#34;project_to_surface&#34; in criterion.attrib)
+        #end for
+        if np.all(truth_list) or ~np.any(truth_list):
+            proj_from_surface = False
+        else:
+            proj_from_surface = True
+        #end if
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            model_type = criterion.attrib[&#34;model_type&#34;]
+            attribute, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            proj_to_surface = &#34;project_to_surface&#34; in criterion.attrib
+            
+            model = model_dict[model_type]
+            print(name, model_type, attribute, target_range, target_value)
+            self.gclon, self.gclat = np.meshgrid(model[&#39;longitude&#39;], 
+                                                 model[&#39;latitude&#39;])
+            self.gcz = model[&#39;depth&#39;]
+            values = model[&#39;values&#39;]
+            
+            if attribute == &#39;Value&#39;:
+                arr, isfinite = truth_array_from_values(values, target_range, 
+                                                        target_value)
+            elif attribute == &#39;Gradient&#39;:
+                arr, isfinite = \
+                    truth_array_from_gradient_sph(self.gclon, self.gclat, 
+                                                  self.gcz, values, 
+                                                  target_range, target_value)
+            #end if
+            
+            if proj_to_surface:
+                min_depth, max_depth = \
+                    fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                                  &#34;array&#34;, dtype=float)
+                arr = project_onto_surface(arr, self.gcz, min_depth=min_depth,
+                                           max_depth=max_depth)
+                isfinite = project_onto_surface(isfinite, self.gcz, 
+                                                min_depth=min_depth, 
+                                                max_depth=max_depth)
+            #end if
+            if proj_from_surface:
+                arr = project_from_surface(arr, self.gcz)
+                isfinite = project_from_surface(isfinite, self.gcz)
+            #end if
+            
+            arrays.append(arr)
+            isfinite_list.append(isfinite)
+        #end if
+        vals = np.all(arrays, axis=0)*1.0
+        if vals.shape[-1] == 1:
+            self.gcz = np.array([0])
+        #end if
+        isfinite = np.all(isfinite_list, axis=0)
+        vals[~isfinite] = np.nan
+        self.feature_values = vals
+    #end func
+    
+    def operate_on_existing_features(self, feature_dict):
+        &#34;&#34;&#34;
+        Routine to examine existing features and combine characteristics of 
+        them, e.g. to look at magnetite/haematite boundaries. 
+        
+        
+        Calls
+        -----
+        project_onto_surface
+        
+        project_from_surface
+        
+        truth_array_from_values
+        
+        
+        &#34;&#34;&#34;
+        
+        arrays = []
+        isfinite_list = []
+        criteria = self.feature.findall(&#34;criterion&#34;)
+        truth_list = list()
+        for criterion in criteria:
+            truth_list.append(&#34;project_to_surface&#34; in criterion.attrib)
+        #end for
+        if np.all(truth_list) or ~np.any(truth_list):
+            proj_from_surface = False
+        else:
+            proj_from_surface = True
+        #end if
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            feature_name = criterion.attrib[&#34;feature_name&#34;]
+            value, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            proj_to_surface = &#34;project_to_surface&#34; in criterion.attrib
+            
+            model = feature_dict[feature_name]
+            if not hasattr(self, &#39;gcz&#39;):
+                self.gclon, self.gclat = model.gclon, model.gclat
+                self.gcz = model.gcz
+            #end if
+            
+            print(name, feature_name, &#39;distance&#39;, target_range, target_value)
+            
+            distances = model.distances
+            
+            arr, isfinite = \
+                truth_array_from_values(distances, target_range, target_value)
+            
+            if proj_to_surface:
+                min_depth, max_depth = \
+                    fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                                  &#34;array&#34;, dtype=float)
+                arr = project_onto_surface(arr, self.gcz, min_depth=min_depth,
+                                           max_depth=max_depth)
+                isfinite = project_onto_surface(isfinite, self.gcz, 
+                                                min_depth=min_depth, 
+                                                max_depth=max_depth)
+            #end if
+            if proj_from_surface:
+                arr = project_from_surface(arr, self.gcz)
+                isfinite = project_from_surface(isfinite, self.gcz)
+            #end if
+            
+            arrays.append(arr)
+            isfinite_list.append(isfinite)
+        #end if
+        vals = np.all(arrays, axis=0)*1.0
+        if vals.shape[-1] == 1:
+            self.gcz = np.array([0])
+        #end if
+        isfinite = np.all(isfinite_list, axis=0)
+        vals[~isfinite] = np.nan
+        self.feature_values = vals
+    #end func
+    
+    def distance_to_feature(self):
+        &#34;&#34;&#34;
+        Finds the points on the edges of the feature, and computes the great
+        circle distance of every grid point to the closest point on the edge of
+        the feature.
+        
+        
+        Calls
+        -----
+        gcdist_to_feat
+        
+        functions.gradient
+        
+        
+        &#34;&#34;&#34;
+        lon = self.gclon
+        lat = self.gclat
+        if (lon[0,1] - lon[0,0] &lt;= 0.025) or (lat[1,0] - lat[0,0] &lt;= 0.025):
+            spacing = &#34;small&#34;
+        else:
+            spacing = &#34;large&#34;
+        #end if
+        depth = self.gcz
+        vals = self.feature_values
+        isnan = np.isnan(vals)
+        arr = (vals &gt; 0)
+        grad = fn.gradient(lon, lat, depth, vals)
+        grad = (grad &gt; 0)
+        grad = ~arr*grad
+        kernel = np.array([[[0], [1], [0]], 
+                           [[1], [1], [1]], 
+                           [[0], [1], [0]]])
+        grad = signal.fftconvolve(grad*1, kernel, mode=&#34;same&#34;)
+        grad = (grad &gt;= 0.5)
+        grad = arr*grad
+        distances = np.empty((lon.shape[0], lon.shape[1], depth.shape[0]))
+        for i in range(len(depth)):
+            gradi = grad[:,:,i]
+            edges = np.transpose(np.array([lon[gradi], lat[gradi]]))
+            points = np.vstack([lon.flatten(), lat.flatten()]).T
+            dist = gcdist_to_feat(points, edges, spacing=spacing)
+            dist = np.reshape(dist, gradi.shape)
+            dist[arr[:,:,i]] = -dist[arr[:,:,i]]
+            distances[:,:,i] = dist
+        #end for
+        distances = np.transpose(distances, axes=(1, 0, 2))
+        x = lon[0,:]
+        y = lat[:,0]
+        if len(depth) == 1:
+            fun = RegularGridInterpolator((x, y), distances[:,:,0], 
+                                          bounds_error=False, fill_value=None)
+        else:
+            fun = RegularGridInterpolator((x, y, depth), distances,
+                                          bounds_error=False, fill_value=None)
+        #end if
+        self.fun = fun
+        self.distances = np.copy(np.transpose(distances, axes=(1, 0, 2)))
+        self.distances[isnan] = np.nan
+    #end func
+    
+    def Plots(self, points_dict, wd_images, bgimage=None):
+        &#34;&#34;&#34;
+        Function to generate figure representing feature.
+        
+        
+        Parameters
+        ----------
+        points_dict: dictionary
+            Dictionary which must contain &#39;point_data_filt&#39;, an array of 
+            deposit locations.
+            
+        wd_images: string
+            Path in which to save the figure.
+            
+        bgimage: string, or matplotlib.imread object
+            Background image to overlay the feature figure onto.
+            
+            
+        Calls
+        -----
+        plotting.plot_feature_at_depth_slice
+        
+        
+        &#34;&#34;&#34;
+        if self.generate_plots:
+            pt.plot_feature_at_depth_slice(self, points_dict, self.gcz, 
+                                           wd_images, bgimage=bgimage)
+        #end if
+    #end func
+    
+    def print_description(self):
+        &#34;&#34;&#34;
+        Function to print information about the feature to the console, or to
+        stdout. This function is called to print feature information to an 
+        output file.
+        
+        
+        Calls
+        -----
+        XML
+        
+        
+        Called by
+        ---------
+        IO.OutputManager.print_to_file
+        
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Feature =&#39;, self.name)
+        print(&#39;Model types =&#39;, self.feature.attrib[&#34;model_types&#34;])
+        print(&#39;Criteria:&#39;)
+        criteria = self.feature.findall(&#34;criterion&#34;)
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            value, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            if &#34;model_type&#34; in criterion.attrib:
+                model = criterion.attrib[&#34;model_type&#34;]
+                print(&#39;%s:&#39;%name, model, value, target_range, target_value)
+            elif &#34;feature_name&#34; in criterion.attrib:
+                feature = criterion.attrib[&#34;feature_name&#34;]
+                print(&#39;%s:&#39;%name, value, target_range, target_value, &#39;from&#39;, 
+                      feature)
+            #end if
+            if &#34;project_to_surface&#34; in criterion.attrib:
+                low, high = \
+                    fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                                  list, dtype=str)
+                print(&#39;Depth slices from&#39;, low, &#39;to&#39;, high, 
+                      &#39;projected to surface&#39;)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.feat_eng.feature_object.Plots"><code class="name flex">
+<span>def <span class="ident">Plots</span></span>(<span>self, points_dict, wd_images, bgimage=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to generate figure representing feature.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>points_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary which must contain 'point_data_filt', an array of
+deposit locations.</dd>
+<dt><strong><code>wd_images</code></strong> :&ensp;<code>string</code></dt>
+<dd>Path in which to save the figure.</dd>
+<dt><strong><code>bgimage</code></strong> :&ensp;<code>string,</code> or <code>matplotlib.imread object</code></dt>
+<dd>Background image to overlay the feature figure onto.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>plotting.plot_feature_at_depth_slice</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Plots(self, points_dict, wd_images, bgimage=None):
+    &#34;&#34;&#34;
+    Function to generate figure representing feature.
+    
+    
+    Parameters
+    ----------
+    points_dict: dictionary
+        Dictionary which must contain &#39;point_data_filt&#39;, an array of 
+        deposit locations.
+        
+    wd_images: string
+        Path in which to save the figure.
+        
+    bgimage: string, or matplotlib.imread object
+        Background image to overlay the feature figure onto.
+        
+        
+    Calls
+    -----
+    plotting.plot_feature_at_depth_slice
+    
+    
+    &#34;&#34;&#34;
+    if self.generate_plots:
+        pt.plot_feature_at_depth_slice(self, points_dict, self.gcz, 
+                                       wd_images, bgimage=bgimage)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.feature_object.distance_to_feature"><code class="name flex">
+<span>def <span class="ident">distance_to_feature</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Finds the points on the edges of the feature, and computes the great
+circle distance of every grid point to the closest point on the edge of
+the feature.</p>
+<h2 id="calls">Calls</h2>
+<p>gcdist_to_feat</p>
+<p>functions.gradient</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def distance_to_feature(self):
+    &#34;&#34;&#34;
+    Finds the points on the edges of the feature, and computes the great
+    circle distance of every grid point to the closest point on the edge of
+    the feature.
+    
+    
+    Calls
+    -----
+    gcdist_to_feat
+    
+    functions.gradient
+    
+    
+    &#34;&#34;&#34;
+    lon = self.gclon
+    lat = self.gclat
+    if (lon[0,1] - lon[0,0] &lt;= 0.025) or (lat[1,0] - lat[0,0] &lt;= 0.025):
+        spacing = &#34;small&#34;
+    else:
+        spacing = &#34;large&#34;
+    #end if
+    depth = self.gcz
+    vals = self.feature_values
+    isnan = np.isnan(vals)
+    arr = (vals &gt; 0)
+    grad = fn.gradient(lon, lat, depth, vals)
+    grad = (grad &gt; 0)
+    grad = ~arr*grad
+    kernel = np.array([[[0], [1], [0]], 
+                       [[1], [1], [1]], 
+                       [[0], [1], [0]]])
+    grad = signal.fftconvolve(grad*1, kernel, mode=&#34;same&#34;)
+    grad = (grad &gt;= 0.5)
+    grad = arr*grad
+    distances = np.empty((lon.shape[0], lon.shape[1], depth.shape[0]))
+    for i in range(len(depth)):
+        gradi = grad[:,:,i]
+        edges = np.transpose(np.array([lon[gradi], lat[gradi]]))
+        points = np.vstack([lon.flatten(), lat.flatten()]).T
+        dist = gcdist_to_feat(points, edges, spacing=spacing)
+        dist = np.reshape(dist, gradi.shape)
+        dist[arr[:,:,i]] = -dist[arr[:,:,i]]
+        distances[:,:,i] = dist
+    #end for
+    distances = np.transpose(distances, axes=(1, 0, 2))
+    x = lon[0,:]
+    y = lat[:,0]
+    if len(depth) == 1:
+        fun = RegularGridInterpolator((x, y), distances[:,:,0], 
+                                      bounds_error=False, fill_value=None)
+    else:
+        fun = RegularGridInterpolator((x, y, depth), distances,
+                                      bounds_error=False, fill_value=None)
+    #end if
+    self.fun = fun
+    self.distances = np.copy(np.transpose(distances, axes=(1, 0, 2)))
+    self.distances[isnan] = np.nan</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.feature_object.generate_feature"><code class="name flex">
+<span>def <span class="ident">generate_feature</span></span>(<span>self, model_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Routine to calculate function values for the type of feature under
+investigation e.g. original values, gradient, etc. </p>
+<h2 id="calls">Calls</h2>
+<p>functions.changetype</p>
+<p>project_onto_surface</p>
+<p>project_from_surface</p>
+<p>truth_array_from_gradient_sph</p>
+<p>truth_array_from_values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_feature(self, model_dict):
+    &#34;&#34;&#34;
+    Routine to calculate function values for the type of feature under 
+    investigation e.g. original values, gradient, etc. 
+    
+    
+    Calls
+    -----
+    functions.changetype
+    
+    project_onto_surface
+    
+    project_from_surface
+    
+    truth_array_from_gradient_sph
+    
+    truth_array_from_values
+    
+    
+    &#34;&#34;&#34;
+    
+    arrays = []
+    isfinite_list = []
+    criteria = self.feature.findall(&#34;criterion&#34;)
+    truth_list = list()
+    for criterion in criteria:
+        truth_list.append(&#34;project_to_surface&#34; in criterion.attrib)
+    #end for
+    if np.all(truth_list) or ~np.any(truth_list):
+        proj_from_surface = False
+    else:
+        proj_from_surface = True
+    #end if
+    for criterion in criteria:
+        name = criterion.attrib[&#34;name&#34;]
+        model_type = criterion.attrib[&#34;model_type&#34;]
+        attribute, target_range, target_value = \
+            fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+        proj_to_surface = &#34;project_to_surface&#34; in criterion.attrib
+        
+        model = model_dict[model_type]
+        print(name, model_type, attribute, target_range, target_value)
+        self.gclon, self.gclat = np.meshgrid(model[&#39;longitude&#39;], 
+                                             model[&#39;latitude&#39;])
+        self.gcz = model[&#39;depth&#39;]
+        values = model[&#39;values&#39;]
+        
+        if attribute == &#39;Value&#39;:
+            arr, isfinite = truth_array_from_values(values, target_range, 
+                                                    target_value)
+        elif attribute == &#39;Gradient&#39;:
+            arr, isfinite = \
+                truth_array_from_gradient_sph(self.gclon, self.gclat, 
+                                              self.gcz, values, 
+                                              target_range, target_value)
+        #end if
+        
+        if proj_to_surface:
+            min_depth, max_depth = \
+                fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                              &#34;array&#34;, dtype=float)
+            arr = project_onto_surface(arr, self.gcz, min_depth=min_depth,
+                                       max_depth=max_depth)
+            isfinite = project_onto_surface(isfinite, self.gcz, 
+                                            min_depth=min_depth, 
+                                            max_depth=max_depth)
+        #end if
+        if proj_from_surface:
+            arr = project_from_surface(arr, self.gcz)
+            isfinite = project_from_surface(isfinite, self.gcz)
+        #end if
+        
+        arrays.append(arr)
+        isfinite_list.append(isfinite)
+    #end if
+    vals = np.all(arrays, axis=0)*1.0
+    if vals.shape[-1] == 1:
+        self.gcz = np.array([0])
+    #end if
+    isfinite = np.all(isfinite_list, axis=0)
+    vals[~isfinite] = np.nan
+    self.feature_values = vals</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.feature_object.operate_on_existing_features"><code class="name flex">
+<span>def <span class="ident">operate_on_existing_features</span></span>(<span>self, feature_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Routine to examine existing features and combine characteristics of
+them, e.g. to look at magnetite/haematite boundaries. </p>
+<h2 id="calls">Calls</h2>
+<p>project_onto_surface</p>
+<p>project_from_surface</p>
+<p>truth_array_from_values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def operate_on_existing_features(self, feature_dict):
+    &#34;&#34;&#34;
+    Routine to examine existing features and combine characteristics of 
+    them, e.g. to look at magnetite/haematite boundaries. 
+    
+    
+    Calls
+    -----
+    project_onto_surface
+    
+    project_from_surface
+    
+    truth_array_from_values
+    
+    
+    &#34;&#34;&#34;
+    
+    arrays = []
+    isfinite_list = []
+    criteria = self.feature.findall(&#34;criterion&#34;)
+    truth_list = list()
+    for criterion in criteria:
+        truth_list.append(&#34;project_to_surface&#34; in criterion.attrib)
+    #end for
+    if np.all(truth_list) or ~np.any(truth_list):
+        proj_from_surface = False
+    else:
+        proj_from_surface = True
+    #end if
+    for criterion in criteria:
+        name = criterion.attrib[&#34;name&#34;]
+        feature_name = criterion.attrib[&#34;feature_name&#34;]
+        value, target_range, target_value = \
+            fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+        proj_to_surface = &#34;project_to_surface&#34; in criterion.attrib
+        
+        model = feature_dict[feature_name]
+        if not hasattr(self, &#39;gcz&#39;):
+            self.gclon, self.gclat = model.gclon, model.gclat
+            self.gcz = model.gcz
+        #end if
+        
+        print(name, feature_name, &#39;distance&#39;, target_range, target_value)
+        
+        distances = model.distances
+        
+        arr, isfinite = \
+            truth_array_from_values(distances, target_range, target_value)
+        
+        if proj_to_surface:
+            min_depth, max_depth = \
+                fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                              &#34;array&#34;, dtype=float)
+            arr = project_onto_surface(arr, self.gcz, min_depth=min_depth,
+                                       max_depth=max_depth)
+            isfinite = project_onto_surface(isfinite, self.gcz, 
+                                            min_depth=min_depth, 
+                                            max_depth=max_depth)
+        #end if
+        if proj_from_surface:
+            arr = project_from_surface(arr, self.gcz)
+            isfinite = project_from_surface(isfinite, self.gcz)
+        #end if
+        
+        arrays.append(arr)
+        isfinite_list.append(isfinite)
+    #end if
+    vals = np.all(arrays, axis=0)*1.0
+    if vals.shape[-1] == 1:
+        self.gcz = np.array([0])
+    #end if
+    isfinite = np.all(isfinite_list, axis=0)
+    vals[~isfinite] = np.nan
+    self.feature_values = vals</code></pre>
+</details>
+</dd>
+<dt id="toolkit.feat_eng.feature_object.print_description"><code class="name flex">
+<span>def <span class="ident">print_description</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to print information about the feature to the console, or to
+stdout. This function is called to print feature information to an
+output file.</p>
+<h2 id="calls">Calls</h2>
+<p>XML</p>
+<h2 id="called-by">Called By</h2>
+<p>IO.OutputManager.print_to_file</p>
+<p>functions.changetype</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_description(self):
+    &#34;&#34;&#34;
+    Function to print information about the feature to the console, or to
+    stdout. This function is called to print feature information to an 
+    output file.
+    
+    
+    Calls
+    -----
+    XML
+    
+    
+    Called by
+    ---------
+    IO.OutputManager.print_to_file
+    
+    functions.changetype
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Feature =&#39;, self.name)
+    print(&#39;Model types =&#39;, self.feature.attrib[&#34;model_types&#34;])
+    print(&#39;Criteria:&#39;)
+    criteria = self.feature.findall(&#34;criterion&#34;)
+    for criterion in criteria:
+        name = criterion.attrib[&#34;name&#34;]
+        value, target_range, target_value = \
+            fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+        if &#34;model_type&#34; in criterion.attrib:
+            model = criterion.attrib[&#34;model_type&#34;]
+            print(&#39;%s:&#39;%name, model, value, target_range, target_value)
+        elif &#34;feature_name&#34; in criterion.attrib:
+            feature = criterion.attrib[&#34;feature_name&#34;]
+            print(&#39;%s:&#39;%name, value, target_range, target_value, &#39;from&#39;, 
+                  feature)
+        #end if
+        if &#34;project_to_surface&#34; in criterion.attrib:
+            low, high = \
+                fn.changetype(criterion.attrib[&#34;project_to_surface&#34;], 
+                              list, dtype=str)
+            print(&#39;Depth slices from&#39;, low, &#39;to&#39;, high, 
+                  &#39;projected to surface&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#feature-engineering-module">Feature Engineering module</a></li>
+<li><a href="#contacts">Contacts</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="toolkit" href="index.html">toolkit</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="toolkit.feat_eng.cosdist_to_feat" href="#toolkit.feat_eng.cosdist_to_feat">cosdist_to_feat</a></code></li>
+<li><code><a title="toolkit.feat_eng.gcdist_to_feat" href="#toolkit.feat_eng.gcdist_to_feat">gcdist_to_feat</a></code></li>
+<li><code><a title="toolkit.feat_eng.project_from_surface" href="#toolkit.feat_eng.project_from_surface">project_from_surface</a></code></li>
+<li><code><a title="toolkit.feat_eng.project_onto_surface" href="#toolkit.feat_eng.project_onto_surface">project_onto_surface</a></code></li>
+<li><code><a title="toolkit.feat_eng.sindist_to_feat" href="#toolkit.feat_eng.sindist_to_feat">sindist_to_feat</a></code></li>
+<li><code><a title="toolkit.feat_eng.truth_array_from_gradient_sph" href="#toolkit.feat_eng.truth_array_from_gradient_sph">truth_array_from_gradient_sph</a></code></li>
+<li><code><a title="toolkit.feat_eng.truth_array_from_values" href="#toolkit.feat_eng.truth_array_from_values">truth_array_from_values</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="toolkit.feat_eng.FeatureManager" href="#toolkit.feat_eng.FeatureManager">FeatureManager</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.feat_eng.FeatureManager.Process" href="#toolkit.feat_eng.FeatureManager.Process">Process</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="toolkit.feat_eng.feature_object" href="#toolkit.feat_eng.feature_object">feature_object</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.feat_eng.feature_object.Plots" href="#toolkit.feat_eng.feature_object.Plots">Plots</a></code></li>
+<li><code><a title="toolkit.feat_eng.feature_object.distance_to_feature" href="#toolkit.feat_eng.feature_object.distance_to_feature">distance_to_feature</a></code></li>
+<li><code><a title="toolkit.feat_eng.feature_object.generate_feature" href="#toolkit.feat_eng.feature_object.generate_feature">generate_feature</a></code></li>
+<li><code><a title="toolkit.feat_eng.feature_object.operate_on_existing_features" href="#toolkit.feat_eng.feature_object.operate_on_existing_features">operate_on_existing_features</a></code></li>
+<li><code><a title="toolkit.feat_eng.feature_object.print_description" href="#toolkit.feat_eng.feature_object.print_description">print_description</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1823 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>toolkit.IO.DataManager API documentation</title>
+<meta name="description" content="Deposit dataset input module
+This module is used to import deposit datasets from various input formats.
+Supported formats are comma separated values …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>toolkit.IO.DataManager</code></h1>
+</header>
+<section id="section-intro">
+<h2 id="deposit-dataset-input-module">Deposit Dataset Input Module</h2>
+<p>This module is used to import deposit datasets from various input formats.
+Supported formats are comma separated values (.csv), text (.txt), excel
+spreadsheet (.xls, .xlsx).</p>
+<h2 id="contacts">Contacts</h2>
+<p>Lachlan Adams
+- Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Deposit dataset input module
+-----------------
+This module is used to import deposit datasets from various input formats.
+Supported formats are comma separated values (.csv), text (.txt), excel
+spreadsheet (.xls, .xlsx).
+
+
+Contacts
+--------
+Lachlan Adams
+    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
+    
+    
+&#34;&#34;&#34;
+
+import os, time
+import numpy as np
+import pandas as pd
+from geopandas.geoseries import GeoSeries
+from shapely.geometry import Point
+import toolkit.functions as fn
+
+class DataManager():
+    def __init__(self):
+        &#34;&#34;&#34;
+        Class to facilitate the importation of mineral deposit datasets.
+        
+        
+        &#34;&#34;&#34;
+        self.point_propertynames = []
+        self.read_columns = []
+        self.bounds = np.array([110, 155, -45, -10])
+    #end func
+    
+    def ParseXMLNode(self, rootNode, commandList):
+        &#34;&#34;&#34;
+        Function to get commands and the details of required datasets from xml 
+        configuration file input.
+        
+        
+        &#34;&#34;&#34;
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        self.datasets = rootNode.findall(&#34;deposits&#34;)
+        self.newcolumns = rootNode.findall(&#34;newcolumn&#34;)
+        self.properties = rootNode.findall(&#34;property&#34;)
+        self.filter = rootNode.find(&#34;filter&#34;)
+    #end func
+    
+    def Filter_Dataset(self, domain):
+        &#34;&#34;&#34;
+        Function to filter input data to ensure it falls within the region of 
+        coverage of the model being used.
+        
+        
+        Calls
+        -----
+        filter_points
+        
+        
+        &#34;&#34;&#34;
+        
+        # Filter by location
+        self.point_data_filt = filter_points(self.point_data, domain)
+        if len(self.point_data_filt) == 0:
+            raise Exception(&#39;No deposits found within region of coverage!&#39;)
+    #end func
+    
+    def Make_Point_Property_Array(self):
+        &#34;&#34;&#34;
+        Function to create an array which stores deposit attributes.
+        
+        
+        Calls
+        -----
+        make_point_property_array
+        
+        
+        &#34;&#34;&#34;
+        self.point_property_array = \
+            make_point_property_array(self.point_data_filt, 
+                                      self.point_propertynames)
+    #end func
+    
+    def Read_Dataset(self, domain_dict):
+        &#34;&#34;&#34;
+        Reads input files, filters input data, creates point property array, 
+        and enters data into a dictionary to be used by other modules.
+        
+        
+        &#34;&#34;&#34;
+        self.Read_Files()
+        self.Filter_Dataset(domain_dict)
+        self.Make_Point_Property_Array() 
+        self.points_dict = {&#39;point_data_filt&#39;: self.point_data_filt,
+                            &#39;point_property_array&#39;: self.point_property_array,
+                            &#39;n_deposits&#39;: len(self.point_data_filt)}
+    #end func
+    
+    def Read_Files(self):
+        &#34;&#34;&#34;
+        Reads input files and returns array of deposit locations and 
+        properties.
+        
+        
+        Calls
+        -----
+        read_deposit_dataset
+        
+        
+        &#34;&#34;&#34;
+        self.point_data = read_deposit_dataset(self.datasets, 
+                                               self.read_columns,
+                                               self.point_propertynames,
+                                               self.properties, self.filter, 
+                                               self.newcolumns)
+    #end func
+#end class
+    
+class RandomPointsManager():
+    &#34;&#34;&#34;
+    Class used to generate uniformly distributed random points, for analysis.
+    
+    
+    &#34;&#34;&#34;
+    def __init__(self, **kwargs):
+        &#34;&#34;&#34;
+        Initialises the object.
+        
+        
+        &#34;&#34;&#34;
+        super().__init__(**kwargs)
+        
+        self.n_repeats_default = 100
+        self.chunksize = 10000
+        self.bounds = np.array([110, 155, -45, -10])
+        
+        # set attributes based on kwargs
+        for key in kwargs.keys():
+            if hasattr(self, key):
+                setattr(self, key, kwargs[key])
+            #end if
+        #end for
+    #end func
+    
+    def ParseXMLNode(self, commandList):
+        &#34;&#34;&#34;
+        Redefines default attributes based on input from xml configuration 
+        file.
+        
+        
+        &#34;&#34;&#34;
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                if tp == list:
+                    val = fn.changetype(row[1], &#39;list&#39;, dtype=&#39;str&#39;)
+                elif tp == np.ndarray:
+                    val = fn.changetype(row[1], &#39;array&#39;, dtype=&#39;float&#39;)
+                else:
+                    val = fn.changetype(row[1], tp)
+                #end if
+                setattr(self, row[0], val)
+            #end if
+        #end for
+    #end func
+    
+    def Prepare(self, domain_dict, points_dict):
+        &#34;&#34;&#34;
+        Sets domain and n_deposits attributes for random point generation.
+        
+        
+        &#34;&#34;&#34;
+        self.domain = domain_dict
+        self.n_deposits = points_dict[&#39;n_deposits&#39;]
+    #end func
+    
+    def seed_random_points(self, n_repeats=0):
+        &#34;&#34;&#34;
+        Seeds uniformly distributed random points.
+        
+
+        Returns
+        -------
+        points_random : array
+            Array of (lon, lat) locations of random points in equal earth 
+            projection, with shape (n, 2)
+            
+            
+        Calls
+        -----
+        filter_points
+        
+        functions.epsg_project
+        
+        
+        &#34;&#34;&#34;
+        if n_repeats == 0:
+            n_repeats = self.n_repeats_default
+        #end if
+        
+        n_points = n_repeats*self.n_deposits
+        
+        # initialise new array to save points to
+        random_points = np.empty((0, 2))
+        
+        while len(random_points) &lt; n_points:
+            random_points_chunk = \
+                initialise_random_points_chunk(self.bounds, self.chunksize)
+            points = filter_points(random_points_chunk, self.domain)
+            random_points = np.vstack([random_points, points])
+        #end while
+        
+        random_points = random_points[:n_points, :]
+        
+        random_points.resize((n_repeats, self.n_deposits, 2), refcheck=False)
+        return random_points
+    #end func
+#end class
+    
+def filter_points(points, domain):
+    &#34;&#34;&#34;
+    Filter points to be within a certain buffer of a station and within/outside
+    polygons as defined by polygon_dict.
+    
+
+    Parameters
+    ----------
+    points : array
+        Numpy array of x and y coordinates of points to be checked, with shape 
+        (n, 2).
+    
+    domain : dictionary of shapely multipolygon
+        Multipolygon describing the region of coverage for the model.
+        
+
+    Returns
+    -------
+    points : array
+        Input points array filtered to contain only points within area of 
+        interest and on land.
+        
+                       
+    &#34;&#34;&#34;
+    
+    coverage_grid = domain[&#39;grid&#39;]
+    pointlist = GeoSeries([Point(pp) for pp in points[:, :2]])
+    indices = np.arange(len(pointlist))
+    
+    print(&#39;Checking if&#39;, len(indices), &#39;points are within coverage grid&#39;)
+    t0 = time.time()
+    dist1 = pointlist.distance(coverage_grid)
+    filt1 = dist1 &lt;= 0.1
+    indices = indices[filt1]
+    print(len(indices), &#39;points, time =&#39;, time.time() - t0)
+    
+    return points[indices]
+#end func
+    
+def initialise_random_points_chunk(bounds, chunksize):
+    &#34;&#34;&#34;
+    Initialise points within the bounds as stored within the attribute.
+    To ensure equal area representation across the globe they are seeded in 
+    eastings and northings, then projected to longitude and latitude.
+    
+
+    Parameters
+    ----------
+    bounds : list of float
+        minimum and maximum longitude and latitude values.
+        
+    chunksize : integer
+        Number of points to be created per chunk.
+        
+        
+    Returns
+    -------
+    random_locations_chunk : array
+        Array of random location coordinates with shape (chunksize, 2).
+        
+    
+    Calls
+    -----
+    functions.epsg_project
+    
+        
+    &#34;&#34;&#34;
+    
+    lon0, lon1, lat0, lat1 = bounds
+    
+    colat0 = np.pi*(90 - lat0)/180
+    colat1 = np.pi*(90 - lat1)/180
+    
+    y0 = np.cos(colat0)
+    y1 = np.cos(colat1)
+    
+    rand = np.random.random(size=chunksize)*(y1 - y0) + y0
+    randcolat = np.arccos(rand)
+    randlat = 90 - 180*randcolat/np.pi 
+    randlon = np.random.random(size=chunksize)*(lon1 - lon0) + lon0
+    
+    return np.vstack([randlon, randlat]).T
+#end func
+    
+def make_point_property_array(point_data_filt, point_propertynames):
+    &#34;&#34;&#34;
+    Make and populate an array to contain point properties (filtered as for x, 
+    y locations).
+    
+    
+    Parameters
+    ----------
+    point_data_filt : array
+        Array of coordinates of deposit locations for which distances to 
+        contours are to be computed.
+        
+    point_propertynames : list of str
+        Names of properties of the points used (e.g. deposit type).
+    
+    
+    Returns
+    -------
+    point_property_array : array
+        Structured array of point properties.
+    
+        
+    &#34;&#34;&#34;
+    
+    arrdtype = [(prop, np.float) for prop in point_propertynames]
+    point_property_array = np.array(np.zeros(len(point_data_filt)),
+                                         dtype=arrdtype)        
+    for i, pname in enumerate(point_propertynames):
+        point_property_array[pname] = point_data_filt[:, i+2]
+    #end for
+    return point_property_array
+#end func
+    
+def read_csv(file, dataset, point_properties):
+    &#34;&#34;&#34;
+    Function to read deposit information from a text file.
+    
+    
+    Parameters
+    ----------
+    file : string
+        Directory/name of input file.
+        
+    dataset : xml node
+        ElementTree xml node containing information about the input dataset.
+        
+    point_properties : list of string
+        Names of required columns for output dataframe. If column is not 
+        present in input file, a column of zeros is created.
+        
+        
+    Returns
+    -------
+    df : pandas dataframe
+        DataFrame containing the coordinates and required point properties for
+        each deposit in the input file.
+        
+    
+    &#34;&#34;&#34;
+    columns = fn.changetype(dataset.attrib[&#34;columns&#34;], list, dtype=str)
+    df = pd.read_csv(file, names=columns).fillna(0)
+    for prop in point_properties:
+        if prop not in df.columns:
+            df[prop] = np.zeros(len(df))
+        #end if
+    #end for
+    return df[[&#39;longitude&#39;, &#39;latitude&#39;] + point_properties]
+#end func
+
+def read_deposit_dataset(datasets, read_columns, point_properties, 
+                         properties, rowfilter, newcolumns):
+    &#34;&#34;&#34;
+    Reads the locations of mineral deposits from text files.
+    
+    
+    Parameters
+    ----------
+    datasets : xml node
+        ElementTree node of input parameters for the data sets.
+        
+    read_columns : list of string
+        List of column names to be read from excel or csv files.
+        
+    point_properties : list of string
+        List of column names for the array returned by the function. If the 
+        point property is not present in the input data file, a column of zeros
+        is created instead.
+        
+    properties : xml node
+        ElementTree node of properties used to create a truth value array. For 
+        example, a property may be &#34;Cu (%) &gt; 0&#34;.
+        
+    rowfilter : string
+        Filter dataset by union or intersection of properties.
+        
+    newcolumns : xml node
+        ElementTree node containing information to generate new columns for the
+        data. For example, if we have Cu (%) and Tonnage (Mt) as columns, we 
+        may make a new column &#34;Cu (Mt) = Cu (%) * Tonnage (Mt)&#34;.
+        
+        
+    Returns
+    -------
+    point_data : array
+        Numpy array with shape (n, m+2) of coordinates for deposit locations 
+        with the first and second coordinates being longitude and latitude 
+        respectively, and the next m coordinates representing point properties.
+        
+        
+    Calls
+    -----
+    read_txt
+    
+    read_csv
+    
+    read_excel
+    
+    add_columns
+    
+    filter_by_properties
+    
+    IO.XML.GetAttributeString
+    
+    
+    &#34;&#34;&#34;
+    pointslist = list()
+    for dataset in datasets:
+        path = dataset.attrib[&#34;path&#34;]
+        file_name = dataset.attrib[&#34;file_name&#34;]
+        file = os.path.join(path, file_name)
+        filetype = file_name.split(&#39;.&#39;)[-1]
+        if filetype == &#39;txt&#39;:
+            df = read_txt(file, dataset, read_columns)
+        elif filetype == &#39;csv&#39;:
+            df = read_csv(file, dataset, read_columns)
+        elif filetype in [&#39;xls&#39;, &#39;xlsx&#39;]:
+            df = read_excel(file, dataset, read_columns)
+        #end if
+        pointslist.append(df)
+    #end for
+    point_df = pd.concat(pointslist, axis=0)
+    point_df_newcols = add_columns(point_df, newcolumns)
+    point_df_filt = filter_by_properties(point_df_newcols, properties, 
+                                         rowfilter)
+    return np.array(point_df_filt[[&#39;longitude&#39;, &#39;latitude&#39;] + \
+                                  point_properties])
+#end func
+
+def read_excel(file, dataset, point_properties):
+    &#34;&#34;&#34;
+    Function to read deposit information from a text file.
+    
+    
+    Parameters
+    ----------
+    file : string
+        Directory/name of input file.
+        
+    dataset : xml node
+        ElementTree xml node containing information about the input dataset.
+        
+    point_properties : list of string
+        List of properties required for analysis.
+        
+        
+    Returns
+    -------
+    df : pandas dataframe
+        DataFrame containing the coordinates and required point properties for
+        each deposit in the input file.
+        
+    
+    &#34;&#34;&#34;
+    sheet_name = dataset.attrib[&#34;sheet_name&#34;]
+    lon_col_name = dataset.attrib[&#34;lon_col_name&#34;]
+    lat_col_name = dataset.attrib[&#34;lat_col_name&#34;]
+    df = pd.read_excel(file, sheet_name=sheet_name).fillna(0)
+    for prop in point_properties:
+        if prop not in df.columns:
+            df[prop] = np.zeros(len(df))
+        #end if
+    #end for
+    df = df[[lon_col_name, lat_col_name] + point_properties]
+    df = df.rename(columns = {lon_col_name: &#39;longitude&#39;, 
+                              lat_col_name: &#39;latitude&#39;})
+    return df
+#end func
+    
+def read_txt(file, dataset, point_properties):
+    &#34;&#34;&#34;
+    Function to read deposit information from a text file.
+    
+    
+    Parameters
+    ----------
+    file : string
+        Directory/name of input file.
+        
+    dataset : xml node
+        ElementTree xml node containing information about the input dataset.
+        
+    point_properties : list of string
+        Names of required columns for output dataframe. If column is not 
+        present in input file, a column of zeros is created.
+        
+        
+    Returns
+    -------
+    df : pandas dataframe
+        DataFrame containing the coordinates and required point properties for
+        each deposit in the input file.
+        
+    
+    &#34;&#34;&#34;
+    columns = fn.changetype(dataset.attrib[&#34;columns&#34;], list, dtype=str)
+    points = np.genfromtxt(file, usecols=tuple(np.arange(len(columns))))
+    df = pd.DataFrame(points, columns=columns).fillna(0)
+    for prop in point_properties:
+        if prop not in df.columns:
+            df[prop] = np.zeros(len(df))
+        #end if
+    #end for
+    return df[[&#39;longitude&#39;, &#39;latitude&#39;] + point_properties]
+#end func
+    
+def filter_by_properties(point_data, properties, rowfilter):
+    &#34;&#34;&#34;
+    Calls
+    -----
+    functions.check_filter
+    
+    functions.check_property
+    
+    functions.get_indices
+    
+    
+    &#34;&#34;&#34;
+    dct = {}
+    keys = []
+    for prop in properties:
+        name = prop.attrib[&#34;name&#34;]
+        description = fn.changetype(prop.attrib[&#34;description&#34;], list, 
+                                    dtype=str)
+        if description[0] in keys:
+            prop1, condition, prop2 = description
+            arr1 = dct[prop1]
+            arr2 = dct[prop2]
+            dct[name] = fn.check_filter(arr1, condition, arr2)
+            keys.append(name)
+        else:
+            column, condition, value = description
+            arr = np.array(point_data[column])
+            try: 
+                value = float(value)
+            except:
+                pass
+            #end try
+            dct[name] = fn.check_property(arr, condition, value)
+            keys.append(name)
+        #end if
+    #end for
+    keys = fn.changetype(rowfilter.attrib[&#34;filters&#34;], list, dtype=str)
+    condition = rowfilter.attrib[&#34;condition&#34;]
+    arrlist = [dct[key] for key in keys]
+    indices = fn.get_indices(arrlist, condition)
+    return point_data[indices]
+#end func
+    
+def add_columns(point_data, newcolumns):
+    &#34;&#34;&#34;
+    Calls
+    -----
+    column_operation
+    
+    
+    &#34;&#34;&#34;
+    for newcolumn in newcolumns:
+        name = newcolumn.attrib[&#34;name&#34;]
+        column1, operation, value = \
+            fn.changetype(newcolumn.attrib[&#34;description&#34;], list, dtype=str)
+        column1 = point_data[column1]
+        if value in point_data.columns:
+            column2 = point_data[value]
+            point_data[name] = column_operation(column1, column2, operation)
+        else:
+            point_data[name] = column_operation(column1, float(value), 
+                                                operation)
+        #end if
+    return point_data
+#end func
+    
+def column_operation(x, y, operation):
+    &#34;&#34;&#34;
+    Function to operate on two columns of a dataframe based on xml input 
+    command.
+    
+    
+    &#34;&#34;&#34;
+    if operation == &#39;*&#39;:
+        return x*y
+    elif operation == &#39;+&#39;:
+        return x + y
+    elif operation == &#39;-&#39;:
+        return x - y
+    elif operation == &#39;/&#39;:
+        return x/y
+    #end if
+#end func</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="toolkit.IO.DataManager.add_columns"><code class="name flex">
+<span>def <span class="ident">add_columns</span></span>(<span>point_data, newcolumns)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="calls">Calls</h2>
+<p>column_operation</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def add_columns(point_data, newcolumns):
+    &#34;&#34;&#34;
+    Calls
+    -----
+    column_operation
+    
+    
+    &#34;&#34;&#34;
+    for newcolumn in newcolumns:
+        name = newcolumn.attrib[&#34;name&#34;]
+        column1, operation, value = \
+            fn.changetype(newcolumn.attrib[&#34;description&#34;], list, dtype=str)
+        column1 = point_data[column1]
+        if value in point_data.columns:
+            column2 = point_data[value]
+            point_data[name] = column_operation(column1, column2, operation)
+        else:
+            point_data[name] = column_operation(column1, float(value), 
+                                                operation)
+        #end if
+    return point_data</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.column_operation"><code class="name flex">
+<span>def <span class="ident">column_operation</span></span>(<span>x, y, operation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to operate on two columns of a dataframe based on xml input
+command.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def column_operation(x, y, operation):
+    &#34;&#34;&#34;
+    Function to operate on two columns of a dataframe based on xml input 
+    command.
+    
+    
+    &#34;&#34;&#34;
+    if operation == &#39;*&#39;:
+        return x*y
+    elif operation == &#39;+&#39;:
+        return x + y
+    elif operation == &#39;-&#39;:
+        return x - y
+    elif operation == &#39;/&#39;:
+        return x/y</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.filter_by_properties"><code class="name flex">
+<span>def <span class="ident">filter_by_properties</span></span>(<span>point_data, properties, rowfilter)</span>
+</code></dt>
+<dd>
+<div class="desc"><h2 id="calls">Calls</h2>
+<p>functions.check_filter</p>
+<p>functions.check_property</p>
+<p>functions.get_indices</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def filter_by_properties(point_data, properties, rowfilter):
+    &#34;&#34;&#34;
+    Calls
+    -----
+    functions.check_filter
+    
+    functions.check_property
+    
+    functions.get_indices
+    
+    
+    &#34;&#34;&#34;
+    dct = {}
+    keys = []
+    for prop in properties:
+        name = prop.attrib[&#34;name&#34;]
+        description = fn.changetype(prop.attrib[&#34;description&#34;], list, 
+                                    dtype=str)
+        if description[0] in keys:
+            prop1, condition, prop2 = description
+            arr1 = dct[prop1]
+            arr2 = dct[prop2]
+            dct[name] = fn.check_filter(arr1, condition, arr2)
+            keys.append(name)
+        else:
+            column, condition, value = description
+            arr = np.array(point_data[column])
+            try: 
+                value = float(value)
+            except:
+                pass
+            #end try
+            dct[name] = fn.check_property(arr, condition, value)
+            keys.append(name)
+        #end if
+    #end for
+    keys = fn.changetype(rowfilter.attrib[&#34;filters&#34;], list, dtype=str)
+    condition = rowfilter.attrib[&#34;condition&#34;]
+    arrlist = [dct[key] for key in keys]
+    indices = fn.get_indices(arrlist, condition)
+    return point_data[indices]</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.filter_points"><code class="name flex">
+<span>def <span class="ident">filter_points</span></span>(<span>points, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Filter points to be within a certain buffer of a station and within/outside
+polygons as defined by polygon_dict.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>points</code></strong> :&ensp;<code>array</code></dt>
+<dd>Numpy array of x and y coordinates of points to be checked, with shape
+(n, 2).</dd>
+<dt><strong><code>domain</code></strong> :&ensp;<code>dictionary</code> of <code>shapely multipolygon</code></dt>
+<dd>Multipolygon describing the region of coverage for the model.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>points</code></strong> :&ensp;<code>array</code></dt>
+<dd>Input points array filtered to contain only points within area of
+interest and on land.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def filter_points(points, domain):
+    &#34;&#34;&#34;
+    Filter points to be within a certain buffer of a station and within/outside
+    polygons as defined by polygon_dict.
+    
+
+    Parameters
+    ----------
+    points : array
+        Numpy array of x and y coordinates of points to be checked, with shape 
+        (n, 2).
+    
+    domain : dictionary of shapely multipolygon
+        Multipolygon describing the region of coverage for the model.
+        
+
+    Returns
+    -------
+    points : array
+        Input points array filtered to contain only points within area of 
+        interest and on land.
+        
+                       
+    &#34;&#34;&#34;
+    
+    coverage_grid = domain[&#39;grid&#39;]
+    pointlist = GeoSeries([Point(pp) for pp in points[:, :2]])
+    indices = np.arange(len(pointlist))
+    
+    print(&#39;Checking if&#39;, len(indices), &#39;points are within coverage grid&#39;)
+    t0 = time.time()
+    dist1 = pointlist.distance(coverage_grid)
+    filt1 = dist1 &lt;= 0.1
+    indices = indices[filt1]
+    print(len(indices), &#39;points, time =&#39;, time.time() - t0)
+    
+    return points[indices]</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.initialise_random_points_chunk"><code class="name flex">
+<span>def <span class="ident">initialise_random_points_chunk</span></span>(<span>bounds, chunksize)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialise points within the bounds as stored within the attribute.
+To ensure equal area representation across the globe they are seeded in
+eastings and northings, then projected to longitude and latitude.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>bounds</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>minimum and maximum longitude and latitude values.</dd>
+<dt><strong><code>chunksize</code></strong> :&ensp;<code>integer</code></dt>
+<dd>Number of points to be created per chunk.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>random_locations_chunk</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array of random location coordinates with shape (chunksize, 2).</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.epsg_project</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialise_random_points_chunk(bounds, chunksize):
+    &#34;&#34;&#34;
+    Initialise points within the bounds as stored within the attribute.
+    To ensure equal area representation across the globe they are seeded in 
+    eastings and northings, then projected to longitude and latitude.
+    
+
+    Parameters
+    ----------
+    bounds : list of float
+        minimum and maximum longitude and latitude values.
+        
+    chunksize : integer
+        Number of points to be created per chunk.
+        
+        
+    Returns
+    -------
+    random_locations_chunk : array
+        Array of random location coordinates with shape (chunksize, 2).
+        
+    
+    Calls
+    -----
+    functions.epsg_project
+    
+        
+    &#34;&#34;&#34;
+    
+    lon0, lon1, lat0, lat1 = bounds
+    
+    colat0 = np.pi*(90 - lat0)/180
+    colat1 = np.pi*(90 - lat1)/180
+    
+    y0 = np.cos(colat0)
+    y1 = np.cos(colat1)
+    
+    rand = np.random.random(size=chunksize)*(y1 - y0) + y0
+    randcolat = np.arccos(rand)
+    randlat = 90 - 180*randcolat/np.pi 
+    randlon = np.random.random(size=chunksize)*(lon1 - lon0) + lon0
+    
+    return np.vstack([randlon, randlat]).T</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.make_point_property_array"><code class="name flex">
+<span>def <span class="ident">make_point_property_array</span></span>(<span>point_data_filt, point_propertynames)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Make and populate an array to contain point properties (filtered as for x,
+y locations).</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>point_data_filt</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array of coordinates of deposit locations for which distances to
+contours are to be computed.</dd>
+<dt><strong><code>point_propertynames</code></strong> :&ensp;<code>list</code> of <code>str</code></dt>
+<dd>Names of properties of the points used (e.g. deposit type).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>point_property_array</code></strong> :&ensp;<code>array</code></dt>
+<dd>Structured array of point properties.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_point_property_array(point_data_filt, point_propertynames):
+    &#34;&#34;&#34;
+    Make and populate an array to contain point properties (filtered as for x, 
+    y locations).
+    
+    
+    Parameters
+    ----------
+    point_data_filt : array
+        Array of coordinates of deposit locations for which distances to 
+        contours are to be computed.
+        
+    point_propertynames : list of str
+        Names of properties of the points used (e.g. deposit type).
+    
+    
+    Returns
+    -------
+    point_property_array : array
+        Structured array of point properties.
+    
+        
+    &#34;&#34;&#34;
+    
+    arrdtype = [(prop, np.float) for prop in point_propertynames]
+    point_property_array = np.array(np.zeros(len(point_data_filt)),
+                                         dtype=arrdtype)        
+    for i, pname in enumerate(point_propertynames):
+        point_property_array[pname] = point_data_filt[:, i+2]
+    #end for
+    return point_property_array</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.read_csv"><code class="name flex">
+<span>def <span class="ident">read_csv</span></span>(<span>file, dataset, point_properties)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to read deposit information from a text file.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>string</code></dt>
+<dd>Directory/name of input file.</dd>
+<dt><strong><code>dataset</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>ElementTree xml node containing information about the input dataset.</dd>
+<dt><strong><code>point_properties</code></strong> :&ensp;<code>list</code> of <code>string</code></dt>
+<dd>Names of required columns for output dataframe. If column is not
+present in input file, a column of zeros is created.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas dataframe</code></dt>
+<dd>DataFrame containing the coordinates and required point properties for
+each deposit in the input file.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_csv(file, dataset, point_properties):
+    &#34;&#34;&#34;
+    Function to read deposit information from a text file.
+    
+    
+    Parameters
+    ----------
+    file : string
+        Directory/name of input file.
+        
+    dataset : xml node
+        ElementTree xml node containing information about the input dataset.
+        
+    point_properties : list of string
+        Names of required columns for output dataframe. If column is not 
+        present in input file, a column of zeros is created.
+        
+        
+    Returns
+    -------
+    df : pandas dataframe
+        DataFrame containing the coordinates and required point properties for
+        each deposit in the input file.
+        
+    
+    &#34;&#34;&#34;
+    columns = fn.changetype(dataset.attrib[&#34;columns&#34;], list, dtype=str)
+    df = pd.read_csv(file, names=columns).fillna(0)
+    for prop in point_properties:
+        if prop not in df.columns:
+            df[prop] = np.zeros(len(df))
+        #end if
+    #end for
+    return df[[&#39;longitude&#39;, &#39;latitude&#39;] + point_properties]</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.read_deposit_dataset"><code class="name flex">
+<span>def <span class="ident">read_deposit_dataset</span></span>(<span>datasets, read_columns, point_properties, properties, rowfilter, newcolumns)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads the locations of mineral deposits from text files.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>datasets</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>ElementTree node of input parameters for the data sets.</dd>
+<dt><strong><code>read_columns</code></strong> :&ensp;<code>list</code> of <code>string</code></dt>
+<dd>List of column names to be read from excel or csv files.</dd>
+<dt><strong><code>point_properties</code></strong> :&ensp;<code>list</code> of <code>string</code></dt>
+<dd>List of column names for the array returned by the function. If the
+point property is not present in the input data file, a column of zeros
+is created instead.</dd>
+<dt><strong><code>properties</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>ElementTree node of properties used to create a truth value array. For
+example, a property may be "Cu (%) &gt; 0".</dd>
+<dt><strong><code>rowfilter</code></strong> :&ensp;<code>string</code></dt>
+<dd>Filter dataset by union or intersection of properties.</dd>
+<dt><strong><code>newcolumns</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>ElementTree node containing information to generate new columns for the
+data. For example, if we have Cu (%) and Tonnage (Mt) as columns, we
+may make a new column "Cu (Mt) = Cu (%) * Tonnage (Mt)".</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>point_data</code></strong> :&ensp;<code>array</code></dt>
+<dd>Numpy array with shape (n, m+2) of coordinates for deposit locations
+with the first and second coordinates being longitude and latitude
+respectively, and the next m coordinates representing point properties.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>read_txt</p>
+<p>read_csv</p>
+<p>read_excel</p>
+<p>add_columns</p>
+<p>filter_by_properties</p>
+<p>IO.XML.GetAttributeString</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_deposit_dataset(datasets, read_columns, point_properties, 
+                         properties, rowfilter, newcolumns):
+    &#34;&#34;&#34;
+    Reads the locations of mineral deposits from text files.
+    
+    
+    Parameters
+    ----------
+    datasets : xml node
+        ElementTree node of input parameters for the data sets.
+        
+    read_columns : list of string
+        List of column names to be read from excel or csv files.
+        
+    point_properties : list of string
+        List of column names for the array returned by the function. If the 
+        point property is not present in the input data file, a column of zeros
+        is created instead.
+        
+    properties : xml node
+        ElementTree node of properties used to create a truth value array. For 
+        example, a property may be &#34;Cu (%) &gt; 0&#34;.
+        
+    rowfilter : string
+        Filter dataset by union or intersection of properties.
+        
+    newcolumns : xml node
+        ElementTree node containing information to generate new columns for the
+        data. For example, if we have Cu (%) and Tonnage (Mt) as columns, we 
+        may make a new column &#34;Cu (Mt) = Cu (%) * Tonnage (Mt)&#34;.
+        
+        
+    Returns
+    -------
+    point_data : array
+        Numpy array with shape (n, m+2) of coordinates for deposit locations 
+        with the first and second coordinates being longitude and latitude 
+        respectively, and the next m coordinates representing point properties.
+        
+        
+    Calls
+    -----
+    read_txt
+    
+    read_csv
+    
+    read_excel
+    
+    add_columns
+    
+    filter_by_properties
+    
+    IO.XML.GetAttributeString
+    
+    
+    &#34;&#34;&#34;
+    pointslist = list()
+    for dataset in datasets:
+        path = dataset.attrib[&#34;path&#34;]
+        file_name = dataset.attrib[&#34;file_name&#34;]
+        file = os.path.join(path, file_name)
+        filetype = file_name.split(&#39;.&#39;)[-1]
+        if filetype == &#39;txt&#39;:
+            df = read_txt(file, dataset, read_columns)
+        elif filetype == &#39;csv&#39;:
+            df = read_csv(file, dataset, read_columns)
+        elif filetype in [&#39;xls&#39;, &#39;xlsx&#39;]:
+            df = read_excel(file, dataset, read_columns)
+        #end if
+        pointslist.append(df)
+    #end for
+    point_df = pd.concat(pointslist, axis=0)
+    point_df_newcols = add_columns(point_df, newcolumns)
+    point_df_filt = filter_by_properties(point_df_newcols, properties, 
+                                         rowfilter)
+    return np.array(point_df_filt[[&#39;longitude&#39;, &#39;latitude&#39;] + \
+                                  point_properties])</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.read_excel"><code class="name flex">
+<span>def <span class="ident">read_excel</span></span>(<span>file, dataset, point_properties)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to read deposit information from a text file.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>string</code></dt>
+<dd>Directory/name of input file.</dd>
+<dt><strong><code>dataset</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>ElementTree xml node containing information about the input dataset.</dd>
+<dt><strong><code>point_properties</code></strong> :&ensp;<code>list</code> of <code>string</code></dt>
+<dd>List of properties required for analysis.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas dataframe</code></dt>
+<dd>DataFrame containing the coordinates and required point properties for
+each deposit in the input file.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_excel(file, dataset, point_properties):
+    &#34;&#34;&#34;
+    Function to read deposit information from a text file.
+    
+    
+    Parameters
+    ----------
+    file : string
+        Directory/name of input file.
+        
+    dataset : xml node
+        ElementTree xml node containing information about the input dataset.
+        
+    point_properties : list of string
+        List of properties required for analysis.
+        
+        
+    Returns
+    -------
+    df : pandas dataframe
+        DataFrame containing the coordinates and required point properties for
+        each deposit in the input file.
+        
+    
+    &#34;&#34;&#34;
+    sheet_name = dataset.attrib[&#34;sheet_name&#34;]
+    lon_col_name = dataset.attrib[&#34;lon_col_name&#34;]
+    lat_col_name = dataset.attrib[&#34;lat_col_name&#34;]
+    df = pd.read_excel(file, sheet_name=sheet_name).fillna(0)
+    for prop in point_properties:
+        if prop not in df.columns:
+            df[prop] = np.zeros(len(df))
+        #end if
+    #end for
+    df = df[[lon_col_name, lat_col_name] + point_properties]
+    df = df.rename(columns = {lon_col_name: &#39;longitude&#39;, 
+                              lat_col_name: &#39;latitude&#39;})
+    return df</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.read_txt"><code class="name flex">
+<span>def <span class="ident">read_txt</span></span>(<span>file, dataset, point_properties)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to read deposit information from a text file.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>string</code></dt>
+<dd>Directory/name of input file.</dd>
+<dt><strong><code>dataset</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>ElementTree xml node containing information about the input dataset.</dd>
+<dt><strong><code>point_properties</code></strong> :&ensp;<code>list</code> of <code>string</code></dt>
+<dd>Names of required columns for output dataframe. If column is not
+present in input file, a column of zeros is created.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas dataframe</code></dt>
+<dd>DataFrame containing the coordinates and required point properties for
+each deposit in the input file.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_txt(file, dataset, point_properties):
+    &#34;&#34;&#34;
+    Function to read deposit information from a text file.
+    
+    
+    Parameters
+    ----------
+    file : string
+        Directory/name of input file.
+        
+    dataset : xml node
+        ElementTree xml node containing information about the input dataset.
+        
+    point_properties : list of string
+        Names of required columns for output dataframe. If column is not 
+        present in input file, a column of zeros is created.
+        
+        
+    Returns
+    -------
+    df : pandas dataframe
+        DataFrame containing the coordinates and required point properties for
+        each deposit in the input file.
+        
+    
+    &#34;&#34;&#34;
+    columns = fn.changetype(dataset.attrib[&#34;columns&#34;], list, dtype=str)
+    points = np.genfromtxt(file, usecols=tuple(np.arange(len(columns))))
+    df = pd.DataFrame(points, columns=columns).fillna(0)
+    for prop in point_properties:
+        if prop not in df.columns:
+            df[prop] = np.zeros(len(df))
+        #end if
+    #end for
+    return df[[&#39;longitude&#39;, &#39;latitude&#39;] + point_properties]</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="toolkit.IO.DataManager.DataManager"><code class="flex name class">
+<span>class <span class="ident">DataManager</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class to facilitate the importation of mineral deposit datasets.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class DataManager():
+    def __init__(self):
+        &#34;&#34;&#34;
+        Class to facilitate the importation of mineral deposit datasets.
+        
+        
+        &#34;&#34;&#34;
+        self.point_propertynames = []
+        self.read_columns = []
+        self.bounds = np.array([110, 155, -45, -10])
+    #end func
+    
+    def ParseXMLNode(self, rootNode, commandList):
+        &#34;&#34;&#34;
+        Function to get commands and the details of required datasets from xml 
+        configuration file input.
+        
+        
+        &#34;&#34;&#34;
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        self.datasets = rootNode.findall(&#34;deposits&#34;)
+        self.newcolumns = rootNode.findall(&#34;newcolumn&#34;)
+        self.properties = rootNode.findall(&#34;property&#34;)
+        self.filter = rootNode.find(&#34;filter&#34;)
+    #end func
+    
+    def Filter_Dataset(self, domain):
+        &#34;&#34;&#34;
+        Function to filter input data to ensure it falls within the region of 
+        coverage of the model being used.
+        
+        
+        Calls
+        -----
+        filter_points
+        
+        
+        &#34;&#34;&#34;
+        
+        # Filter by location
+        self.point_data_filt = filter_points(self.point_data, domain)
+        if len(self.point_data_filt) == 0:
+            raise Exception(&#39;No deposits found within region of coverage!&#39;)
+    #end func
+    
+    def Make_Point_Property_Array(self):
+        &#34;&#34;&#34;
+        Function to create an array which stores deposit attributes.
+        
+        
+        Calls
+        -----
+        make_point_property_array
+        
+        
+        &#34;&#34;&#34;
+        self.point_property_array = \
+            make_point_property_array(self.point_data_filt, 
+                                      self.point_propertynames)
+    #end func
+    
+    def Read_Dataset(self, domain_dict):
+        &#34;&#34;&#34;
+        Reads input files, filters input data, creates point property array, 
+        and enters data into a dictionary to be used by other modules.
+        
+        
+        &#34;&#34;&#34;
+        self.Read_Files()
+        self.Filter_Dataset(domain_dict)
+        self.Make_Point_Property_Array() 
+        self.points_dict = {&#39;point_data_filt&#39;: self.point_data_filt,
+                            &#39;point_property_array&#39;: self.point_property_array,
+                            &#39;n_deposits&#39;: len(self.point_data_filt)}
+    #end func
+    
+    def Read_Files(self):
+        &#34;&#34;&#34;
+        Reads input files and returns array of deposit locations and 
+        properties.
+        
+        
+        Calls
+        -----
+        read_deposit_dataset
+        
+        
+        &#34;&#34;&#34;
+        self.point_data = read_deposit_dataset(self.datasets, 
+                                               self.read_columns,
+                                               self.point_propertynames,
+                                               self.properties, self.filter, 
+                                               self.newcolumns)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.IO.DataManager.DataManager.Filter_Dataset"><code class="name flex">
+<span>def <span class="ident">Filter_Dataset</span></span>(<span>self, domain)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to filter input data to ensure it falls within the region of
+coverage of the model being used.</p>
+<h2 id="calls">Calls</h2>
+<p>filter_points</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Filter_Dataset(self, domain):
+    &#34;&#34;&#34;
+    Function to filter input data to ensure it falls within the region of 
+    coverage of the model being used.
+    
+    
+    Calls
+    -----
+    filter_points
+    
+    
+    &#34;&#34;&#34;
+    
+    # Filter by location
+    self.point_data_filt = filter_points(self.point_data, domain)
+    if len(self.point_data_filt) == 0:
+        raise Exception(&#39;No deposits found within region of coverage!&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.DataManager.Make_Point_Property_Array"><code class="name flex">
+<span>def <span class="ident">Make_Point_Property_Array</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to create an array which stores deposit attributes.</p>
+<h2 id="calls">Calls</h2>
+<p>make_point_property_array</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Make_Point_Property_Array(self):
+    &#34;&#34;&#34;
+    Function to create an array which stores deposit attributes.
+    
+    
+    Calls
+    -----
+    make_point_property_array
+    
+    
+    &#34;&#34;&#34;
+    self.point_property_array = \
+        make_point_property_array(self.point_data_filt, 
+                                  self.point_propertynames)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.DataManager.ParseXMLNode"><code class="name flex">
+<span>def <span class="ident">ParseXMLNode</span></span>(<span>self, rootNode, commandList)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to get commands and the details of required datasets from xml
+configuration file input.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ParseXMLNode(self, rootNode, commandList):
+    &#34;&#34;&#34;
+    Function to get commands and the details of required datasets from xml 
+    configuration file input.
+    
+    
+    &#34;&#34;&#34;
+    for row in commandList:
+        if hasattr(self, row[0]):
+            tp = type(getattr(self, row[0]))
+            val = fn.changetype(row[1], tp)
+            setattr(self, row[0], val)
+        #end if
+    #end for
+    self.datasets = rootNode.findall(&#34;deposits&#34;)
+    self.newcolumns = rootNode.findall(&#34;newcolumn&#34;)
+    self.properties = rootNode.findall(&#34;property&#34;)
+    self.filter = rootNode.find(&#34;filter&#34;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.DataManager.Read_Dataset"><code class="name flex">
+<span>def <span class="ident">Read_Dataset</span></span>(<span>self, domain_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads input files, filters input data, creates point property array,
+and enters data into a dictionary to be used by other modules.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Read_Dataset(self, domain_dict):
+    &#34;&#34;&#34;
+    Reads input files, filters input data, creates point property array, 
+    and enters data into a dictionary to be used by other modules.
+    
+    
+    &#34;&#34;&#34;
+    self.Read_Files()
+    self.Filter_Dataset(domain_dict)
+    self.Make_Point_Property_Array() 
+    self.points_dict = {&#39;point_data_filt&#39;: self.point_data_filt,
+                        &#39;point_property_array&#39;: self.point_property_array,
+                        &#39;n_deposits&#39;: len(self.point_data_filt)}</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.DataManager.Read_Files"><code class="name flex">
+<span>def <span class="ident">Read_Files</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads input files and returns array of deposit locations and
+properties.</p>
+<h2 id="calls">Calls</h2>
+<p>read_deposit_dataset</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Read_Files(self):
+    &#34;&#34;&#34;
+    Reads input files and returns array of deposit locations and 
+    properties.
+    
+    
+    Calls
+    -----
+    read_deposit_dataset
+    
+    
+    &#34;&#34;&#34;
+    self.point_data = read_deposit_dataset(self.datasets, 
+                                           self.read_columns,
+                                           self.point_propertynames,
+                                           self.properties, self.filter, 
+                                           self.newcolumns)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="toolkit.IO.DataManager.RandomPointsManager"><code class="flex name class">
+<span>class <span class="ident">RandomPointsManager</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class used to generate uniformly distributed random points, for analysis.</p>
+<p>Initialises the object.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class RandomPointsManager():
+    &#34;&#34;&#34;
+    Class used to generate uniformly distributed random points, for analysis.
+    
+    
+    &#34;&#34;&#34;
+    def __init__(self, **kwargs):
+        &#34;&#34;&#34;
+        Initialises the object.
+        
+        
+        &#34;&#34;&#34;
+        super().__init__(**kwargs)
+        
+        self.n_repeats_default = 100
+        self.chunksize = 10000
+        self.bounds = np.array([110, 155, -45, -10])
+        
+        # set attributes based on kwargs
+        for key in kwargs.keys():
+            if hasattr(self, key):
+                setattr(self, key, kwargs[key])
+            #end if
+        #end for
+    #end func
+    
+    def ParseXMLNode(self, commandList):
+        &#34;&#34;&#34;
+        Redefines default attributes based on input from xml configuration 
+        file.
+        
+        
+        &#34;&#34;&#34;
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                if tp == list:
+                    val = fn.changetype(row[1], &#39;list&#39;, dtype=&#39;str&#39;)
+                elif tp == np.ndarray:
+                    val = fn.changetype(row[1], &#39;array&#39;, dtype=&#39;float&#39;)
+                else:
+                    val = fn.changetype(row[1], tp)
+                #end if
+                setattr(self, row[0], val)
+            #end if
+        #end for
+    #end func
+    
+    def Prepare(self, domain_dict, points_dict):
+        &#34;&#34;&#34;
+        Sets domain and n_deposits attributes for random point generation.
+        
+        
+        &#34;&#34;&#34;
+        self.domain = domain_dict
+        self.n_deposits = points_dict[&#39;n_deposits&#39;]
+    #end func
+    
+    def seed_random_points(self, n_repeats=0):
+        &#34;&#34;&#34;
+        Seeds uniformly distributed random points.
+        
+
+        Returns
+        -------
+        points_random : array
+            Array of (lon, lat) locations of random points in equal earth 
+            projection, with shape (n, 2)
+            
+            
+        Calls
+        -----
+        filter_points
+        
+        functions.epsg_project
+        
+        
+        &#34;&#34;&#34;
+        if n_repeats == 0:
+            n_repeats = self.n_repeats_default
+        #end if
+        
+        n_points = n_repeats*self.n_deposits
+        
+        # initialise new array to save points to
+        random_points = np.empty((0, 2))
+        
+        while len(random_points) &lt; n_points:
+            random_points_chunk = \
+                initialise_random_points_chunk(self.bounds, self.chunksize)
+            points = filter_points(random_points_chunk, self.domain)
+            random_points = np.vstack([random_points, points])
+        #end while
+        
+        random_points = random_points[:n_points, :]
+        
+        random_points.resize((n_repeats, self.n_deposits, 2), refcheck=False)
+        return random_points</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.IO.DataManager.RandomPointsManager.ParseXMLNode"><code class="name flex">
+<span>def <span class="ident">ParseXMLNode</span></span>(<span>self, commandList)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Redefines default attributes based on input from xml configuration
+file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ParseXMLNode(self, commandList):
+    &#34;&#34;&#34;
+    Redefines default attributes based on input from xml configuration 
+    file.
+    
+    
+    &#34;&#34;&#34;
+    for row in commandList:
+        if hasattr(self, row[0]):
+            tp = type(getattr(self, row[0]))
+            if tp == list:
+                val = fn.changetype(row[1], &#39;list&#39;, dtype=&#39;str&#39;)
+            elif tp == np.ndarray:
+                val = fn.changetype(row[1], &#39;array&#39;, dtype=&#39;float&#39;)
+            else:
+                val = fn.changetype(row[1], tp)
+            #end if
+            setattr(self, row[0], val)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.RandomPointsManager.Prepare"><code class="name flex">
+<span>def <span class="ident">Prepare</span></span>(<span>self, domain_dict, points_dict)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets domain and n_deposits attributes for random point generation.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Prepare(self, domain_dict, points_dict):
+    &#34;&#34;&#34;
+    Sets domain and n_deposits attributes for random point generation.
+    
+    
+    &#34;&#34;&#34;
+    self.domain = domain_dict
+    self.n_deposits = points_dict[&#39;n_deposits&#39;]</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.DataManager.RandomPointsManager.seed_random_points"><code class="name flex">
+<span>def <span class="ident">seed_random_points</span></span>(<span>self, n_repeats=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Seeds uniformly distributed random points.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>points_random</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array of (lon, lat) locations of random points in equal earth
+projection, with shape (n, 2)</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>filter_points</p>
+<p>functions.epsg_project</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def seed_random_points(self, n_repeats=0):
+    &#34;&#34;&#34;
+    Seeds uniformly distributed random points.
+    
+
+    Returns
+    -------
+    points_random : array
+        Array of (lon, lat) locations of random points in equal earth 
+        projection, with shape (n, 2)
+        
+        
+    Calls
+    -----
+    filter_points
+    
+    functions.epsg_project
+    
+    
+    &#34;&#34;&#34;
+    if n_repeats == 0:
+        n_repeats = self.n_repeats_default
+    #end if
+    
+    n_points = n_repeats*self.n_deposits
+    
+    # initialise new array to save points to
+    random_points = np.empty((0, 2))
+    
+    while len(random_points) &lt; n_points:
+        random_points_chunk = \
+            initialise_random_points_chunk(self.bounds, self.chunksize)
+        points = filter_points(random_points_chunk, self.domain)
+        random_points = np.vstack([random_points, points])
+    #end while
+    
+    random_points = random_points[:n_points, :]
+    
+    random_points.resize((n_repeats, self.n_deposits, 2), refcheck=False)
+    return random_points</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#deposit-dataset-input-module">Deposit dataset input module</a></li>
+<li><a href="#contacts">Contacts</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="toolkit.IO" href="index.html">toolkit.IO</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="toolkit.IO.DataManager.add_columns" href="#toolkit.IO.DataManager.add_columns">add_columns</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.column_operation" href="#toolkit.IO.DataManager.column_operation">column_operation</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.filter_by_properties" href="#toolkit.IO.DataManager.filter_by_properties">filter_by_properties</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.filter_points" href="#toolkit.IO.DataManager.filter_points">filter_points</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.initialise_random_points_chunk" href="#toolkit.IO.DataManager.initialise_random_points_chunk">initialise_random_points_chunk</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.make_point_property_array" href="#toolkit.IO.DataManager.make_point_property_array">make_point_property_array</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.read_csv" href="#toolkit.IO.DataManager.read_csv">read_csv</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.read_deposit_dataset" href="#toolkit.IO.DataManager.read_deposit_dataset">read_deposit_dataset</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.read_excel" href="#toolkit.IO.DataManager.read_excel">read_excel</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.read_txt" href="#toolkit.IO.DataManager.read_txt">read_txt</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="toolkit.IO.DataManager.DataManager" href="#toolkit.IO.DataManager.DataManager">DataManager</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.IO.DataManager.DataManager.Filter_Dataset" href="#toolkit.IO.DataManager.DataManager.Filter_Dataset">Filter_Dataset</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.DataManager.Make_Point_Property_Array" href="#toolkit.IO.DataManager.DataManager.Make_Point_Property_Array">Make_Point_Property_Array</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.DataManager.ParseXMLNode" href="#toolkit.IO.DataManager.DataManager.ParseXMLNode">ParseXMLNode</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.DataManager.Read_Dataset" href="#toolkit.IO.DataManager.DataManager.Read_Dataset">Read_Dataset</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.DataManager.Read_Files" href="#toolkit.IO.DataManager.DataManager.Read_Files">Read_Files</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="toolkit.IO.DataManager.RandomPointsManager" href="#toolkit.IO.DataManager.RandomPointsManager">RandomPointsManager</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.IO.DataManager.RandomPointsManager.ParseXMLNode" href="#toolkit.IO.DataManager.RandomPointsManager.ParseXMLNode">ParseXMLNode</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.RandomPointsManager.Prepare" href="#toolkit.IO.DataManager.RandomPointsManager.Prepare">Prepare</a></code></li>
+<li><code><a title="toolkit.IO.DataManager.RandomPointsManager.seed_random_points" href="#toolkit.IO.DataManager.RandomPointsManager.seed_random_points">seed_random_points</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

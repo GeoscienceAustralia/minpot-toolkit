@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>toolkit.main API documentation</title>
+<meta name="description" content="Mineral Potential Toolkit
+This repository is designed to facilitate statistical appraisal of the
+correlations between geological data / models / …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>toolkit.main</code></h1>
+</header>
+<section id="section-intro">
+<h2 id="mineral-potential-toolkit">Mineral Potential Toolkit</h2>
+<p>This repository is designed to facilitate statistical appraisal of the
+correlations between geological data / models / features, and classes of known
+mineral deposits. In the future the repository will be developed to enable the
+integration of multiple models together to generate mineral prospectivity
+assessments.</p>
+<h2 id="usage">Usage</h2>
+<p>python main.py &ndash;config_file &hellip;/config.xml</p>
+<h2 id="contacts">Contacts</h2>
+<p>Lachlan Adams
+- Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com</p>
+<p>Marcus Haynes
+- Marcus.Haynes@ga.gov.au</p>
+<p>Alison Kirkby
+- Alison.Kirkby@ga.gov.au</p>
+<p>Fei Zhang
+- Fei.Zhang@ga.gov.au</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Mineral Potential Toolkit
+-------------------------
+This repository is designed to facilitate statistical appraisal of the 
+correlations between geological data / models / features, and classes of known 
+mineral deposits. In the future the repository will be developed to enable the 
+integration of multiple models together to generate mineral prospectivity 
+assessments.
+
+
+Usage
+-----
+python main.py --config_file .../config.xml
+
+
+Contacts
+--------
+Lachlan Adams
+    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
+
+Marcus Haynes
+    - Marcus.Haynes@ga.gov.au
+    
+Alison Kirkby
+    - Alison.Kirkby@ga.gov.au
+    
+Fei Zhang
+    - Fei.Zhang@ga.gov.au
+    
+    
+&#34;&#34;&#34;
+
+import toolkit.functions as fn
+import toolkit.plotting as pt
+import numpy as np
+import os, warnings, argparse
+from matplotlib.image import imread
+import xml.etree.ElementTree as ElementTree
+
+from toolkit.feat_eng import FeatureManager
+from toolkit.IO.DataManager import DataManager, RandomPointsManager
+from toolkit.IO.ModelsManager import ModelsManager
+from toolkit.pros_mod import Prospectivity
+from toolkit.IO.OutputManager import print_to_file, results_to_file
+from toolkit.stat_corr import StatsManager
+
+warnings.filterwarnings(&#34;ignore&#34;, category = RuntimeWarning)
+warnings.filterwarnings(&#34;ignore&#34;, category = UserWarning)
+
+class MineralPotential():
+    def __init__(self, file):
+        &#34;&#34;&#34;
+        A class to facilitate mineral prospectivity analysis. Workflow:
+            
+            1. Parse XML file
+            
+            2. Read geophysical models
+            
+            3. Read deposit dataset
+            
+            4. Generate &#34;features&#34; from geophysical models based on XML config
+            
+            5. Perform statistical analysis described in XML config
+            
+            6. Assess prospectivity (needs work)
+            
+            7. Generate outputs
+            
+        
+        Parameters
+        ----------
+        file: string
+            Name of XML configuration file to use.
+        
+        
+        Calls
+        -----
+        toolkit.IO.ModelManager.ModelsManager
+        
+        toolkit.IO.DataManager.DataManager
+        
+        toolkit.IO.DataManager.RandomPointsManager
+        
+        
+        &#34;&#34;&#34;
+        self.ModelsManager = ModelsManager()
+        self.DataManager = DataManager()
+        self.RPManager = RandomPointsManager()
+        self.bgimage = &#34;&#34;
+        self.generate_output = True
+        self.make_plots = False
+        self.log_plots = False
+        self.model_from_savefile = False
+        self.model_to_savefile = False
+        self.data_from_savefile = False
+        self.data_to_savefile = False
+        self.model_savefile=&#34;model_savefile.npy&#34;
+        self.domain_savefile=&#34;domain_savefile.npy&#34;
+        self.data_savefile=&#34;data_savefile.npy&#34;
+        self.input_path = &#39;.&#39;
+        self.output_path = &#39;.&#39;
+        
+        self.ParseXMLNode(file)
+    #end func
+    
+    def ParseXMLNode(self, file):
+        &#34;&#34;&#34;
+        Initialise the problem workflow from xml specification. This function
+        will read all commands from the config file and store them in a list to
+        be used by all modules required by the workflow.
+        
+        
+        Parameters
+        ----------
+        file: string
+            Name of XML configuration file to use.
+            
+            
+        Calls
+        -----
+        functions.changetype
+        
+        IO.ModelsManager.ModelsManager.ParseXMLNode
+        
+        IO.DataManager.DataManager.ParseXMLNode
+        
+        IO.DataManager.RandomPointsManager.ParseXMLNode
+        
+        
+        &#34;&#34;&#34;
+        
+        rootNode = ElementTree.parse(file).getroot()
+        commandsNode = rootNode.find(&#34;commands&#34;)
+        self.commandList = list()
+        items = list(commandsNode.attrib.keys())
+        for item in items:
+            val = commandsNode.attrib[item]
+            self.commandList.append([item, val])
+        #end for
+        for row in self.commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        
+        # Input models
+        modelsNode = rootNode.find(&#34;models&#34;)
+        self.ModelsManager.ParseXMLNode(modelsNode, self.commandList)
+        
+        # Input data
+        datasetNode = rootNode.find(&#34;dataset&#34;)
+        self.DataManager.ParseXMLNode(datasetNode, self.commandList)
+        
+        # Input random data
+        self.RPManager.ParseXMLNode(self.commandList)
+        
+        # Input commands for analysis
+        featEngNode = rootNode.find(&#34;features&#34;)
+        self.featureNodes = featEngNode.findall(&#34;feature&#34;)
+        statCorrNode = rootNode.find(&#34;statistics&#34;)
+        self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)
+    #end func
+    
+    def Prepare(self):
+        &#34;&#34;&#34;
+        Prepares model and deposit data inputs. Based on XML config file, it 
+        will either read models and deposit data from an existing numpy binary
+        savefile, or will generate new ones.
+        
+        
+        Calls
+        -----
+        IO.ModelsManager.ModelsManager.Read_Models
+        
+        IO.DataManager.DataManager.Read_Dataset
+        
+        IO.DataManager.RandomPointsManager.Prepare
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Reading models&#39;)
+        if self.model_from_savefile:
+            self.ModelsManager.model_dict = \
+                np.load(os.path.join(self.input_path, self.model_savefile), 
+                        allow_pickle=True).item()
+            self.ModelsManager.domain = \
+                np.load(os.path.join(self.input_path, self.domain_savefile), 
+                        allow_pickle=True).item()
+        else:
+            self.ModelsManager.Process()
+        #end if
+        if self.model_to_savefile:
+            np.save(os.path.join(self.input_path, self.model_savefile), 
+                    self.ModelsManager.model_dict, allow_pickle=True)
+            np.save(os.path.join(self.input_path, self.domain_savefile), 
+                    self.ModelsManager.domain, allow_pickle=True)
+        #end if
+        print(&#39;Completed reading models, reading deposit datasets&#39;)
+        if self.data_from_savefile:
+            self.DataManager.points_dict = \
+                np.load(os.path.join(self.input_path, self.data_savefile), 
+                        allow_pickle=True).item()
+        else:
+            self.DataManager.Read_Dataset(self.ModelsManager.domain)
+        #end if
+        if self.data_to_savefile:
+            np.save(os.path.join(self.input_path, self.data_savefile), 
+                    self.DataManager.points_dict, allow_pickle=True)
+        #end if
+        print(&#39;Completed reading deposit datasets, initialising random points&#39;)
+        self.RPManager.Prepare(self.ModelsManager.domain,
+                               self.DataManager.points_dict)
+        print(&#39;Completed initialising random points&#39;)
+    #end func
+    
+    def Run_Analysis(self):
+        &#34;&#34;&#34;
+        Runs analysis by generating features and performing statistical 
+        computations.
+        
+        Needs work: prospectivity module.
+        
+        
+        Calls
+        -----
+        feat_eng.FeatureManager.Process
+        
+        stat_corr.StatsManager.Process
+        
+        pros_mod.Prospectivity.Process
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Engineering features&#39;)
+        self.FeatureManager = FeatureManager(self.commandList, 
+                                             self.featureNodes)
+        self.FeatureManager.Process(self.ModelsManager.model_dict)
+        print(&#39;Completed engineering features, running analysis&#39;)
+        self.StatsManager = StatsManager(self.commandList, self.statnodes)
+        self.StatsManager.Process(self.FeatureManager.feature_dict, 
+                                  self.DataManager.points_dict, self.RPManager)
+        print(&#39;Completed running analysis, generating prospectivity maps&#39;)
+        self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
+                                           self.FeatureManager.feature_dict)
+        print(&#39;Completed generating prospectivity maps&#39;)
+    #end func
+    
+    def Plots(self):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Calls
+        -----
+        plotting.plot_coverage_region
+        
+        feat_eng.FeatureManager.feature_object.Plots
+        
+        stat_corr.StatsManager.(various).Plots
+        
+        pros_mod.Prospectivity.Plots
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Generating plots&#39;)
+        if self.bgimage is not None:
+            self.bgimage = imread(self.bgimage)
+        #end if
+        pt.plot_coverage_region(self.ModelsManager.domain, self.output_path,
+                                bgimage=self.bgimage)
+        for key in self.StatsManager.stat_obj_dict.keys():
+            test = self.StatsManager.stat_obj_dict[key]
+            path = os.path.join(self.output_path, &#39;Stats&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            test.Plots(path)
+        #end for
+        for key in self.FeatureManager.feature_dict.keys():
+            feat = self.FeatureManager.feature_dict[key]
+            path = os.path.join(self.output_path, &#39;Features&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            feat.Plots(self.DataManager.points_dict, path, 
+                       bgimage=self.bgimage)
+        #end for
+        self.Prospectivity.Plots(bgimage=self.bgimage, 
+                                 wd_images=self.output_path)
+        print(&#39;Completed generating plots&#39;)
+    #end func
+    
+    def Output(self):
+        &#34;&#34;&#34;
+        Function to generate the output of the feature engineering, statistics,
+        and prospectivity modelling modules.
+        
+        
+        Calls
+        -----
+        IO.OutputManager.print_to_file
+        
+        IO.OutputManager.results_to_file
+        
+        
+        &#34;&#34;&#34;
+        if self.make_plots:
+            self.Plots()
+        #end if
+        keys = self.StatsManager.stat_obj_dict.keys()
+        for key in keys:
+            stat_obj = self.StatsManager.stat_obj_dict[key]
+            path = os.path.join(self.output_path, &#39;Stats&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            results_to_file(stat_obj, path)
+        #end for
+        keys = self.FeatureManager.feature_dict.keys()
+        for key in keys:
+            feat_obj = self.FeatureManager.feature_dict[key]
+            path = os.path.join(self.output_path, &#39;Features&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            print_to_file(feat_obj, path)
+        #end for
+        np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, 
+                allow_pickle=True)
+    #end func
+    
+    def __call__(self):
+        &#34;&#34;&#34;
+        Prepares data, runs analysis, and generates plots and output (if 
+        flagged).
+        
+        
+        &#34;&#34;&#34;
+        # Data and models are initialised during XML parsing
+        self.Prepare()
+        
+        # Calculate statistical relations, and analyse prospectivity
+        self.Run_Analysis()
+        
+        # Outputs and visualisation
+        if self.generate_output:
+            self.Output()
+        #end if
+    #end func
+#end class
+
+if __name__==&#39;__main__&#39;:
+    parser = argparse.ArgumentParser(description=&#39;Mineral Potential Toolkit&#39;)
+    parser.add_argument(&#34;-C&#34;, &#34;--config_file&#34;, type=str, required=True,
+                        default=&#34;../config/config.xml&#34;)
+    args = parser.parse_args()
+    file = args.config_file
+    #file = os.path.join(r&#39;..\config&#39;, &#39;config.xml&#39;)
+    ProblemManager = MineralPotential(file)
+    ProblemManager()
+#end if</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="toolkit.main.MineralPotential"><code class="flex name class">
+<span>class <span class="ident">MineralPotential</span></span>
+<span>(</span><span>file)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class to facilitate mineral prospectivity analysis. Workflow:</p>
+<pre><code>1. Parse XML file
+
+2. Read geophysical models
+
+3. Read deposit dataset
+
+4. Generate "features" from geophysical models based on XML config
+
+5. Perform statistical analysis described in XML config
+
+6. Assess prospectivity (needs work)
+
+7. Generate outputs
+</code></pre>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>string</code></dt>
+<dd>Name of XML configuration file to use.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>toolkit.IO.ModelManager.ModelsManager</p>
+<p>toolkit.IO.DataManager.DataManager</p>
+<p>toolkit.IO.DataManager.RandomPointsManager</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MineralPotential():
+    def __init__(self, file):
+        &#34;&#34;&#34;
+        A class to facilitate mineral prospectivity analysis. Workflow:
+            
+            1. Parse XML file
+            
+            2. Read geophysical models
+            
+            3. Read deposit dataset
+            
+            4. Generate &#34;features&#34; from geophysical models based on XML config
+            
+            5. Perform statistical analysis described in XML config
+            
+            6. Assess prospectivity (needs work)
+            
+            7. Generate outputs
+            
+        
+        Parameters
+        ----------
+        file: string
+            Name of XML configuration file to use.
+        
+        
+        Calls
+        -----
+        toolkit.IO.ModelManager.ModelsManager
+        
+        toolkit.IO.DataManager.DataManager
+        
+        toolkit.IO.DataManager.RandomPointsManager
+        
+        
+        &#34;&#34;&#34;
+        self.ModelsManager = ModelsManager()
+        self.DataManager = DataManager()
+        self.RPManager = RandomPointsManager()
+        self.bgimage = &#34;&#34;
+        self.generate_output = True
+        self.make_plots = False
+        self.log_plots = False
+        self.model_from_savefile = False
+        self.model_to_savefile = False
+        self.data_from_savefile = False
+        self.data_to_savefile = False
+        self.model_savefile=&#34;model_savefile.npy&#34;
+        self.domain_savefile=&#34;domain_savefile.npy&#34;
+        self.data_savefile=&#34;data_savefile.npy&#34;
+        self.input_path = &#39;.&#39;
+        self.output_path = &#39;.&#39;
+        
+        self.ParseXMLNode(file)
+    #end func
+    
+    def ParseXMLNode(self, file):
+        &#34;&#34;&#34;
+        Initialise the problem workflow from xml specification. This function
+        will read all commands from the config file and store them in a list to
+        be used by all modules required by the workflow.
+        
+        
+        Parameters
+        ----------
+        file: string
+            Name of XML configuration file to use.
+            
+            
+        Calls
+        -----
+        functions.changetype
+        
+        IO.ModelsManager.ModelsManager.ParseXMLNode
+        
+        IO.DataManager.DataManager.ParseXMLNode
+        
+        IO.DataManager.RandomPointsManager.ParseXMLNode
+        
+        
+        &#34;&#34;&#34;
+        
+        rootNode = ElementTree.parse(file).getroot()
+        commandsNode = rootNode.find(&#34;commands&#34;)
+        self.commandList = list()
+        items = list(commandsNode.attrib.keys())
+        for item in items:
+            val = commandsNode.attrib[item]
+            self.commandList.append([item, val])
+        #end for
+        for row in self.commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        
+        # Input models
+        modelsNode = rootNode.find(&#34;models&#34;)
+        self.ModelsManager.ParseXMLNode(modelsNode, self.commandList)
+        
+        # Input data
+        datasetNode = rootNode.find(&#34;dataset&#34;)
+        self.DataManager.ParseXMLNode(datasetNode, self.commandList)
+        
+        # Input random data
+        self.RPManager.ParseXMLNode(self.commandList)
+        
+        # Input commands for analysis
+        featEngNode = rootNode.find(&#34;features&#34;)
+        self.featureNodes = featEngNode.findall(&#34;feature&#34;)
+        statCorrNode = rootNode.find(&#34;statistics&#34;)
+        self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)
+    #end func
+    
+    def Prepare(self):
+        &#34;&#34;&#34;
+        Prepares model and deposit data inputs. Based on XML config file, it 
+        will either read models and deposit data from an existing numpy binary
+        savefile, or will generate new ones.
+        
+        
+        Calls
+        -----
+        IO.ModelsManager.ModelsManager.Read_Models
+        
+        IO.DataManager.DataManager.Read_Dataset
+        
+        IO.DataManager.RandomPointsManager.Prepare
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Reading models&#39;)
+        if self.model_from_savefile:
+            self.ModelsManager.model_dict = \
+                np.load(os.path.join(self.input_path, self.model_savefile), 
+                        allow_pickle=True).item()
+            self.ModelsManager.domain = \
+                np.load(os.path.join(self.input_path, self.domain_savefile), 
+                        allow_pickle=True).item()
+        else:
+            self.ModelsManager.Process()
+        #end if
+        if self.model_to_savefile:
+            np.save(os.path.join(self.input_path, self.model_savefile), 
+                    self.ModelsManager.model_dict, allow_pickle=True)
+            np.save(os.path.join(self.input_path, self.domain_savefile), 
+                    self.ModelsManager.domain, allow_pickle=True)
+        #end if
+        print(&#39;Completed reading models, reading deposit datasets&#39;)
+        if self.data_from_savefile:
+            self.DataManager.points_dict = \
+                np.load(os.path.join(self.input_path, self.data_savefile), 
+                        allow_pickle=True).item()
+        else:
+            self.DataManager.Read_Dataset(self.ModelsManager.domain)
+        #end if
+        if self.data_to_savefile:
+            np.save(os.path.join(self.input_path, self.data_savefile), 
+                    self.DataManager.points_dict, allow_pickle=True)
+        #end if
+        print(&#39;Completed reading deposit datasets, initialising random points&#39;)
+        self.RPManager.Prepare(self.ModelsManager.domain,
+                               self.DataManager.points_dict)
+        print(&#39;Completed initialising random points&#39;)
+    #end func
+    
+    def Run_Analysis(self):
+        &#34;&#34;&#34;
+        Runs analysis by generating features and performing statistical 
+        computations.
+        
+        Needs work: prospectivity module.
+        
+        
+        Calls
+        -----
+        feat_eng.FeatureManager.Process
+        
+        stat_corr.StatsManager.Process
+        
+        pros_mod.Prospectivity.Process
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Engineering features&#39;)
+        self.FeatureManager = FeatureManager(self.commandList, 
+                                             self.featureNodes)
+        self.FeatureManager.Process(self.ModelsManager.model_dict)
+        print(&#39;Completed engineering features, running analysis&#39;)
+        self.StatsManager = StatsManager(self.commandList, self.statnodes)
+        self.StatsManager.Process(self.FeatureManager.feature_dict, 
+                                  self.DataManager.points_dict, self.RPManager)
+        print(&#39;Completed running analysis, generating prospectivity maps&#39;)
+        self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
+                                           self.FeatureManager.feature_dict)
+        print(&#39;Completed generating prospectivity maps&#39;)
+    #end func
+    
+    def Plots(self):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Calls
+        -----
+        plotting.plot_coverage_region
+        
+        feat_eng.FeatureManager.feature_object.Plots
+        
+        stat_corr.StatsManager.(various).Plots
+        
+        pros_mod.Prospectivity.Plots
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Generating plots&#39;)
+        if self.bgimage is not None:
+            self.bgimage = imread(self.bgimage)
+        #end if
+        pt.plot_coverage_region(self.ModelsManager.domain, self.output_path,
+                                bgimage=self.bgimage)
+        for key in self.StatsManager.stat_obj_dict.keys():
+            test = self.StatsManager.stat_obj_dict[key]
+            path = os.path.join(self.output_path, &#39;Stats&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            test.Plots(path)
+        #end for
+        for key in self.FeatureManager.feature_dict.keys():
+            feat = self.FeatureManager.feature_dict[key]
+            path = os.path.join(self.output_path, &#39;Features&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            feat.Plots(self.DataManager.points_dict, path, 
+                       bgimage=self.bgimage)
+        #end for
+        self.Prospectivity.Plots(bgimage=self.bgimage, 
+                                 wd_images=self.output_path)
+        print(&#39;Completed generating plots&#39;)
+    #end func
+    
+    def Output(self):
+        &#34;&#34;&#34;
+        Function to generate the output of the feature engineering, statistics,
+        and prospectivity modelling modules.
+        
+        
+        Calls
+        -----
+        IO.OutputManager.print_to_file
+        
+        IO.OutputManager.results_to_file
+        
+        
+        &#34;&#34;&#34;
+        if self.make_plots:
+            self.Plots()
+        #end if
+        keys = self.StatsManager.stat_obj_dict.keys()
+        for key in keys:
+            stat_obj = self.StatsManager.stat_obj_dict[key]
+            path = os.path.join(self.output_path, &#39;Stats&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            results_to_file(stat_obj, path)
+        #end for
+        keys = self.FeatureManager.feature_dict.keys()
+        for key in keys:
+            feat_obj = self.FeatureManager.feature_dict[key]
+            path = os.path.join(self.output_path, &#39;Features&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            print_to_file(feat_obj, path)
+        #end for
+        np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, 
+                allow_pickle=True)
+    #end func
+    
+    def __call__(self):
+        &#34;&#34;&#34;
+        Prepares data, runs analysis, and generates plots and output (if 
+        flagged).
+        
+        
+        &#34;&#34;&#34;
+        # Data and models are initialised during XML parsing
+        self.Prepare()
+        
+        # Calculate statistical relations, and analyse prospectivity
+        self.Run_Analysis()
+        
+        # Outputs and visualisation
+        if self.generate_output:
+            self.Output()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.main.MineralPotential.Output"><code class="name flex">
+<span>def <span class="ident">Output</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to generate the output of the feature engineering, statistics,
+and prospectivity modelling modules.</p>
+<h2 id="calls">Calls</h2>
+<p>IO.OutputManager.print_to_file</p>
+<p>IO.OutputManager.results_to_file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Output(self):
+    &#34;&#34;&#34;
+    Function to generate the output of the feature engineering, statistics,
+    and prospectivity modelling modules.
+    
+    
+    Calls
+    -----
+    IO.OutputManager.print_to_file
+    
+    IO.OutputManager.results_to_file
+    
+    
+    &#34;&#34;&#34;
+    if self.make_plots:
+        self.Plots()
+    #end if
+    keys = self.StatsManager.stat_obj_dict.keys()
+    for key in keys:
+        stat_obj = self.StatsManager.stat_obj_dict[key]
+        path = os.path.join(self.output_path, &#39;Stats&#39;)
+        if not os.path.exists(path):
+            os.mkdir(path)
+        #end if
+        results_to_file(stat_obj, path)
+    #end for
+    keys = self.FeatureManager.feature_dict.keys()
+    for key in keys:
+        feat_obj = self.FeatureManager.feature_dict[key]
+        path = os.path.join(self.output_path, &#39;Features&#39;)
+        if not os.path.exists(path):
+            os.mkdir(path)
+        #end if
+        print_to_file(feat_obj, path)
+    #end for
+    np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, 
+            allow_pickle=True)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.main.MineralPotential.ParseXMLNode"><code class="name flex">
+<span>def <span class="ident">ParseXMLNode</span></span>(<span>self, file)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialise the problem workflow from xml specification. This function
+will read all commands from the config file and store them in a list to
+be used by all modules required by the workflow.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>file</code></strong> :&ensp;<code>string</code></dt>
+<dd>Name of XML configuration file to use.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.changetype</p>
+<p>IO.ModelsManager.ModelsManager.ParseXMLNode</p>
+<p>IO.DataManager.DataManager.ParseXMLNode</p>
+<p>IO.DataManager.RandomPointsManager.ParseXMLNode</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ParseXMLNode(self, file):
+    &#34;&#34;&#34;
+    Initialise the problem workflow from xml specification. This function
+    will read all commands from the config file and store them in a list to
+    be used by all modules required by the workflow.
+    
+    
+    Parameters
+    ----------
+    file: string
+        Name of XML configuration file to use.
+        
+        
+    Calls
+    -----
+    functions.changetype
+    
+    IO.ModelsManager.ModelsManager.ParseXMLNode
+    
+    IO.DataManager.DataManager.ParseXMLNode
+    
+    IO.DataManager.RandomPointsManager.ParseXMLNode
+    
+    
+    &#34;&#34;&#34;
+    
+    rootNode = ElementTree.parse(file).getroot()
+    commandsNode = rootNode.find(&#34;commands&#34;)
+    self.commandList = list()
+    items = list(commandsNode.attrib.keys())
+    for item in items:
+        val = commandsNode.attrib[item]
+        self.commandList.append([item, val])
+    #end for
+    for row in self.commandList:
+        if hasattr(self, row[0]):
+            tp = type(getattr(self, row[0]))
+            val = fn.changetype(row[1], tp)
+            setattr(self, row[0], val)
+        #end if
+    #end for
+    
+    # Input models
+    modelsNode = rootNode.find(&#34;models&#34;)
+    self.ModelsManager.ParseXMLNode(modelsNode, self.commandList)
+    
+    # Input data
+    datasetNode = rootNode.find(&#34;dataset&#34;)
+    self.DataManager.ParseXMLNode(datasetNode, self.commandList)
+    
+    # Input random data
+    self.RPManager.ParseXMLNode(self.commandList)
+    
+    # Input commands for analysis
+    featEngNode = rootNode.find(&#34;features&#34;)
+    self.featureNodes = featEngNode.findall(&#34;feature&#34;)
+    statCorrNode = rootNode.find(&#34;statistics&#34;)
+    self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.main.MineralPotential.Plots"><code class="name flex">
+<span>def <span class="ident">Plots</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates plots.</p>
+<h2 id="calls">Calls</h2>
+<p>plotting.plot_coverage_region</p>
+<p>feat_eng.FeatureManager.feature_object.Plots</p>
+<p>stat_corr.StatsManager.(various).Plots</p>
+<p>pros_mod.Prospectivity.Plots</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Plots(self):
+    &#34;&#34;&#34;
+    Generates plots.
+    
+    
+    Calls
+    -----
+    plotting.plot_coverage_region
+    
+    feat_eng.FeatureManager.feature_object.Plots
+    
+    stat_corr.StatsManager.(various).Plots
+    
+    pros_mod.Prospectivity.Plots
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Generating plots&#39;)
+    if self.bgimage is not None:
+        self.bgimage = imread(self.bgimage)
+    #end if
+    pt.plot_coverage_region(self.ModelsManager.domain, self.output_path,
+                            bgimage=self.bgimage)
+    for key in self.StatsManager.stat_obj_dict.keys():
+        test = self.StatsManager.stat_obj_dict[key]
+        path = os.path.join(self.output_path, &#39;Stats&#39;)
+        if not os.path.exists(path):
+            os.mkdir(path)
+        #end if
+        test.Plots(path)
+    #end for
+    for key in self.FeatureManager.feature_dict.keys():
+        feat = self.FeatureManager.feature_dict[key]
+        path = os.path.join(self.output_path, &#39;Features&#39;)
+        if not os.path.exists(path):
+            os.mkdir(path)
+        #end if
+        feat.Plots(self.DataManager.points_dict, path, 
+                   bgimage=self.bgimage)
+    #end for
+    self.Prospectivity.Plots(bgimage=self.bgimage, 
+                             wd_images=self.output_path)
+    print(&#39;Completed generating plots&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.main.MineralPotential.Prepare"><code class="name flex">
+<span>def <span class="ident">Prepare</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Prepares model and deposit data inputs. Based on XML config file, it
+will either read models and deposit data from an existing numpy binary
+savefile, or will generate new ones.</p>
+<h2 id="calls">Calls</h2>
+<p>IO.ModelsManager.ModelsManager.Read_Models</p>
+<p>IO.DataManager.DataManager.Read_Dataset</p>
+<p>IO.DataManager.RandomPointsManager.Prepare</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Prepare(self):
+    &#34;&#34;&#34;
+    Prepares model and deposit data inputs. Based on XML config file, it 
+    will either read models and deposit data from an existing numpy binary
+    savefile, or will generate new ones.
+    
+    
+    Calls
+    -----
+    IO.ModelsManager.ModelsManager.Read_Models
+    
+    IO.DataManager.DataManager.Read_Dataset
+    
+    IO.DataManager.RandomPointsManager.Prepare
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Reading models&#39;)
+    if self.model_from_savefile:
+        self.ModelsManager.model_dict = \
+            np.load(os.path.join(self.input_path, self.model_savefile), 
+                    allow_pickle=True).item()
+        self.ModelsManager.domain = \
+            np.load(os.path.join(self.input_path, self.domain_savefile), 
+                    allow_pickle=True).item()
+    else:
+        self.ModelsManager.Process()
+    #end if
+    if self.model_to_savefile:
+        np.save(os.path.join(self.input_path, self.model_savefile), 
+                self.ModelsManager.model_dict, allow_pickle=True)
+        np.save(os.path.join(self.input_path, self.domain_savefile), 
+                self.ModelsManager.domain, allow_pickle=True)
+    #end if
+    print(&#39;Completed reading models, reading deposit datasets&#39;)
+    if self.data_from_savefile:
+        self.DataManager.points_dict = \
+            np.load(os.path.join(self.input_path, self.data_savefile), 
+                    allow_pickle=True).item()
+    else:
+        self.DataManager.Read_Dataset(self.ModelsManager.domain)
+    #end if
+    if self.data_to_savefile:
+        np.save(os.path.join(self.input_path, self.data_savefile), 
+                self.DataManager.points_dict, allow_pickle=True)
+    #end if
+    print(&#39;Completed reading deposit datasets, initialising random points&#39;)
+    self.RPManager.Prepare(self.ModelsManager.domain,
+                           self.DataManager.points_dict)
+    print(&#39;Completed initialising random points&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.main.MineralPotential.Run_Analysis"><code class="name flex">
+<span>def <span class="ident">Run_Analysis</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Runs analysis by generating features and performing statistical
+computations.</p>
+<p>Needs work: prospectivity module.</p>
+<h2 id="calls">Calls</h2>
+<p>feat_eng.FeatureManager.Process</p>
+<p>stat_corr.StatsManager.Process</p>
+<p>pros_mod.Prospectivity.Process</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Run_Analysis(self):
+    &#34;&#34;&#34;
+    Runs analysis by generating features and performing statistical 
+    computations.
+    
+    Needs work: prospectivity module.
+    
+    
+    Calls
+    -----
+    feat_eng.FeatureManager.Process
+    
+    stat_corr.StatsManager.Process
+    
+    pros_mod.Prospectivity.Process
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Engineering features&#39;)
+    self.FeatureManager = FeatureManager(self.commandList, 
+                                         self.featureNodes)
+    self.FeatureManager.Process(self.ModelsManager.model_dict)
+    print(&#39;Completed engineering features, running analysis&#39;)
+    self.StatsManager = StatsManager(self.commandList, self.statnodes)
+    self.StatsManager.Process(self.FeatureManager.feature_dict, 
+                              self.DataManager.points_dict, self.RPManager)
+    print(&#39;Completed running analysis, generating prospectivity maps&#39;)
+    self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
+                                       self.FeatureManager.feature_dict)
+    print(&#39;Completed generating prospectivity maps&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#mineral-potential-toolkit">Mineral Potential Toolkit</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#contacts">Contacts</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="toolkit" href="index.html">toolkit</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="toolkit.main.MineralPotential" href="#toolkit.main.MineralPotential">MineralPotential</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.main.MineralPotential.Output" href="#toolkit.main.MineralPotential.Output">Output</a></code></li>
+<li><code><a title="toolkit.main.MineralPotential.ParseXMLNode" href="#toolkit.main.MineralPotential.ParseXMLNode">ParseXMLNode</a></code></li>
+<li><code><a title="toolkit.main.MineralPotential.Plots" href="#toolkit.main.MineralPotential.Plots">Plots</a></code></li>
+<li><code><a title="toolkit.main.MineralPotential.Prepare" href="#toolkit.main.MineralPotential.Prepare">Prepare</a></code></li>
+<li><code><a title="toolkit.main.MineralPotential.Run_Analysis" href="#toolkit.main.MineralPotential.Run_Analysis">Run_Analysis</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

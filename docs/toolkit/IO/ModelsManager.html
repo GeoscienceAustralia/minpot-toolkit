@@ -1,0 +1,2142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>toolkit.IO.ModelsManager API documentation</title>
+<meta name="description" content="Model input module
+This module is used to import geophysical models from various input formats.
+Supported formats are comma separated values (.csv), …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>toolkit.IO.ModelsManager</code></h1>
+</header>
+<section id="section-intro">
+<h2 id="model-input-module">Model Input Module</h2>
+<p>This module is used to import geophysical models from various input formats.
+Supported formats are comma separated values (.csv), ModEM, and netcdf (.nc).</p>
+<h2 id="contacts">Contacts</h2>
+<p>Lachlan Adams
+- Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Model input module
+-----------------
+This module is used to import geophysical models from various input formats.
+Supported formats are comma separated values (.csv), ModEM, and netcdf (.nc).
+
+
+Contacts
+--------
+Lachlan Adams
+    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
+    
+    
+&#34;&#34;&#34;
+
+import os, time
+import cartopy.io.shapereader as shpreader
+import numpy as np
+import toolkit.functions as fn
+
+from geopandas import read_file
+from geopandas.geoseries import GeoSeries
+from scipy.interpolate import RegularGridInterpolator
+from scipy.spatial import Delaunay
+from shapely.geometry import Polygon
+from shapely.ops import unary_union
+
+class ModelsManager():
+    def __init__(self):
+        &#34;&#34;&#34;
+        Class to faciliate importation of geophysical models.
+        
+        
+        &#34;&#34;&#34;
+        self.cellsize = 0.1
+        self.bounds = np.array([110.0, 155.0, -45.0, -10.0])
+        self.outside_polygon_file = &#34;&#34;
+        self.inside_polygon_file = &#34;&#34;
+    #end func
+    
+    def compute_domain(self):
+        &#34;&#34;&#34;
+        Takes polygons of region of coverage for each model, merges them, and 
+        computes the intersection of this domain with land.
+        
+        
+        Calls
+        -----
+        get_outside_polygon
+        
+        
+        &#34;&#34;&#34;
+        t0 = time.time()
+        print(&#39;Generating land polygon&#39;)
+        land_shp_fname = \
+            shpreader.natural_earth(resolution=&#39;50m&#39;, category=&#39;physical&#39;, 
+                                    name=&#39;land&#39;)
+        land_geom = \
+            unary_union(list(shpreader.Reader(land_shp_fname).geometries()))
+        t1 = time.time()
+        print(&#39;Finished generating land polygon, time =&#39;, t1-t0)
+        print(&#39;Merging model domains&#39;)
+        domain = unary_union(self.domain)
+        xmin, ymin, xmax, ymax = domain.bounds
+        self.bbox = Polygon([(xmin, ymin), (xmax, ymin), (xmax, ymax), 
+                             (xmin, ymax)])
+        t2 = time.time()
+        print(&#39;Finished merging model domains, time =&#39;, t2-t1)
+        print(&#39;Computing intersection of domain with specified shapefiles&#39;)
+        land = self.bbox.intersection(land_geom)
+        region = domain.intersection(land)        
+        self.domain = {&#39;region&#39;: region}
+        if self.outside_polygon_file:
+            outside_polygon = get_polygon(self.outside_polygon_file)
+            allowed_region = region.difference(outside_polygon)
+        else:
+            allowed_region = region
+        #end if
+        if self.inside_polygon_file:
+            inside_polygon = get_polygon(self.inside_polygon_file)
+            allowed_region = allowed_region.intersection(inside_polygon)
+        #end if
+        self.domain[&#39;allowed_region&#39;] = allowed_region
+        t3 = time.time()
+        print(&#39;Completed computing region, time =&#39;, t3-t2)
+    #end func
+    
+    def decompose_domain_into_grid(self):
+        &#34;&#34;&#34;
+        Takes the region of coverage of the model, and fishnets the polygon to
+        improve the speed of the filtering of random points by location.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Decomposing region into grid&#39;)
+        t3 = time.time()
+        edge_squares = [self.bbox]
+        gs_within = GeoSeries()
+        allowed_region = self.domain[&#39;allowed_region&#39;]
+        not_allowed_region = self.bbox.difference(allowed_region)
+        i = 0
+        t4 = time.time()
+        for d in [1, 0.5, 0.25]:
+            i = i + 1
+            dx = dy = d
+            squares = list()
+            for edge_square in edge_squares:
+                xmin, ymin, xmax, ymax = edge_square.bounds
+                xvals = np.arange(xmin, xmax+dx, dx)
+                yvals = np.arange(ymin, ymax+dy, dy)
+                squares.extend([Polygon([(x,y), (x+dx,y), (x+dx,y+dy), 
+                                         (x,y+dy)]) \
+                                for x in xvals for y in yvals])
+            #end for
+            gs = GeoSeries(squares)
+            ind1 = gs.intersects(allowed_region)
+            ind2 = gs.intersects(not_allowed_region)
+            edge_filt = np.logical_and(ind1, ind2)
+            within_filt = np.logical_and(ind1, ~ind2)
+            gs_within = gs_within.append(gs[within_filt])
+            edge_squares = list(gs[edge_filt])
+            print(&#39;Iteration&#39;, i, &#39;complete of&#39;, 3, &#39;time =&#39;, time.time()-t4)
+            t4 = time.time()
+        #end for
+        print(&#39;Completed generating grid, time =&#39;, t4-t3)
+        print(&#39;Computing union of grid squares&#39;)
+        gs = gs_within.append(GeoSeries(edge_squares))
+        grid = unary_union(gs)
+        t5 = time.time()
+        print(&#39;Completed computing union of grid squares, time =&#39;, t5-t4)
+        self.domain[&#39;grid&#39;] = grid
+    #end func
+    
+    def ParseXMLNode(self, rootNode, commandList):
+        depths_type = rootNode.attrib[&#34;depths_type&#34;]
+        if depths_type == &#34;values&#34;:
+            self.depth_list = fn.changetype(rootNode.attrib[&#34;depths&#34;], &#39;array&#39;, 
+                                            dtype=float)
+        elif depths_type == &#34;range&#34;:
+            ranges = fn.changetype(rootNode.attrib[&#34;depths&#34;], list, dtype=str, 
+                                   sep=&#39;;&#39;)
+            depths = list()
+            for rng in ranges:
+                minval, maxval, interval = \
+                    fn.changetype(rng, &#39;array&#39;, dtype=float)
+                depths.append(np.arange(minval, maxval + interval, interval))
+            #end for
+            self.depth_list = np.hstack(depths)
+        #end if
+        models = rootNode.findall(&#34;model&#34;)
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        model_details = list()
+        for model in models:
+            name = model.attrib[&#34;name&#34;]
+            model_type = model.attrib[&#34;type&#34;]
+            model_details.append([str(name + &#39;.&#39; + model_type), model])
+        #end for
+        self.model_details_dict = {row[0]: row[1] for row in model_details}
+    #end func
+    
+    def Read_Models(self):
+        &#34;&#34;&#34;
+        Reads in all input models, creating a different geophysical model for 
+        each model type.
+        
+        Calls
+        -----
+        GeophysicalModel
+        
+        
+        &#34;&#34;&#34;
+        self.model_dict = {}
+        self.domain = []
+        self.model_types = [key.split(&#39;.&#39;)[-1] for key in 
+                            self.model_details_dict]
+        for model_type in self.model_types:
+            keys = [key for key in self.model_details_dict if \
+                    key.split(&#39;.&#39;)[-1] == model_type]
+            models = [self.model_details_dict[key] for key in keys]
+            GM = GeophysicalModel(models, model_type, self.depth_list,
+                                  cellsize = self.cellsize,
+                                  bounds = self.bounds)
+            GM.merge_models()
+            self.domain.append(GM.domain)
+            self.model_dict[model_type] = \
+                {&#39;longitude&#39;: GM.longitude, &#39;latitude&#39;: GM.latitude,
+                 &#39;depth&#39;: GM.depth_list, &#39;values&#39;: GM.values,
+                 &#39;propertyname&#39;: GM.propertyname}
+        #end for
+    #end func
+    
+    def Process(self):
+        self.Read_Models()
+        self.compute_domain()
+        self.decompose_domain_into_grid()
+    #end func
+#end class
+
+class GeophysicalModel():
+    def __init__(self, models, model_type, depth_list, **kwargs):
+        &#34;&#34;&#34;
+        Class to facilitate importation of a geophysical model.
+        
+        
+        Parameters
+        ----------
+        models : dictionary
+            Dictionary of model details describing various parameters, paths,
+            file names, etc.
+            
+        model_type : string
+            Keyword for the type of model to be generated. Used to extract the
+            correct information from the models dictionary.
+            
+
+        &#34;&#34;&#34;
+        
+        self.model_type = model_type
+        self.models = models
+        self.propertyname = None
+        self.cellsize = 0.1
+        self.depth_list = depth_list
+        self.bounds = [110, 155, -45, -10]
+        
+        for key in kwargs.keys():
+            if hasattr(self, key):
+                setattr(self, key, kwargs[key])
+            #end if
+        #end for
+
+    def read_models(self):
+        &#34;&#34;&#34;
+        Determines type of model, and reads inputs into a dictionary.
+
+
+        Calls
+        -----
+        read_modem
+        
+        read_maggrav
+        
+        read_csv_model
+        
+        read_netcdf_model
+        
+        
+        &#34;&#34;&#34;
+        self.model_dict = {}
+        if self.model_type == &#39;ModEM&#39;:
+            self.propertyname = &#39;resistivity&#39;
+        elif self.model_type == &#39;Grav&#39;:
+            self.propertyname = &#39;density&#39;
+        elif self.model_type == &#39;Mag&#39;:
+            self.propertyname = &#39;susceptibility&#39;
+        else:
+            self.propertyname = &#39;unknown&#39;
+        #end if
+        for model in self.models:
+            name = model.attrib[&#39;name&#39;]
+            if model.attrib[&#39;model_format&#39;] == &#39;ModEM&#39;:
+                self.model_dict[name] = read_modem(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;MagGrav&#39;:
+                self.model_dict[name] = read_maggrav(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;csv&#39;:
+                self.model_dict[name] = read_csv_model(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;netcdf&#39;:
+                self.model_dict[name] = read_netcdf_model(model)
+            #end if
+        #end for
+    #end func
+    
+    def compute_coverage_region(self):
+        &#34;&#34;&#34;
+        Creates a multipolygon of a triangulation of the region of coverage
+        for each model.
+        
+        
+        Calls
+        -----
+        compute_coverage_polygon
+        
+        
+        &#34;&#34;&#34;
+
+    #end func
+    
+    def interpolate_to_grid(self):
+        &#34;&#34;&#34;
+        Takes separate models and placed them all on the same grid.
+        
+        
+        Calls
+        -----
+        interpolate_to_grid
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Interpolating to grid&#39;)
+        log = (self.model_type == &#39;ModEM&#39;)
+        self.longitude, self.latitude, self.values = \
+            interpolate_to_grid(self.cellsize, self.depth_list, 
+                                self.model_dict, self.model_type, self.bounds, 
+                                log=log)
+        self.gclon, self.gclat = np.meshgrid(self.longitude, self.latitude)
+        print(&#39;Finished interpolating to grid&#39;)
+    #end func
+    
+    def merge_models(self):
+        &#34;&#34;&#34;
+        Reads in all data, computes a multipolygon of the region of coverage,
+        and places all models on the same grid.
+        
+        
+        &#34;&#34;&#34;
+        self.read_models()
+        self.interpolate_to_grid()
+        print(&#39;Computing coverage region&#39;)
+        self.domain = compute_coverage_polygon(self)
+        print(&#39;Completed computing coverage region&#39;)
+    #end func
+#end class
+    
+def compute_coverage_polygon(model):
+    &#34;&#34;&#34;
+    Function to generate a polygon of the region of coverage for a model.
+    Note - if the longitude values cross over the 180 degree line, then the 
+    furthest eastern cells in the eastern hemisphere are not included in the 
+    region of coverage.
+    
+    
+    Parameters
+    ----------
+    model_dict : dictionary
+        Dictionary of model objects to use. Must contain longitude and latitude
+        values for grid points in a mesh grid, and function values in a rank-3
+        tensor (3rd dimension may be 1).
+        
+    
+    Returns
+    -------
+    domain : shapely multipolygon
+        Multipolygon of the region of coverage for the model.
+        
+        
+    Calls
+    -----
+    functions.gradient
+    
+    
+    &#34;&#34;&#34;
+    
+    bounds = model.bounds
+    gclon = model.gclon
+    gclat = model.gclat
+    values = model.values
+    arr = np.any(~np.isnan(values), axis=2)
+    grad = (fn.gradient(gclon, gclat, np.array([0]), 
+                        1.0*np.expand_dims(arr, 3))[:,:,0] != 0)*1
+    iindices = np.arange(len(grad[:, 0]))
+    jindices = np.arange(len(grad[0, :]))
+    grad1 = np.zeros_like(grad)
+    for i in [-1, 0, 1]:
+        for j in [-1, 0, 1]:
+            grad1 = grad1 + \
+                grad.take(iindices+i, axis=0, 
+                          mode=&#39;wrap&#39;).take(jindices+j, axis=1, 
+                                            mode=&#39;wrap&#39;)
+        #end for
+    #end for
+    on_boundary = np.zeros_like(grad1).astype(bool)
+    on_boundary[:, 0] = True
+    on_boundary[:, -1] = True
+    on_boundary[0, :] = True
+    on_boundary[-1, :] = True
+    near_edge = (grad1 &gt; 0)
+    not_inside_edges = np.logical_or((grad &gt; 0), ~arr)
+    vals = np.logical_or(np.logical_and(near_edge, not_inside_edges),
+                         on_boundary)
+    
+    xfilt = gclon[vals]
+    yfilt = gclat[vals]
+    zfilt = arr[vals]
+    points = np.transpose(np.vstack([xfilt, yfilt]))
+    tri = Delaunay(points)
+    indices = [np.all(zfilt[simp]) for simp in tri.simplices]
+    coord_groups = [tri.points[simp] for simp in tri.simplices[indices]]
+    polygons = [Polygon(coords) for coords in coord_groups]
+    
+    region = unary_union(polygons)
+    minlon, maxlon, minlat, maxlat = bounds
+    corners = [(minlon, minlat), (minlon, maxlat), (maxlon, maxlat), 
+           (maxlon, minlat)]
+    polygon = Polygon(corners)
+    
+    return region.intersection(polygon)
+#end func
+    
+def get_polygon(filename):
+    shapefile = read_file(filename)
+    return unary_union(shapefile[&#39;geometry&#39;])
+#end func
+    
+def interpolate_to_grid(cellsize, depth_list, model_dict, model_type, bounds, 
+                        log=True):
+    &#34;&#34;&#34;
+    Interpolate values from a geophysical model to a grid.
+    
+
+    Parameters
+    ----------
+    cellsize : float
+        Width of cells for grid.
+        
+    depth_list : list of float
+        List of depth values data is provided at.
+        
+    model_dict : dictionary 
+        Dictionary of geophysical models.
+        
+    model_type : string
+        String identifying the type of model being used.
+        
+    log : boolean
+        Describes whether to interpolate function values or their logarithm.
+        
+        
+    Returns
+    -------
+    longitude : array
+        Numpy linspace of longitude values in grid.
+    
+    latitude : array
+        Numpy linspace for latitude values in grid.
+    
+    values : array
+        Rank-3 tensor of interpolated values for points on the grid.
+        
+        
+    Calls
+    -----
+    functions.epsg_project
+    
+        
+    &#34;&#34;&#34;
+    
+    # make a master grid to store data in
+    #minLon, minLat, maxLon, maxLat = -180, -90, 180, 90
+    globMinLon, globMaxLon, globMinLat, globMaxLat = bounds
+    if globMaxLon &lt; globMinLon:
+        globMaxLon = globMaxLon + 360
+    #end if
+    
+    longitude = np.linspace(globMinLon, globMaxLon, 
+                            int((globMaxLon-globMinLon)/cellsize+1))
+    latitude = np.linspace(globMinLat, globMaxLat, 
+                           int((globMaxLat-globMinLat)/cellsize+1))
+    values = np.zeros((longitude.size, latitude.size, depth_list.size))*np.nan
+    
+    # dictionary to store min/max lat/lon in each model
+    for key in model_dict.keys():
+        modObj = model_dict[key]
+        if modObj.epsg != 0:
+            epsg = modObj.epsg
+            proj_str = None
+        else:
+            epsg = 0
+            proj_str = modObj.proj_str
+        #end if
+    
+        # get min/max longitude and latitude
+        minLon, maxLon, minLat, maxLat = modObj.bounds
+    
+        # force onto even lat/lon intervals
+        minLon, minLat = [np.floor(val) for val in [minLon, minLat]]
+        maxLon, maxLat = [np.ceil(val) for val in [maxLon, maxLat]]
+        if maxLon &lt;= minLon:
+            maxLon = maxLon + 360
+        #end if
+        
+        minLon = max(minLon, globMinLon)
+        minLat = max(minLat, globMinLat)
+        maxLon = min(maxLon, globMaxLon)
+        maxLat = min(maxLat, globMaxLat)
+
+        # define longitude and latitude to interpolate to
+        loni = np.linspace(minLon, maxLon, int((maxLon-minLon)/cellsize + 1))
+        lati = np.linspace(minLat, maxLat, int((maxLat-minLat)/cellsize + 1))
+        loni, lati, zi = np.meshgrid(loni, lati, depth_list)   
+        
+        #Assumption is made that x, y coordinates do not wrap around in
+        #original model
+        xi, yi = fn.epsg_project(loni, lati, 4326, epsg, proj_str=proj_str)
+
+        if log:
+            vals = np.log10(modObj.values)
+        else:
+            vals = modObj.values
+        #end if
+        
+        if modObj.gcz.shape[0] &gt; 1:
+            func = RegularGridInterpolator((modObj.gcy, modObj.gcx, 
+                                            modObj.gcz), vals, 
+                                           bounds_error=False)
+            
+            xyzi = np.vstack([yi.flatten(), xi.flatten(), zi.flatten()]).T
+            ny, nx, nz = xi.shape
+            
+            if log:
+                newvals = 10**func((xyzi)).reshape(ny, nx, nz).transpose(1,0,2)
+            else:
+                newvals = func((xyzi)).reshape(ny, nx, nz).transpose(1,0,2)
+            #end if
+        else:
+            func = RegularGridInterpolator((modObj.gcy, modObj.gcx), 
+                                           vals[:,:,0], bounds_error=False)
+            
+            xyi = np.vstack([yi.flatten(), xi.flatten()]).T
+            ny, nx, nz = xi.shape
+            
+            if log:
+                newvals = 10**func((xyi)).reshape(ny, nx, nz).transpose(1,0,2)
+            else:
+                newvals = func((xyi)).reshape(ny, nx, nz).transpose(1,0,2)
+            #end if
+        #end if            
+
+        # mesh into master grid
+        
+        i0 = fn.nearest_index(loni[0, 0, 0], longitude)
+        i1 = i0 + loni.shape[1]
+        
+        j0 = fn.nearest_index(lati[0, 0, 0], latitude)
+        j1 = j0 + lati.shape[0]    
+        
+        if i1 &lt;= len(longitude):
+            values[i0:i1, j0:j1][np.isfinite(newvals)] = \
+                newvals[np.isfinite(newvals)]
+        else:
+            newvals_east = newvals[:len(longitude)-i0, :, :]
+            newvals_west = newvals[len(longitude)-i1:, :, :]
+            values[i0:, j0:j1][np.isfinite(newvals_east)] = \
+                newvals_east[np.isfinite(newvals_east)]
+            values[:i1-len(longitude), j0:j1][np.isfinite(newvals_west)] = \
+                newvals_west[np.isfinite(newvals_west)]
+        #end if
+    #end for
+    
+    longitude[longitude &gt;= 180] = longitude[longitude &gt;= 180] - 360
+    
+    values = values.transpose(1,0,2)
+    
+    return longitude, latitude, values
+#end func
+    
+def read_csv_model(model):
+    &#34;&#34;&#34;
+    Read CSV models and return CSV_model object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : CSV_model object.
+        
+        
+    Calls
+    -----
+    IO.CSV_Model.CSV_model
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.CSV_Model import CSV_model
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    dims = fn.changetype(model.attrib[&#34;dims&#34;], &#34;array&#34;, dtype=int)
+    cellsize = fn.changetype(model.attrib[&#34;cellsize&#34;], &#34;array&#34;, dtype=float)
+    depth_interval = fn.changetype(model.attrib[&#34;depth_interval&#34;, float])
+    bottomleft = fn.changetype(model.attrib[&#34;bottomleft&#34;], &#34;array&#34;, 
+                               dtype=float)
+    nanval = fn.changetype(model.attrib[&#34;nanval&#34;], float)
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    
+    modObj = CSV_model(os.path.join(wd, model_fn), dims, cellsize, 
+                       depth_interval, epsg=epsg, proj_str=proj_str, 
+                       bottomleft=bottomleft, nanval=nanval)
+    
+    modObj.epsg = epsg
+    modObj.proj_str = proj_str
+    return modObj
+#end func
+    
+def read_maggrav(model):
+    &#34;&#34;&#34;
+    Read MagGrav models and return MagGrav object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : MagGrav object.
+        
+        
+    Calls
+    -----
+    IO.MagGrav.MagGrav
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.MagGrav import MagGrav
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    dims = fn.changetype(model.attrib[&#34;dims&#34;], &#34;array&#34;, dtype=int)
+    cellsize = fn.changetype(model.attrib[&#34;cellsize&#34;], &#34;array&#34;, dtype=float)
+    bottomleft = fn.changetype(model.attrib[&#34;bottomleft&#34;], &#34;array&#34;, 
+                               dtype=float)
+    nanval = fn.changetype(model.attrib[&#34;nanval&#34;], float)
+    nzlst = fn.changetype(model.attrib[&#34;nzlst&#34;], &#34;array&#34;, dtype=int)
+    dzlst = fn.changetype(model.attrib[&#34;dzlst&#34;], &#34;array&#34;, dtype=float)
+    
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    
+    modObj = MagGrav(os.path.join(wd, model_fn), dims, cellsize, nzlst, dzlst, 
+                     epsg=epsg, proj_str=proj_str, bottomleft=bottomleft, 
+                     nanval=nanval)
+    
+    modObj.epsg = epsg
+    modObj.proj_str = proj_str
+    return modObj
+#end func
+
+def read_modem(model):
+    &#34;&#34;&#34;
+    Read ModEM models and return ModEM object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : ModEM object.
+        
+        
+    Calls
+    -----
+    IO.ModEM.ModEM
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.ModEM import ModEM
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    stationxy_fn = model.attrib[&#34;stationxy_fn&#34;]
+    centre = fn.changetype(model.attrib[&#34;centre&#34;], &#34;array&#34;, dtype=float)
+    station_buffer = fn.changetype(model.attrib[&#34;station_buffer&#34;], float)
+    
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    
+    modObj = ModEM(os.path.join(wd, model_fn),
+                   stationxy_fn=os.path.join(wd, stationxy_fn),
+                   proj_str=proj_str, epsg=epsg, rpad=1, centre=centre)
+    
+    modObj.mask_station_distance(station_buffer)
+    modObj.proj_str = proj_str
+    return modObj
+#end func
+    
+def read_netcdf_model(model):
+    &#34;&#34;&#34;
+    Read netcdf models and return netcdf_model object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : CSV_model object.
+        
+        
+    Calls
+    -----
+    IO.CSV_Model.CSV_model
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.netcdf_Model import netcdf_model
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    x_var_name = model.attrib[&#34;x_var_name&#34;]
+    y_var_name = model.attrib[&#34;y_var_name&#34;]
+    values_var_name = model.attrib[&#34;values_var_name&#34;]
+    if &#34;z_var_name&#34; in model.attrib:
+        z_var_name = model.attrib[&#34;z_var_name&#34;]
+    else:
+        z_var_name = None
+    #end if
+    if &#34;nanval&#34; in model.attrib:
+        nanval = fn.changetype(model.attrib[&#34;nanval&#34;], float)
+    else:
+        nanval = np.nan
+    #end if
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    if &#34;swap_xy&#34; in model.attrib:
+        swap_xy = fn.changetype(model.attrib[&#34;swap_xy&#34;], bool)
+    else:
+        swap_xy = False
+    #end if
+    if &#34;interval&#34; in model.attrib:
+        interval = fn.changetype(model.attrib[&#34;interval&#34;], int)
+    else:
+        interval = 1
+    #end if
+    
+    modObj = netcdf_model(os.path.join(wd, model_fn), x_var_name, y_var_name, 
+                          values_var_name, z_var_name=z_var_name, epsg=epsg, 
+                          proj_str=proj_str, nanval=nanval, swap_xy=swap_xy,
+                          interval=interval)
+    
+    modObj.epsg = epsg
+    modObj.proj_str = proj_str
+    return modObj
+#end func</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="toolkit.IO.ModelsManager.compute_coverage_polygon"><code class="name flex">
+<span>def <span class="ident">compute_coverage_polygon</span></span>(<span>model)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to generate a polygon of the region of coverage for a model.
+Note - if the longitude values cross over the 180 degree line, then the
+furthest eastern cells in the eastern hemisphere are not included in the
+region of coverage.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary of model objects to use. Must contain longitude and latitude
+values for grid points in a mesh grid, and function values in a rank-3
+tensor (3rd dimension may be 1).</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>domain</code></strong> :&ensp;<code>shapely multipolygon</code></dt>
+<dd>Multipolygon of the region of coverage for the model.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.gradient</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_coverage_polygon(model):
+    &#34;&#34;&#34;
+    Function to generate a polygon of the region of coverage for a model.
+    Note - if the longitude values cross over the 180 degree line, then the 
+    furthest eastern cells in the eastern hemisphere are not included in the 
+    region of coverage.
+    
+    
+    Parameters
+    ----------
+    model_dict : dictionary
+        Dictionary of model objects to use. Must contain longitude and latitude
+        values for grid points in a mesh grid, and function values in a rank-3
+        tensor (3rd dimension may be 1).
+        
+    
+    Returns
+    -------
+    domain : shapely multipolygon
+        Multipolygon of the region of coverage for the model.
+        
+        
+    Calls
+    -----
+    functions.gradient
+    
+    
+    &#34;&#34;&#34;
+    
+    bounds = model.bounds
+    gclon = model.gclon
+    gclat = model.gclat
+    values = model.values
+    arr = np.any(~np.isnan(values), axis=2)
+    grad = (fn.gradient(gclon, gclat, np.array([0]), 
+                        1.0*np.expand_dims(arr, 3))[:,:,0] != 0)*1
+    iindices = np.arange(len(grad[:, 0]))
+    jindices = np.arange(len(grad[0, :]))
+    grad1 = np.zeros_like(grad)
+    for i in [-1, 0, 1]:
+        for j in [-1, 0, 1]:
+            grad1 = grad1 + \
+                grad.take(iindices+i, axis=0, 
+                          mode=&#39;wrap&#39;).take(jindices+j, axis=1, 
+                                            mode=&#39;wrap&#39;)
+        #end for
+    #end for
+    on_boundary = np.zeros_like(grad1).astype(bool)
+    on_boundary[:, 0] = True
+    on_boundary[:, -1] = True
+    on_boundary[0, :] = True
+    on_boundary[-1, :] = True
+    near_edge = (grad1 &gt; 0)
+    not_inside_edges = np.logical_or((grad &gt; 0), ~arr)
+    vals = np.logical_or(np.logical_and(near_edge, not_inside_edges),
+                         on_boundary)
+    
+    xfilt = gclon[vals]
+    yfilt = gclat[vals]
+    zfilt = arr[vals]
+    points = np.transpose(np.vstack([xfilt, yfilt]))
+    tri = Delaunay(points)
+    indices = [np.all(zfilt[simp]) for simp in tri.simplices]
+    coord_groups = [tri.points[simp] for simp in tri.simplices[indices]]
+    polygons = [Polygon(coords) for coords in coord_groups]
+    
+    region = unary_union(polygons)
+    minlon, maxlon, minlat, maxlat = bounds
+    corners = [(minlon, minlat), (minlon, maxlat), (maxlon, maxlat), 
+           (maxlon, minlat)]
+    polygon = Polygon(corners)
+    
+    return region.intersection(polygon)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.get_polygon"><code class="name flex">
+<span>def <span class="ident">get_polygon</span></span>(<span>filename)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_polygon(filename):
+    shapefile = read_file(filename)
+    return unary_union(shapefile[&#39;geometry&#39;])</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.interpolate_to_grid"><code class="name flex">
+<span>def <span class="ident">interpolate_to_grid</span></span>(<span>cellsize, depth_list, model_dict, model_type, bounds, log=True)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Interpolate values from a geophysical model to a grid.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>cellsize</code></strong> :&ensp;<code>float</code></dt>
+<dd>Width of cells for grid.</dd>
+<dt><strong><code>depth_list</code></strong> :&ensp;<code>list</code> of <code>float</code></dt>
+<dd>List of depth values data is provided at.</dd>
+<dt><strong><code>model_dict</code></strong> :&ensp;<code>dictionary </code></dt>
+<dd>Dictionary of geophysical models.</dd>
+<dt><strong><code>model_type</code></strong> :&ensp;<code>string</code></dt>
+<dd>String identifying the type of model being used.</dd>
+<dt><strong><code>log</code></strong> :&ensp;<code>boolean</code></dt>
+<dd>Describes whether to interpolate function values or their logarithm.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>longitude</code></strong> :&ensp;<code>array</code></dt>
+<dd>Numpy linspace of longitude values in grid.</dd>
+<dt><strong><code>latitude</code></strong> :&ensp;<code>array</code></dt>
+<dd>Numpy linspace for latitude values in grid.</dd>
+<dt><strong><code>values</code></strong> :&ensp;<code>array</code></dt>
+<dd>Rank-3 tensor of interpolated values for points on the grid.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.epsg_project</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def interpolate_to_grid(cellsize, depth_list, model_dict, model_type, bounds, 
+                        log=True):
+    &#34;&#34;&#34;
+    Interpolate values from a geophysical model to a grid.
+    
+
+    Parameters
+    ----------
+    cellsize : float
+        Width of cells for grid.
+        
+    depth_list : list of float
+        List of depth values data is provided at.
+        
+    model_dict : dictionary 
+        Dictionary of geophysical models.
+        
+    model_type : string
+        String identifying the type of model being used.
+        
+    log : boolean
+        Describes whether to interpolate function values or their logarithm.
+        
+        
+    Returns
+    -------
+    longitude : array
+        Numpy linspace of longitude values in grid.
+    
+    latitude : array
+        Numpy linspace for latitude values in grid.
+    
+    values : array
+        Rank-3 tensor of interpolated values for points on the grid.
+        
+        
+    Calls
+    -----
+    functions.epsg_project
+    
+        
+    &#34;&#34;&#34;
+    
+    # make a master grid to store data in
+    #minLon, minLat, maxLon, maxLat = -180, -90, 180, 90
+    globMinLon, globMaxLon, globMinLat, globMaxLat = bounds
+    if globMaxLon &lt; globMinLon:
+        globMaxLon = globMaxLon + 360
+    #end if
+    
+    longitude = np.linspace(globMinLon, globMaxLon, 
+                            int((globMaxLon-globMinLon)/cellsize+1))
+    latitude = np.linspace(globMinLat, globMaxLat, 
+                           int((globMaxLat-globMinLat)/cellsize+1))
+    values = np.zeros((longitude.size, latitude.size, depth_list.size))*np.nan
+    
+    # dictionary to store min/max lat/lon in each model
+    for key in model_dict.keys():
+        modObj = model_dict[key]
+        if modObj.epsg != 0:
+            epsg = modObj.epsg
+            proj_str = None
+        else:
+            epsg = 0
+            proj_str = modObj.proj_str
+        #end if
+    
+        # get min/max longitude and latitude
+        minLon, maxLon, minLat, maxLat = modObj.bounds
+    
+        # force onto even lat/lon intervals
+        minLon, minLat = [np.floor(val) for val in [minLon, minLat]]
+        maxLon, maxLat = [np.ceil(val) for val in [maxLon, maxLat]]
+        if maxLon &lt;= minLon:
+            maxLon = maxLon + 360
+        #end if
+        
+        minLon = max(minLon, globMinLon)
+        minLat = max(minLat, globMinLat)
+        maxLon = min(maxLon, globMaxLon)
+        maxLat = min(maxLat, globMaxLat)
+
+        # define longitude and latitude to interpolate to
+        loni = np.linspace(minLon, maxLon, int((maxLon-minLon)/cellsize + 1))
+        lati = np.linspace(minLat, maxLat, int((maxLat-minLat)/cellsize + 1))
+        loni, lati, zi = np.meshgrid(loni, lati, depth_list)   
+        
+        #Assumption is made that x, y coordinates do not wrap around in
+        #original model
+        xi, yi = fn.epsg_project(loni, lati, 4326, epsg, proj_str=proj_str)
+
+        if log:
+            vals = np.log10(modObj.values)
+        else:
+            vals = modObj.values
+        #end if
+        
+        if modObj.gcz.shape[0] &gt; 1:
+            func = RegularGridInterpolator((modObj.gcy, modObj.gcx, 
+                                            modObj.gcz), vals, 
+                                           bounds_error=False)
+            
+            xyzi = np.vstack([yi.flatten(), xi.flatten(), zi.flatten()]).T
+            ny, nx, nz = xi.shape
+            
+            if log:
+                newvals = 10**func((xyzi)).reshape(ny, nx, nz).transpose(1,0,2)
+            else:
+                newvals = func((xyzi)).reshape(ny, nx, nz).transpose(1,0,2)
+            #end if
+        else:
+            func = RegularGridInterpolator((modObj.gcy, modObj.gcx), 
+                                           vals[:,:,0], bounds_error=False)
+            
+            xyi = np.vstack([yi.flatten(), xi.flatten()]).T
+            ny, nx, nz = xi.shape
+            
+            if log:
+                newvals = 10**func((xyi)).reshape(ny, nx, nz).transpose(1,0,2)
+            else:
+                newvals = func((xyi)).reshape(ny, nx, nz).transpose(1,0,2)
+            #end if
+        #end if            
+
+        # mesh into master grid
+        
+        i0 = fn.nearest_index(loni[0, 0, 0], longitude)
+        i1 = i0 + loni.shape[1]
+        
+        j0 = fn.nearest_index(lati[0, 0, 0], latitude)
+        j1 = j0 + lati.shape[0]    
+        
+        if i1 &lt;= len(longitude):
+            values[i0:i1, j0:j1][np.isfinite(newvals)] = \
+                newvals[np.isfinite(newvals)]
+        else:
+            newvals_east = newvals[:len(longitude)-i0, :, :]
+            newvals_west = newvals[len(longitude)-i1:, :, :]
+            values[i0:, j0:j1][np.isfinite(newvals_east)] = \
+                newvals_east[np.isfinite(newvals_east)]
+            values[:i1-len(longitude), j0:j1][np.isfinite(newvals_west)] = \
+                newvals_west[np.isfinite(newvals_west)]
+        #end if
+    #end for
+    
+    longitude[longitude &gt;= 180] = longitude[longitude &gt;= 180] - 360
+    
+    values = values.transpose(1,0,2)
+    
+    return longitude, latitude, values</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.read_csv_model"><code class="name flex">
+<span>def <span class="ident">read_csv_model</span></span>(<span>model)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read CSV models and return CSV_model object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>Node containing model details.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>modObj : CSV_model object.</p>
+<h2 id="calls">Calls</h2>
+<p>IO.CSV_Model.CSV_model</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_csv_model(model):
+    &#34;&#34;&#34;
+    Read CSV models and return CSV_model object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : CSV_model object.
+        
+        
+    Calls
+    -----
+    IO.CSV_Model.CSV_model
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.CSV_Model import CSV_model
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    dims = fn.changetype(model.attrib[&#34;dims&#34;], &#34;array&#34;, dtype=int)
+    cellsize = fn.changetype(model.attrib[&#34;cellsize&#34;], &#34;array&#34;, dtype=float)
+    depth_interval = fn.changetype(model.attrib[&#34;depth_interval&#34;, float])
+    bottomleft = fn.changetype(model.attrib[&#34;bottomleft&#34;], &#34;array&#34;, 
+                               dtype=float)
+    nanval = fn.changetype(model.attrib[&#34;nanval&#34;], float)
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    
+    modObj = CSV_model(os.path.join(wd, model_fn), dims, cellsize, 
+                       depth_interval, epsg=epsg, proj_str=proj_str, 
+                       bottomleft=bottomleft, nanval=nanval)
+    
+    modObj.epsg = epsg
+    modObj.proj_str = proj_str
+    return modObj</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.read_maggrav"><code class="name flex">
+<span>def <span class="ident">read_maggrav</span></span>(<span>model)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read MagGrav models and return MagGrav object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>Node containing model details.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>modObj : MagGrav object.</p>
+<h2 id="calls">Calls</h2>
+<p>IO.MagGrav.MagGrav</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_maggrav(model):
+    &#34;&#34;&#34;
+    Read MagGrav models and return MagGrav object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : MagGrav object.
+        
+        
+    Calls
+    -----
+    IO.MagGrav.MagGrav
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.MagGrav import MagGrav
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    dims = fn.changetype(model.attrib[&#34;dims&#34;], &#34;array&#34;, dtype=int)
+    cellsize = fn.changetype(model.attrib[&#34;cellsize&#34;], &#34;array&#34;, dtype=float)
+    bottomleft = fn.changetype(model.attrib[&#34;bottomleft&#34;], &#34;array&#34;, 
+                               dtype=float)
+    nanval = fn.changetype(model.attrib[&#34;nanval&#34;], float)
+    nzlst = fn.changetype(model.attrib[&#34;nzlst&#34;], &#34;array&#34;, dtype=int)
+    dzlst = fn.changetype(model.attrib[&#34;dzlst&#34;], &#34;array&#34;, dtype=float)
+    
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    
+    modObj = MagGrav(os.path.join(wd, model_fn), dims, cellsize, nzlst, dzlst, 
+                     epsg=epsg, proj_str=proj_str, bottomleft=bottomleft, 
+                     nanval=nanval)
+    
+    modObj.epsg = epsg
+    modObj.proj_str = proj_str
+    return modObj</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.read_modem"><code class="name flex">
+<span>def <span class="ident">read_modem</span></span>(<span>model)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read ModEM models and return ModEM object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>Node containing model details.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>modObj : ModEM object.</p>
+<h2 id="calls">Calls</h2>
+<p>IO.ModEM.ModEM</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_modem(model):
+    &#34;&#34;&#34;
+    Read ModEM models and return ModEM object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : ModEM object.
+        
+        
+    Calls
+    -----
+    IO.ModEM.ModEM
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.ModEM import ModEM
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    stationxy_fn = model.attrib[&#34;stationxy_fn&#34;]
+    centre = fn.changetype(model.attrib[&#34;centre&#34;], &#34;array&#34;, dtype=float)
+    station_buffer = fn.changetype(model.attrib[&#34;station_buffer&#34;], float)
+    
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    
+    modObj = ModEM(os.path.join(wd, model_fn),
+                   stationxy_fn=os.path.join(wd, stationxy_fn),
+                   proj_str=proj_str, epsg=epsg, rpad=1, centre=centre)
+    
+    modObj.mask_station_distance(station_buffer)
+    modObj.proj_str = proj_str
+    return modObj</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.read_netcdf_model"><code class="name flex">
+<span>def <span class="ident">read_netcdf_model</span></span>(<span>model)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read netcdf models and return netcdf_model object.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>model</code></strong> :&ensp;<code>xml node</code></dt>
+<dd>Node containing model details.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>modObj : CSV_model object.</p>
+<h2 id="calls">Calls</h2>
+<p>IO.CSV_Model.CSV_model</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_netcdf_model(model):
+    &#34;&#34;&#34;
+    Read netcdf models and return netcdf_model object.
+
+    
+    Parameters
+    ----------
+    model : xml node
+        Node containing model details.
+        
+        
+    Returns
+    -------
+    modObj : CSV_model object.
+        
+        
+    Calls
+    -----
+    IO.CSV_Model.CSV_model
+    
+    &#34;&#34;&#34;
+    from toolkit.IO.netcdf_Model import netcdf_model
+    
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = model.attrib[&#34;model_file_name&#34;]
+    x_var_name = model.attrib[&#34;x_var_name&#34;]
+    y_var_name = model.attrib[&#34;y_var_name&#34;]
+    values_var_name = model.attrib[&#34;values_var_name&#34;]
+    if &#34;z_var_name&#34; in model.attrib:
+        z_var_name = model.attrib[&#34;z_var_name&#34;]
+    else:
+        z_var_name = None
+    #end if
+    if &#34;nanval&#34; in model.attrib:
+        nanval = fn.changetype(model.attrib[&#34;nanval&#34;], float)
+    else:
+        nanval = np.nan
+    #end if
+    if &#34;epsg&#34; in model.attrib:
+        proj_str = None
+        epsg = fn.changetype(model.attrib[&#34;epsg&#34;], int)
+    else:
+        proj_str = model.attrib[&#34;proj_str&#34;]
+        epsg = 0
+    #end if
+    if &#34;swap_xy&#34; in model.attrib:
+        swap_xy = fn.changetype(model.attrib[&#34;swap_xy&#34;], bool)
+    else:
+        swap_xy = False
+    #end if
+    if &#34;interval&#34; in model.attrib:
+        interval = fn.changetype(model.attrib[&#34;interval&#34;], int)
+    else:
+        interval = 1
+    #end if
+    
+    modObj = netcdf_model(os.path.join(wd, model_fn), x_var_name, y_var_name, 
+                          values_var_name, z_var_name=z_var_name, epsg=epsg, 
+                          proj_str=proj_str, nanval=nanval, swap_xy=swap_xy,
+                          interval=interval)
+    
+    modObj.epsg = epsg
+    modObj.proj_str = proj_str
+    return modObj</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="toolkit.IO.ModelsManager.GeophysicalModel"><code class="flex name class">
+<span>class <span class="ident">GeophysicalModel</span></span>
+<span>(</span><span>models, model_type, depth_list, **kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class to facilitate importation of a geophysical model.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>models</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary of model details describing various parameters, paths,
+file names, etc.</dd>
+<dt><strong><code>model_type</code></strong> :&ensp;<code>string</code></dt>
+<dd>Keyword for the type of model to be generated. Used to extract the
+correct information from the models dictionary.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GeophysicalModel():
+    def __init__(self, models, model_type, depth_list, **kwargs):
+        &#34;&#34;&#34;
+        Class to facilitate importation of a geophysical model.
+        
+        
+        Parameters
+        ----------
+        models : dictionary
+            Dictionary of model details describing various parameters, paths,
+            file names, etc.
+            
+        model_type : string
+            Keyword for the type of model to be generated. Used to extract the
+            correct information from the models dictionary.
+            
+
+        &#34;&#34;&#34;
+        
+        self.model_type = model_type
+        self.models = models
+        self.propertyname = None
+        self.cellsize = 0.1
+        self.depth_list = depth_list
+        self.bounds = [110, 155, -45, -10]
+        
+        for key in kwargs.keys():
+            if hasattr(self, key):
+                setattr(self, key, kwargs[key])
+            #end if
+        #end for
+
+    def read_models(self):
+        &#34;&#34;&#34;
+        Determines type of model, and reads inputs into a dictionary.
+
+
+        Calls
+        -----
+        read_modem
+        
+        read_maggrav
+        
+        read_csv_model
+        
+        read_netcdf_model
+        
+        
+        &#34;&#34;&#34;
+        self.model_dict = {}
+        if self.model_type == &#39;ModEM&#39;:
+            self.propertyname = &#39;resistivity&#39;
+        elif self.model_type == &#39;Grav&#39;:
+            self.propertyname = &#39;density&#39;
+        elif self.model_type == &#39;Mag&#39;:
+            self.propertyname = &#39;susceptibility&#39;
+        else:
+            self.propertyname = &#39;unknown&#39;
+        #end if
+        for model in self.models:
+            name = model.attrib[&#39;name&#39;]
+            if model.attrib[&#39;model_format&#39;] == &#39;ModEM&#39;:
+                self.model_dict[name] = read_modem(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;MagGrav&#39;:
+                self.model_dict[name] = read_maggrav(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;csv&#39;:
+                self.model_dict[name] = read_csv_model(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;netcdf&#39;:
+                self.model_dict[name] = read_netcdf_model(model)
+            #end if
+        #end for
+    #end func
+    
+    def compute_coverage_region(self):
+        &#34;&#34;&#34;
+        Creates a multipolygon of a triangulation of the region of coverage
+        for each model.
+        
+        
+        Calls
+        -----
+        compute_coverage_polygon
+        
+        
+        &#34;&#34;&#34;
+
+    #end func
+    
+    def interpolate_to_grid(self):
+        &#34;&#34;&#34;
+        Takes separate models and placed them all on the same grid.
+        
+        
+        Calls
+        -----
+        interpolate_to_grid
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Interpolating to grid&#39;)
+        log = (self.model_type == &#39;ModEM&#39;)
+        self.longitude, self.latitude, self.values = \
+            interpolate_to_grid(self.cellsize, self.depth_list, 
+                                self.model_dict, self.model_type, self.bounds, 
+                                log=log)
+        self.gclon, self.gclat = np.meshgrid(self.longitude, self.latitude)
+        print(&#39;Finished interpolating to grid&#39;)
+    #end func
+    
+    def merge_models(self):
+        &#34;&#34;&#34;
+        Reads in all data, computes a multipolygon of the region of coverage,
+        and places all models on the same grid.
+        
+        
+        &#34;&#34;&#34;
+        self.read_models()
+        self.interpolate_to_grid()
+        print(&#39;Computing coverage region&#39;)
+        self.domain = compute_coverage_polygon(self)
+        print(&#39;Completed computing coverage region&#39;)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.IO.ModelsManager.GeophysicalModel.compute_coverage_region"><code class="name flex">
+<span>def <span class="ident">compute_coverage_region</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a multipolygon of a triangulation of the region of coverage
+for each model.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_coverage_polygon</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_coverage_region(self):
+    &#34;&#34;&#34;
+    Creates a multipolygon of a triangulation of the region of coverage
+    for each model.
+    
+    
+    Calls
+    -----
+    compute_coverage_polygon
+    
+    
+    &#34;&#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.GeophysicalModel.interpolate_to_grid"><code class="name flex">
+<span>def <span class="ident">interpolate_to_grid</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes separate models and placed them all on the same grid.</p>
+<h2 id="calls">Calls</h2>
+<p>interpolate_to_grid</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def interpolate_to_grid(self):
+    &#34;&#34;&#34;
+    Takes separate models and placed them all on the same grid.
+    
+    
+    Calls
+    -----
+    interpolate_to_grid
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Interpolating to grid&#39;)
+    log = (self.model_type == &#39;ModEM&#39;)
+    self.longitude, self.latitude, self.values = \
+        interpolate_to_grid(self.cellsize, self.depth_list, 
+                            self.model_dict, self.model_type, self.bounds, 
+                            log=log)
+    self.gclon, self.gclat = np.meshgrid(self.longitude, self.latitude)
+    print(&#39;Finished interpolating to grid&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.GeophysicalModel.merge_models"><code class="name flex">
+<span>def <span class="ident">merge_models</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads in all data, computes a multipolygon of the region of coverage,
+and places all models on the same grid.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def merge_models(self):
+    &#34;&#34;&#34;
+    Reads in all data, computes a multipolygon of the region of coverage,
+    and places all models on the same grid.
+    
+    
+    &#34;&#34;&#34;
+    self.read_models()
+    self.interpolate_to_grid()
+    print(&#39;Computing coverage region&#39;)
+    self.domain = compute_coverage_polygon(self)
+    print(&#39;Completed computing coverage region&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.GeophysicalModel.read_models"><code class="name flex">
+<span>def <span class="ident">read_models</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determines type of model, and reads inputs into a dictionary.</p>
+<h2 id="calls">Calls</h2>
+<p>read_modem</p>
+<p>read_maggrav</p>
+<p>read_csv_model</p>
+<p>read_netcdf_model</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_models(self):
+    &#34;&#34;&#34;
+    Determines type of model, and reads inputs into a dictionary.
+
+
+    Calls
+    -----
+    read_modem
+    
+    read_maggrav
+    
+    read_csv_model
+    
+    read_netcdf_model
+    
+    
+    &#34;&#34;&#34;
+    self.model_dict = {}
+    if self.model_type == &#39;ModEM&#39;:
+        self.propertyname = &#39;resistivity&#39;
+    elif self.model_type == &#39;Grav&#39;:
+        self.propertyname = &#39;density&#39;
+    elif self.model_type == &#39;Mag&#39;:
+        self.propertyname = &#39;susceptibility&#39;
+    else:
+        self.propertyname = &#39;unknown&#39;
+    #end if
+    for model in self.models:
+        name = model.attrib[&#39;name&#39;]
+        if model.attrib[&#39;model_format&#39;] == &#39;ModEM&#39;:
+            self.model_dict[name] = read_modem(model)
+        elif model.attrib[&#39;model_format&#39;] == &#39;MagGrav&#39;:
+            self.model_dict[name] = read_maggrav(model)
+        elif model.attrib[&#39;model_format&#39;] == &#39;csv&#39;:
+            self.model_dict[name] = read_csv_model(model)
+        elif model.attrib[&#39;model_format&#39;] == &#39;netcdf&#39;:
+            self.model_dict[name] = read_netcdf_model(model)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="toolkit.IO.ModelsManager.ModelsManager"><code class="flex name class">
+<span>class <span class="ident">ModelsManager</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class to faciliate importation of geophysical models.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ModelsManager():
+    def __init__(self):
+        &#34;&#34;&#34;
+        Class to faciliate importation of geophysical models.
+        
+        
+        &#34;&#34;&#34;
+        self.cellsize = 0.1
+        self.bounds = np.array([110.0, 155.0, -45.0, -10.0])
+        self.outside_polygon_file = &#34;&#34;
+        self.inside_polygon_file = &#34;&#34;
+    #end func
+    
+    def compute_domain(self):
+        &#34;&#34;&#34;
+        Takes polygons of region of coverage for each model, merges them, and 
+        computes the intersection of this domain with land.
+        
+        
+        Calls
+        -----
+        get_outside_polygon
+        
+        
+        &#34;&#34;&#34;
+        t0 = time.time()
+        print(&#39;Generating land polygon&#39;)
+        land_shp_fname = \
+            shpreader.natural_earth(resolution=&#39;50m&#39;, category=&#39;physical&#39;, 
+                                    name=&#39;land&#39;)
+        land_geom = \
+            unary_union(list(shpreader.Reader(land_shp_fname).geometries()))
+        t1 = time.time()
+        print(&#39;Finished generating land polygon, time =&#39;, t1-t0)
+        print(&#39;Merging model domains&#39;)
+        domain = unary_union(self.domain)
+        xmin, ymin, xmax, ymax = domain.bounds
+        self.bbox = Polygon([(xmin, ymin), (xmax, ymin), (xmax, ymax), 
+                             (xmin, ymax)])
+        t2 = time.time()
+        print(&#39;Finished merging model domains, time =&#39;, t2-t1)
+        print(&#39;Computing intersection of domain with specified shapefiles&#39;)
+        land = self.bbox.intersection(land_geom)
+        region = domain.intersection(land)        
+        self.domain = {&#39;region&#39;: region}
+        if self.outside_polygon_file:
+            outside_polygon = get_polygon(self.outside_polygon_file)
+            allowed_region = region.difference(outside_polygon)
+        else:
+            allowed_region = region
+        #end if
+        if self.inside_polygon_file:
+            inside_polygon = get_polygon(self.inside_polygon_file)
+            allowed_region = allowed_region.intersection(inside_polygon)
+        #end if
+        self.domain[&#39;allowed_region&#39;] = allowed_region
+        t3 = time.time()
+        print(&#39;Completed computing region, time =&#39;, t3-t2)
+    #end func
+    
+    def decompose_domain_into_grid(self):
+        &#34;&#34;&#34;
+        Takes the region of coverage of the model, and fishnets the polygon to
+        improve the speed of the filtering of random points by location.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Decomposing region into grid&#39;)
+        t3 = time.time()
+        edge_squares = [self.bbox]
+        gs_within = GeoSeries()
+        allowed_region = self.domain[&#39;allowed_region&#39;]
+        not_allowed_region = self.bbox.difference(allowed_region)
+        i = 0
+        t4 = time.time()
+        for d in [1, 0.5, 0.25]:
+            i = i + 1
+            dx = dy = d
+            squares = list()
+            for edge_square in edge_squares:
+                xmin, ymin, xmax, ymax = edge_square.bounds
+                xvals = np.arange(xmin, xmax+dx, dx)
+                yvals = np.arange(ymin, ymax+dy, dy)
+                squares.extend([Polygon([(x,y), (x+dx,y), (x+dx,y+dy), 
+                                         (x,y+dy)]) \
+                                for x in xvals for y in yvals])
+            #end for
+            gs = GeoSeries(squares)
+            ind1 = gs.intersects(allowed_region)
+            ind2 = gs.intersects(not_allowed_region)
+            edge_filt = np.logical_and(ind1, ind2)
+            within_filt = np.logical_and(ind1, ~ind2)
+            gs_within = gs_within.append(gs[within_filt])
+            edge_squares = list(gs[edge_filt])
+            print(&#39;Iteration&#39;, i, &#39;complete of&#39;, 3, &#39;time =&#39;, time.time()-t4)
+            t4 = time.time()
+        #end for
+        print(&#39;Completed generating grid, time =&#39;, t4-t3)
+        print(&#39;Computing union of grid squares&#39;)
+        gs = gs_within.append(GeoSeries(edge_squares))
+        grid = unary_union(gs)
+        t5 = time.time()
+        print(&#39;Completed computing union of grid squares, time =&#39;, t5-t4)
+        self.domain[&#39;grid&#39;] = grid
+    #end func
+    
+    def ParseXMLNode(self, rootNode, commandList):
+        depths_type = rootNode.attrib[&#34;depths_type&#34;]
+        if depths_type == &#34;values&#34;:
+            self.depth_list = fn.changetype(rootNode.attrib[&#34;depths&#34;], &#39;array&#39;, 
+                                            dtype=float)
+        elif depths_type == &#34;range&#34;:
+            ranges = fn.changetype(rootNode.attrib[&#34;depths&#34;], list, dtype=str, 
+                                   sep=&#39;;&#39;)
+            depths = list()
+            for rng in ranges:
+                minval, maxval, interval = \
+                    fn.changetype(rng, &#39;array&#39;, dtype=float)
+                depths.append(np.arange(minval, maxval + interval, interval))
+            #end for
+            self.depth_list = np.hstack(depths)
+        #end if
+        models = rootNode.findall(&#34;model&#34;)
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+        model_details = list()
+        for model in models:
+            name = model.attrib[&#34;name&#34;]
+            model_type = model.attrib[&#34;type&#34;]
+            model_details.append([str(name + &#39;.&#39; + model_type), model])
+        #end for
+        self.model_details_dict = {row[0]: row[1] for row in model_details}
+    #end func
+    
+    def Read_Models(self):
+        &#34;&#34;&#34;
+        Reads in all input models, creating a different geophysical model for 
+        each model type.
+        
+        Calls
+        -----
+        GeophysicalModel
+        
+        
+        &#34;&#34;&#34;
+        self.model_dict = {}
+        self.domain = []
+        self.model_types = [key.split(&#39;.&#39;)[-1] for key in 
+                            self.model_details_dict]
+        for model_type in self.model_types:
+            keys = [key for key in self.model_details_dict if \
+                    key.split(&#39;.&#39;)[-1] == model_type]
+            models = [self.model_details_dict[key] for key in keys]
+            GM = GeophysicalModel(models, model_type, self.depth_list,
+                                  cellsize = self.cellsize,
+                                  bounds = self.bounds)
+            GM.merge_models()
+            self.domain.append(GM.domain)
+            self.model_dict[model_type] = \
+                {&#39;longitude&#39;: GM.longitude, &#39;latitude&#39;: GM.latitude,
+                 &#39;depth&#39;: GM.depth_list, &#39;values&#39;: GM.values,
+                 &#39;propertyname&#39;: GM.propertyname}
+        #end for
+    #end func
+    
+    def Process(self):
+        self.Read_Models()
+        self.compute_domain()
+        self.decompose_domain_into_grid()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.IO.ModelsManager.ModelsManager.ParseXMLNode"><code class="name flex">
+<span>def <span class="ident">ParseXMLNode</span></span>(<span>self, rootNode, commandList)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ParseXMLNode(self, rootNode, commandList):
+    depths_type = rootNode.attrib[&#34;depths_type&#34;]
+    if depths_type == &#34;values&#34;:
+        self.depth_list = fn.changetype(rootNode.attrib[&#34;depths&#34;], &#39;array&#39;, 
+                                        dtype=float)
+    elif depths_type == &#34;range&#34;:
+        ranges = fn.changetype(rootNode.attrib[&#34;depths&#34;], list, dtype=str, 
+                               sep=&#39;;&#39;)
+        depths = list()
+        for rng in ranges:
+            minval, maxval, interval = \
+                fn.changetype(rng, &#39;array&#39;, dtype=float)
+            depths.append(np.arange(minval, maxval + interval, interval))
+        #end for
+        self.depth_list = np.hstack(depths)
+    #end if
+    models = rootNode.findall(&#34;model&#34;)
+    for row in commandList:
+        if hasattr(self, row[0]):
+            tp = type(getattr(self, row[0]))
+            val = fn.changetype(row[1], tp)
+            setattr(self, row[0], val)
+        #end if
+    #end for
+    model_details = list()
+    for model in models:
+        name = model.attrib[&#34;name&#34;]
+        model_type = model.attrib[&#34;type&#34;]
+        model_details.append([str(name + &#39;.&#39; + model_type), model])
+    #end for
+    self.model_details_dict = {row[0]: row[1] for row in model_details}</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.ModelsManager.Process"><code class="name flex">
+<span>def <span class="ident">Process</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Process(self):
+    self.Read_Models()
+    self.compute_domain()
+    self.decompose_domain_into_grid()</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.ModelsManager.Read_Models"><code class="name flex">
+<span>def <span class="ident">Read_Models</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Reads in all input models, creating a different geophysical model for
+each model type.</p>
+<h2 id="calls">Calls</h2>
+<p>GeophysicalModel</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Read_Models(self):
+    &#34;&#34;&#34;
+    Reads in all input models, creating a different geophysical model for 
+    each model type.
+    
+    Calls
+    -----
+    GeophysicalModel
+    
+    
+    &#34;&#34;&#34;
+    self.model_dict = {}
+    self.domain = []
+    self.model_types = [key.split(&#39;.&#39;)[-1] for key in 
+                        self.model_details_dict]
+    for model_type in self.model_types:
+        keys = [key for key in self.model_details_dict if \
+                key.split(&#39;.&#39;)[-1] == model_type]
+        models = [self.model_details_dict[key] for key in keys]
+        GM = GeophysicalModel(models, model_type, self.depth_list,
+                              cellsize = self.cellsize,
+                              bounds = self.bounds)
+        GM.merge_models()
+        self.domain.append(GM.domain)
+        self.model_dict[model_type] = \
+            {&#39;longitude&#39;: GM.longitude, &#39;latitude&#39;: GM.latitude,
+             &#39;depth&#39;: GM.depth_list, &#39;values&#39;: GM.values,
+             &#39;propertyname&#39;: GM.propertyname}</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.ModelsManager.compute_domain"><code class="name flex">
+<span>def <span class="ident">compute_domain</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes polygons of region of coverage for each model, merges them, and
+computes the intersection of this domain with land.</p>
+<h2 id="calls">Calls</h2>
+<p>get_outside_polygon</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_domain(self):
+    &#34;&#34;&#34;
+    Takes polygons of region of coverage for each model, merges them, and 
+    computes the intersection of this domain with land.
+    
+    
+    Calls
+    -----
+    get_outside_polygon
+    
+    
+    &#34;&#34;&#34;
+    t0 = time.time()
+    print(&#39;Generating land polygon&#39;)
+    land_shp_fname = \
+        shpreader.natural_earth(resolution=&#39;50m&#39;, category=&#39;physical&#39;, 
+                                name=&#39;land&#39;)
+    land_geom = \
+        unary_union(list(shpreader.Reader(land_shp_fname).geometries()))
+    t1 = time.time()
+    print(&#39;Finished generating land polygon, time =&#39;, t1-t0)
+    print(&#39;Merging model domains&#39;)
+    domain = unary_union(self.domain)
+    xmin, ymin, xmax, ymax = domain.bounds
+    self.bbox = Polygon([(xmin, ymin), (xmax, ymin), (xmax, ymax), 
+                         (xmin, ymax)])
+    t2 = time.time()
+    print(&#39;Finished merging model domains, time =&#39;, t2-t1)
+    print(&#39;Computing intersection of domain with specified shapefiles&#39;)
+    land = self.bbox.intersection(land_geom)
+    region = domain.intersection(land)        
+    self.domain = {&#39;region&#39;: region}
+    if self.outside_polygon_file:
+        outside_polygon = get_polygon(self.outside_polygon_file)
+        allowed_region = region.difference(outside_polygon)
+    else:
+        allowed_region = region
+    #end if
+    if self.inside_polygon_file:
+        inside_polygon = get_polygon(self.inside_polygon_file)
+        allowed_region = allowed_region.intersection(inside_polygon)
+    #end if
+    self.domain[&#39;allowed_region&#39;] = allowed_region
+    t3 = time.time()
+    print(&#39;Completed computing region, time =&#39;, t3-t2)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.ModelsManager.decompose_domain_into_grid"><code class="name flex">
+<span>def <span class="ident">decompose_domain_into_grid</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes the region of coverage of the model, and fishnets the polygon to
+improve the speed of the filtering of random points by location.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def decompose_domain_into_grid(self):
+    &#34;&#34;&#34;
+    Takes the region of coverage of the model, and fishnets the polygon to
+    improve the speed of the filtering of random points by location.
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Decomposing region into grid&#39;)
+    t3 = time.time()
+    edge_squares = [self.bbox]
+    gs_within = GeoSeries()
+    allowed_region = self.domain[&#39;allowed_region&#39;]
+    not_allowed_region = self.bbox.difference(allowed_region)
+    i = 0
+    t4 = time.time()
+    for d in [1, 0.5, 0.25]:
+        i = i + 1
+        dx = dy = d
+        squares = list()
+        for edge_square in edge_squares:
+            xmin, ymin, xmax, ymax = edge_square.bounds
+            xvals = np.arange(xmin, xmax+dx, dx)
+            yvals = np.arange(ymin, ymax+dy, dy)
+            squares.extend([Polygon([(x,y), (x+dx,y), (x+dx,y+dy), 
+                                     (x,y+dy)]) \
+                            for x in xvals for y in yvals])
+        #end for
+        gs = GeoSeries(squares)
+        ind1 = gs.intersects(allowed_region)
+        ind2 = gs.intersects(not_allowed_region)
+        edge_filt = np.logical_and(ind1, ind2)
+        within_filt = np.logical_and(ind1, ~ind2)
+        gs_within = gs_within.append(gs[within_filt])
+        edge_squares = list(gs[edge_filt])
+        print(&#39;Iteration&#39;, i, &#39;complete of&#39;, 3, &#39;time =&#39;, time.time()-t4)
+        t4 = time.time()
+    #end for
+    print(&#39;Completed generating grid, time =&#39;, t4-t3)
+    print(&#39;Computing union of grid squares&#39;)
+    gs = gs_within.append(GeoSeries(edge_squares))
+    grid = unary_union(gs)
+    t5 = time.time()
+    print(&#39;Completed computing union of grid squares, time =&#39;, t5-t4)
+    self.domain[&#39;grid&#39;] = grid</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#model-input-module">Model input module</a></li>
+<li><a href="#contacts">Contacts</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="toolkit.IO" href="index.html">toolkit.IO</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="toolkit.IO.ModelsManager.compute_coverage_polygon" href="#toolkit.IO.ModelsManager.compute_coverage_polygon">compute_coverage_polygon</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.get_polygon" href="#toolkit.IO.ModelsManager.get_polygon">get_polygon</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.interpolate_to_grid" href="#toolkit.IO.ModelsManager.interpolate_to_grid">interpolate_to_grid</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.read_csv_model" href="#toolkit.IO.ModelsManager.read_csv_model">read_csv_model</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.read_maggrav" href="#toolkit.IO.ModelsManager.read_maggrav">read_maggrav</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.read_modem" href="#toolkit.IO.ModelsManager.read_modem">read_modem</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.read_netcdf_model" href="#toolkit.IO.ModelsManager.read_netcdf_model">read_netcdf_model</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="toolkit.IO.ModelsManager.GeophysicalModel" href="#toolkit.IO.ModelsManager.GeophysicalModel">GeophysicalModel</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.IO.ModelsManager.GeophysicalModel.compute_coverage_region" href="#toolkit.IO.ModelsManager.GeophysicalModel.compute_coverage_region">compute_coverage_region</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.GeophysicalModel.interpolate_to_grid" href="#toolkit.IO.ModelsManager.GeophysicalModel.interpolate_to_grid">interpolate_to_grid</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.GeophysicalModel.merge_models" href="#toolkit.IO.ModelsManager.GeophysicalModel.merge_models">merge_models</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.GeophysicalModel.read_models" href="#toolkit.IO.ModelsManager.GeophysicalModel.read_models">read_models</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="toolkit.IO.ModelsManager.ModelsManager" href="#toolkit.IO.ModelsManager.ModelsManager">ModelsManager</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.IO.ModelsManager.ModelsManager.ParseXMLNode" href="#toolkit.IO.ModelsManager.ModelsManager.ParseXMLNode">ParseXMLNode</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.ModelsManager.Process" href="#toolkit.IO.ModelsManager.ModelsManager.Process">Process</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.ModelsManager.Read_Models" href="#toolkit.IO.ModelsManager.ModelsManager.Read_Models">Read_Models</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.ModelsManager.compute_domain" href="#toolkit.IO.ModelsManager.ModelsManager.compute_domain">compute_domain</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.ModelsManager.decompose_domain_into_grid" href="#toolkit.IO.ModelsManager.ModelsManager.decompose_domain_into_grid">decompose_domain_into_grid</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

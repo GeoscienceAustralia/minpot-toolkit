@@ -1,0 +1,3997 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>toolkit.stat_corr API documentation</title>
+<meta name="description" content="Statistics module
+This module is used to investigate the statistical significance of any
+correlation present between mineral deposit locations and …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>toolkit.stat_corr</code></h1>
+</header>
+<section id="section-intro">
+<h2 id="statistics-module">Statistics Module</h2>
+<p>This module is used to investigate the statistical significance of any
+correlation present between mineral deposit locations and mappable proxies
+derived from geophysical models.</p>
+<h2 id="contacts">Contacts</h2>
+<p>Lachlan Adams
+- Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Statistics module
+-----------------
+This module is used to investigate the statistical significance of any 
+correlation present between mineral deposit locations and mappable proxies
+derived from geophysical models.
+
+
+Contacts
+--------
+Lachlan Adams
+    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
+    
+    
+&#34;&#34;&#34;
+
+import numpy as np
+import matplotlib.pyplot as plt
+import toolkit.functions as fn
+import toolkit.plotting as pt
+
+from scipy.special import gammainc
+
+class StatsManager():
+    def __init__(self, commandList, statnodes):
+        &#34;&#34;&#34;
+        A class to facilitate any statistical calculations which need to be 
+        performed.
+        
+        
+        Parameters
+        ----------
+        commandList: list
+            A list of commands read from XML config file.
+            
+        statnodes: xml.ElementTree node
+            A node, which contains within it nodes representing each statistial
+            computation that must be performed.
+            
+        
+        Calls
+        -----
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        
+        self.statnodes = statnodes
+
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+    #end func
+    
+    def Process(self, feature_dict, points_dict, RPManager):
+        &#34;&#34;&#34;
+        Process to perform statistical computations.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feature objects which were generated by the feature
+            engineering module.
+            
+        points_dict: dictionary
+            Dictionary containing deposit locations which have been read in and
+            filtered by the data input module.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            RandomPointsManager object which is given to the run_analysis 
+            function to provide a set of randomly generated locations.
+            
+        
+        Calls
+        -----
+        Kolmogorov_Smirnov_p_test
+        
+        Poisson_p_test
+        
+        Binomial_p_test
+        
+        
+        &#34;&#34;&#34;
+        point_data = points_dict[&#39;point_data_filt&#39;]
+        
+        self.stat_obj_dict = {}
+        for node in self.statnodes:
+            key = node.attrib[&#34;name&#34;]
+            test_type = node.attrib[&#34;test&#34;]
+            if test_type == &#34;Kolmogorov-Smirnov p test&#34;:
+                stat = Kolmogorov_Smirnov_p_test(feature_dict, point_data, 
+                                                 RPManager, node)
+                self.stat_obj_dict[key] = stat
+            elif test_type == &#34;Poisson p test&#34;:
+                stat = Poisson_p_test(feature_dict, point_data, RPManager, 
+                                      node)
+                self.stat_obj_dict[key] = stat
+            #end if
+            elif test_type == &#34;Binomial p test&#34;:
+                stat = Binomial_p_test(feature_dict, point_data, RPManager, 
+                                       node)
+                self.stat_obj_dict[key] = stat
+            #end if
+        #end for
+#end class
+    
+class Kolmogorov_Smirnov_p_test():
+    def __init__(self, feature_dict, point_data, RPManager, node):
+        &#34;&#34;&#34;
+        A class used to perform the Kolmogorov-Smirnov p test on a dataset.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feat_eng.feature_object objects, containing each
+            feature needed for the analysis.
+            
+        point_data_xy: numpy array
+            Array of deposit locations.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            Object which facilitates the generation of random locations to 
+            compare to actual deposit locations.
+            
+        node: xml.ElementTree node
+            Node which contains commands and information about the test to be 
+            performed.
+        
+        
+        &#34;&#34;&#34;
+        self.name = node.attrib[&#34;name&#34;]                
+        self.feature_key = node.attrib[&#34;feature&#34;]
+        self.correlation = node.attrib[&#34;correlation&#34;]
+        self.binsize = fn.changetype(node.attrib[&#34;binsize&#34;], float)
+        self.n_repeats = fn.changetype(node.attrib[&#34;n_repeats&#34;], int)
+        feature = feature_dict[self.feature_key]
+        self.cdf = False
+        self.pdf = False
+        depths_type = node.attrib[&#34;depths_type&#34;]
+        depths = fn.changetype(node.attrib[&#34;depths&#34;], &#34;array&#34;, dtype=float)
+        if depths_type == &#39;range&#39;:
+            self.depths = list(np.arange(depths[0], depths[1], depths[2]))
+        else:
+            self.depths = depths
+        #end if
+        
+        if &#34;pros_map&#34; in node.attrib:
+            self.prospectivity_map = fn.changetype(node.attrib[&#34;pros_map&#34;], 
+                                                   bool)
+        else:
+            self.prospectivity_map = False
+        #end if
+        
+        self.distance_array = make_distance_array(feature, point_data, 
+                                                  self.n_repeats, 
+                                                  RPManager=RPManager)
+        self.Kolmogorov_Smirnov_p_test()
+        self.print_results()
+    #end func
+    
+    def compute_cdf(self):
+        &#34;&#34;&#34;
+        Computes the cumulative distribution function for input dataset.
+        
+        
+        Calls
+        -----
+        compute_cdf
+        
+        initialise_cdf_array
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Computing CDF&#39;)
+        if not hasattr(self, &#39;cdf_array&#39;):
+            self.cdf_array, self.n_deposits = \
+                initialise_cdf_array(self.distance_array, self.binsize)
+        #end if
+        self.cdf_array = compute_cdf(self.distance_array, self.cdf_array)
+        self.cdf = True
+        print(&#39;Completed computing CDF&#39;)
+    #end func
+    
+    def compute_pdf(self):
+        &#34;&#34;&#34;
+        Computes the probability density function for input dataset.
+        
+        
+        Calls
+        -----
+        compute_pdf
+        
+        initialise_cdf_array
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Computing PDF&#39;)
+        if not hasattr(self, &#39;cdf_array&#39;):
+            self.cdf_array, self.n_deposits = \
+                initialise_cdf_array(self.distance_array, self.binsize)
+        #end if
+        self.cdf_array = compute_pdf(self.distance_array, self.cdf_array)
+        self.pdf = True
+        print(&#39;Completed computing PDF&#39;)
+    #end func
+    
+    def compute_normed_cdf(self):
+        &#34;&#34;&#34;
+        Computes the normalised cumulative distribution function from an
+        already existing CDF.
+        
+        
+        Calls
+        -----
+        compute_normed_cdf
+        
+        
+        &#34;&#34;&#34;
+        if not self.cdf:
+            self.compute_cdf()
+        #end if
+        print(&#39;Computing normed cdf&#39;)
+        self.cdf_normed, self.cdf_random_normed, self.cdf_random_std, \
+            self.dvalues, self.dmax = \
+            compute_normed_cdf(self.cdf_array, self.n_deposits, 
+                               self.correlation)
+        print(&#39;Completed computing normed cdf&#39;)
+    #end func
+    
+    def compute_normed_pdf(self):
+        &#34;&#34;&#34;
+        Computes the normalised probability density function from an already 
+        existing PDF.
+        
+        
+        Calls
+        -----
+        compute_normed_pdf
+        
+        
+        &#34;&#34;&#34;
+        if not self.pdf:
+            self.compute_pdf()
+        #end if
+        print(&#39;Computing normed pdf&#39;)
+        self.pdf_normed, self.pdf_random_normed, self.pdf_random_std = \
+            compute_normed_pdf(self.cdf_array, self.n_deposits)
+        print(&#39;Completed computing normed pdf&#39;)
+    #end func
+    
+    def Kolmogorov_Smirnov_p_test(self):
+        &#34;&#34;&#34;
+        Performs the Kolmogorov-Smirnov &#34;p&#34; test to determine the statistical
+        significance of the results.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Computing Kolmogorov-Smirnov values&#39;)
+        if not hasattr(self, &#39;dmax&#39;):
+            self.compute_normed_cdf()
+        #end if
+        self.kolmogorov_smirnov = \
+            np.exp(-2.*(self.n_deposits**2)*(self.dmax**2)/(2*self.n_deposits))
+        print(&#39;Completed computing Kolmogorov-Smirnov values&#39;)
+    #end func
+    
+    def Plots(self, wd_images):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Parameters
+        ----------
+        wd_images: string
+            Path in which to save the figure.
+        
+        
+        Calls
+        -----
+        plotting.plot_cdf_at_depth_slice
+        
+        plotting.plot_heat_map
+        
+        plotting.plot_kolmogorov_smirnov_values
+        
+        
+        &#34;&#34;&#34;
+        pt.plot_cdf_at_depth_slice(self.depths, wd_images, obj=self)
+        #pt.plot_pdf_at_depth_slice(self.depths, wd_images, obj=self)
+        if len(self.depths) &gt; 1:
+            pt.plot_heat_map(wd_images, obj=self)
+            pt.plot_kolmogorov_smirnov_values(wd_images, obj=self)
+        #end if
+    #end func
+    
+    def print_results(self):
+        &#34;&#34;&#34;
+        Function to print results of the statistical test to the console, or to
+        stdout. This function is called to print information to an output file.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Test =&#39;, self.name)
+        print(&#39;Number of deposits =&#39;, self.n_deposits)
+        print(&#39;Number of repeats =&#39;, self.n_repeats)
+        print(&#39;Depths =&#39;, self.depths)
+        print(&#39;d values =&#39;, self.dmax)
+        print(&#39;p values =&#39;, self.kolmogorov_smirnov)
+    #end func
+#end class
+    
+class Poisson_p_test():
+    def __init__(self, feature_dict, point_data, RPManager, node):
+        &#34;&#34;&#34;
+        A class used to perform a p test on a dataset assuming it follows the 
+        Poisson distribution, and to perform the chi squared test to determine
+        if the Poisson distribution is followed.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feat_eng.feature_object objects, containing each
+            feature needed for the analysis.
+            
+        point_data_xy: numpy array
+            Array of deposit locations.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            Object which facilitates the generation of random locations to 
+            compare to actual deposit locations.
+            
+        node: xml.ElementTree node
+            Node which contains commands and information about the test to be 
+            performed.
+        
+        
+        Calls
+        -----
+        functions.changetype
+        
+        IO.DataManager.RandomPointsManager.seed_random_points
+        
+        
+        Called by
+        ---------
+        StatsManager.Process
+        
+        
+        &#34;&#34;&#34;                
+        self.distribution = &#39;Poisson&#39;
+        self.n_repeats = fn.changetype(node.attrib[&#34;n_repeats&#34;], int)
+        self.name = node.attrib[&#34;name&#34;]
+        self.dtf_dict = {}
+        self.conditions = list()
+        self.distance_arrays = list()
+        self.n_points = len(point_data)
+        depths_type = node.attrib[&#34;depths_type&#34;]
+        depths = fn.changetype(node.attrib[&#34;depths&#34;], &#34;array&#34;, dtype=float)
+        if depths_type == &#39;range&#39;:
+            self.depths = np.arange(depths[0], depths[1], depths[2])
+        else:
+            self.depths = depths
+        #end if
+        criteria = node.findall(&#34;criterion&#34;)
+        points_random = \
+            RPManager.seed_random_points(n_repeats=self.n_repeats)
+        for criterion in criteria:
+            feature_key = node.attrib[&#34;feature_key&#34;]
+            feature = feature_dict[feature_key]
+            
+            distance_array = make_distance_array(feature, point_data, 
+                                                 self.n_repeats, 
+                                                 points_random=points_random)
+            self.distance_arrays.append(distance_array)
+            _, rng, thr = fn.changetype(criterion.attrib[&#34;description&#34;], list, 
+                                        dtype=str)
+            self.conditions.append([rng, float(thr)])
+        #end for
+        if len(criteria) == 1:
+            self.feature_key = feature_key
+        #end if
+        
+        if &#34;pros_map&#34; in node.attrib:
+            self.prospectivity_map = fn.changetype(node.attrib[&#34;pros_map&#34;], 
+                                                   bool)
+        else:
+            self.prospectivity_map = False
+        #end if
+        
+        self.Poisson_p_test()
+        self.chi_squared_test()
+        self.print_results()
+    #end func
+    
+    def compute_truth_arrays(self):
+        &#34;&#34;&#34;
+        Used to determine if data points fulfil all conditions required.
+        
+        
+        Calls
+        -----
+        compute_truth_arrays
+        
+        
+        &#34;&#34;&#34;
+        self.real_truth_array, self.random_truth_array = \
+            compute_truth_arrays(self.distance_arrays, self.conditions)
+    #end func
+    
+    def compute_parameters_for_Poisson_test(self):
+        &#34;&#34;&#34;
+        Computes parameters required for the Poisson p test.
+        
+        
+        Calls
+        -----
+        compute_parameters_for_p_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;real_truth_array&#39;):
+            self.compute_truth_arrays()
+        #end if
+        self.xvals, self.mvals, self.svals, self.rvals = \
+            compute_parameters_for_p_test(self.real_truth_array,
+                                          self.random_truth_array, 
+                                          self.n_points)
+    #end func
+    
+    def chi_squared_test(self):
+        &#34;&#34;&#34;
+        Performs the chi squared test to determine if the random point dataset
+        follows the Poisson distribution.
+        
+        
+        Calls
+        -----
+        chi_squared_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;pvals&#39;):
+            self.Poisson_p_test()
+        #end if
+        self.chi_t_vals, self.chi_p_vals, self.chi_k_vals = \
+            chi_squared_test(self.rvals, self.n_points, self.distribution)
+        #end func
+    #end func
+    
+    def Poisson_p_test(self):
+        &#34;&#34;&#34;
+        Performs a p test to determine if a result is statistically 
+        significant, if the data is assumed to follow the Poisson distribution.
+        
+        
+        Calls
+        -----
+        Poisson_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;xvals&#39;):
+            self.compute_parameters_for_Poisson_test()
+        #end if
+        self.pvals = Poisson_test(self.xvals, self.mvals, self.n_points)
+    #end func
+    
+    def Plots(self, wd_images):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Parameters
+        ----------
+        wd_images: string
+            Directory in which to save figures.
+        
+        
+        Calls
+        -----
+        plotting.plot_distribution_at_depth_slice
+        
+        plotting.plot_Poisson_p_values
+        
+        
+        &#34;&#34;&#34;
+        pt.plot_distribution_at_depth_slice(self, self.depths, wd_images)
+        if len(self.depths) &gt; 1:
+            pt.plot_Poisson_p_values(self, wd_images)
+        #end if
+    #end func
+    
+    def print_results(self):
+        &#34;&#34;&#34;
+        Function to print results of the statistical test to the console, or to
+        stdout. This function is called to print information to an output file.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Test =&#39;, self.name)
+        print(&#39;Test distribution type =&#39;, self.distribution)
+        print(&#39;Number of deposits =&#39;, self.n_points)
+        print(&#39;Number of repeats =&#39;, self.n_repeats)
+        print(&#39;Depths =&#39;, self.depths)
+        print(&#39;Criteria:&#39;)
+        criteria = self.node.findall(&#34;criterion&#34;)
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            _, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            feature = criterion.attrib[&#34;feature&#34;]
+            print(&#39;%s:&#39;%name, &#39;distance&#39;, target_range, target_value, &#39;from&#39;,
+                  feature)
+        #end for
+        print(self.distribution, &#39;distribution probability test results:&#39;)
+        print(&#39;Proportion of deposits satisfying criteria, x =&#39;, self.xvals)
+        print(&#39;Proportion of random points satisfying criteria, m =&#39;, 
+              self.mvals)
+        print(&#39;Probability of obtaining x with mean m, p =&#39;, self.pvals)
+        print(&#39;Chi squared test results:&#39;)
+        print(&#39;t values =&#39;, self.chi_t_vals)
+        print(&#39;p values =&#39;, self.chi_p_vals)
+        print(&#39;k values =&#39;, self.chi_k_vals)
+    #end func
+#end class
+    
+class Binomial_p_test():
+    def __init__(self, feature_dict, point_data, RPManager, node):
+        &#34;&#34;&#34;
+        A class used to perform a p test on a dataset assuming it follows the 
+        Binomial distribution, and to perform the chi squared test to determine
+        if the Binomial distribution is followed.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feat_eng.feature_object objects, containing each
+            feature needed for the analysis.
+            
+        point_data_xy: numpy array
+            Array of deposit locations.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            Object which facilitates the generation of random locations to 
+            compare to actual deposit locations.
+            
+        node: xml.ElementTree node
+            Node which contains commands and information about the test to be 
+            performed.
+        
+        
+        Calls
+        -----
+        functions.changetype
+        
+        IO.DataManager.RandomPointsManager.seed_random_points
+        
+        
+        &#34;&#34;&#34;       
+        self.distribution = &#39;Binomial&#39;         
+        self.n_repeats = fn.changetype(node.attrib[&#34;n_repeats&#34;], int)
+        self.name = node.attrib[&#34;name&#34;]
+        self.dtf_dict = {}
+        self.conditions = list()
+        self.features = list()
+        self.distance_arrays = list()
+        self.n_points = len(point_data)
+        self.node = node
+        depths_type = self.node.attrib[&#34;depths_type&#34;]
+        depths = fn.changetype(self.node.attrib[&#34;depths&#34;], &#34;array&#34;, 
+                               dtype=float)
+        if depths_type == &#39;range&#39;:
+            self.depths = list(np.arange(depths[0], depths[1], depths[2]))
+        else:
+            self.depths = depths
+        #end if
+        criteria = self.node.findall(&#34;criterion&#34;)
+        points_random = \
+            RPManager.seed_random_points(n_repeats=self.n_repeats)
+        for criterion in criteria:
+            feature_key = criterion.attrib[&#34;feature&#34;]
+            feature = feature_dict[feature_key]
+            self.features.append(feature)
+            
+            distance_array = make_distance_array(feature, point_data, 
+                                                 self.n_repeats, 
+                                                 points_random=points_random)
+            self.distance_arrays.append(distance_array)
+            _, rng, thr = fn.changetype(criterion.attrib[&#34;description&#34;], list,
+                                        dtype=str)
+            self.conditions.append([rng, float(thr)])
+        #end for
+        
+        if &#34;pros_map&#34; in node.attrib:
+            self.prospectivity_map = fn.changetype(node.attrib[&#34;pros_map&#34;],
+                                                   bool)
+        else:
+            self.prospectivity_map = False
+        #end if
+        
+        self.Binomial_p_test()
+        self.chi_squared_test()
+        self.print_results()
+    #end func
+    
+    def compute_truth_arrays(self):
+        &#34;&#34;&#34;
+        Used to determine if data points fulfil all conditions required.
+        
+        
+        Calls
+        -----
+        compute_truth_arrays
+        
+        
+        &#34;&#34;&#34;
+        self.real_truth_array, self.random_truth_array = \
+            compute_truth_arrays(self.distance_arrays, self.conditions)
+    #end func
+    
+    def compute_parameters_for_binomial_test(self):
+        &#34;&#34;&#34;
+        Computes parameters required for the Poisson p test.
+        
+        
+        Calls
+        -----
+        compute_parameters_for_p_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;real_truth_array&#39;):
+            self.compute_truth_arrays()
+        #end if
+        self.xvals, self.mvals, self.svals, self.rvals = \
+            compute_parameters_for_p_test(self.real_truth_array,
+                                          self.random_truth_array, 
+                                          self.n_points)
+    #end func
+    
+    def chi_squared_test(self):
+        &#34;&#34;&#34;
+        Performs the chi squared test to determine if the random point dataset
+        follows the Poisson distribution.
+        
+        
+        Calls
+        -----
+        chi_squared_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;pvals&#39;):
+            self.Binomial_p_test()
+        #end if
+        self.chi_t_vals, self.chi_p_vals, self.chi_k_vals = \
+            chi_squared_test(self.rvals, self.n_points, self.distribution)
+        #end func
+    #end func
+    
+    def Binomial_p_test(self):
+        &#34;&#34;&#34;
+        Performs a p test to determine if a result is statistically 
+        significant, if the data is assumed to follow the Binomial 
+        distribution.
+        
+        
+        Calls
+        -----
+        Binomial_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;xvals&#39;):
+            self.compute_parameters_for_binomial_test()
+        #end if
+        self.pvals = Binomial_test(self.xvals, self.mvals, self.n_points)
+    #end func
+    
+    def Plots(self, wd_images):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Parameters
+        ----------
+        wd_images: string
+            Directory in which to save figures.
+        
+        
+        Calls
+        -----
+        plotting.plot_distribution_at_depth_slice
+        
+        plotting.plot_Binomial_p_values
+        
+        
+        &#34;&#34;&#34;
+        pt.plot_distribution_at_depth_slice(self, self.depths, wd_images)
+        if len(self.depths) &gt; 1:
+            pt.plot_Binomial_p_values(self, wd_images)
+        #end if
+    #end func
+    
+    def print_results(self):
+        &#34;&#34;&#34;
+        Function to print results of the statistical test to the console, or to
+        stdout. This function is called to print information to an output file.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Test =&#39;, self.name)
+        print(&#39;Test distribution type =&#39;, self.distribution)
+        print(&#39;Number of deposits =&#39;, self.n_points)
+        print(&#39;Number of repeats =&#39;, self.n_repeats)
+        print(&#39;Depths =&#39;, self.depths)
+        print(&#39;Criteria:&#39;)
+        criteria = self.node.findall(&#34;criterion&#34;)
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            _, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            feature = criterion.attrib[&#34;feature&#34;]
+            print(&#39;%s:&#39;%name, &#39;distance&#39;, target_range, target_value, &#39;from&#39;,
+                  feature)
+        #end for
+        print(self.distribution, &#39;distribution probability test results:&#39;)
+        print(&#39;Proportion of deposits satisfying criteria, x =&#39;, self.xvals)
+        print(&#39;Proportion of random points satisfying criteria, m =&#39;, 
+              self.mvals)
+        print(&#39;Probability of obtaining x with mean m, p =&#39;, self.pvals)
+        print(&#39;Chi squared test results:&#39;)
+        print(&#39;t values =&#39;, self.chi_t_vals)
+        print(&#39;p values =&#39;, self.chi_p_vals)
+        print(&#39;k values =&#39;, self.chi_k_vals)
+    #end func
+#end class
+    
+def chi_squared_test(rvals, n_points, distribution):
+    &#34;&#34;&#34;
+    Performs the chi squared test to determine whether or not a data set
+    follows a given distribution.
+    
+    
+    Parameters
+    ----------
+    rvals: numpy array
+        2D array with dimensions (n_depths, n_repeats) representing the 
+        proportions of points which fulfil the criteria of the statistical 
+        test.
+        
+    n_points: integer
+        The number of deposit locations used.
+        
+    distribution: string
+        Flag representing which distribution to test the data against. 
+        Supported values are &#39;Poisson&#39; and &#39;Binomial&#39;.
+        
+        
+    Returns
+    -------
+    tvals: numpy array
+        1D numpy array representing the test statistic values calculated for
+        each depth.
+        
+    pvals: numpy array
+        1D numpy array representing the p values at each depth.
+        
+    kvals: numpy array
+        1D numpy array representing degrees of freedom at each depth.
+        
+        
+    Calls
+    -----
+    functions.Poisson
+    
+    functions.binomial
+    
+    
+   &#34;&#34;&#34;
+    tvals = list()
+    pvals = list()
+    kvals = list()
+    for i in range(len(rvals)):
+        r = rvals[i]*n_points
+        freqs, binedges = np.histogram(r, bins=n_points+1, 
+                                       range=(0, n_points+1))
+        x = binedges[:-1]
+        m = np.mean(r)
+        if distribution == &#39;Poisson&#39;:
+            y = fn.Poisson(x, m)*len(r)
+        elif distribution == &#39;Binomial&#39;:
+            y = fn.binomial(x, m, n_points)*len(r)
+        #end if
+        #Maybe make smallest allowable expectation value an input?
+        #maxind = np.max(np.where(y &gt;= np.max([5, 0.01*len(r)]))[0])
+        bins = np.where(y &gt;= 5)[0]
+        minind = np.min(bins)
+        maxind = np.max(bins)
+        #DoF = Number of bins minus 1, minus 1 because of assumed mean
+        if len(bins) &gt; 2:
+            k = len(bins) - 2
+            freqs = freqs[minind:maxind]
+            y = y[minind:maxind]
+            O = np.hstack([freqs, np.array([len(r) - np.sum(freqs)])])
+            E = np.hstack([y, np.array([len(r) - np.sum(y)])])
+            chi2 = np.sum((O-E)**2/E)
+            p = 1 - gammainc(k/2, chi2/2)
+            tvals.append(chi2)
+            pvals.append(p)
+            kvals.append(k)
+        else:
+            tvals.append(np.nan)
+            pvals.append(np.nan)
+            kvals.append(np.nan)
+        #end if
+    #end for
+    return np.array(tvals), np.array(pvals), np.array(kvals)
+#end func
+    
+def compute_truth_arrays(distance_arrays, conditions, 
+                         grouping_type=&#39;intersection&#39;):
+    &#34;&#34;&#34;
+    Determines whether or not a set of points fulfils the given conditions.
+    
+    
+    Parameters
+    ----------
+    distance_arrays: list
+        List of structured numpy arrays containing distances from deposit 
+        locations and random locations from features under investigation.
+        
+    conditions: list
+        A list of lists. Each sub list is to contain two elements:
+            1. &#34;range&#34; to use, e.g. &#39;less than&#39;, &#39;greater than&#39;
+            2. Threshold value to compare to.
+            
+    grouping_type: string
+        Either &#39;intersection&#39; or &#39;union&#39;. If &#39;intersection&#39;, all criteria must
+        be fulfilled. If &#39;union&#39;, any criterion must be fulfilled.
+        
+        
+    Returns
+    -------
+    truth1: numpy array
+        Array of truth values representing whether or not deposit locations 
+        fulfil the criteria.
+        
+    truth2: numpy array
+        Array of truth values representing whether or not random locations 
+        fulfil the criteria.
+    
+    
+    &#34;&#34;&#34;
+    list1 = list()
+    list2 = list()
+    for i in range(len(distance_arrays)):
+        condition = conditions[i]
+        thr = condition[1]
+        rng = condition[0]
+        distance_array = distance_arrays[i]
+        distances = distance_array[&#39;distance&#39;]
+        distances_random = distance_array[&#39;distance_random&#39;]
+        if rng == &#39;less than&#39;:
+            list1.append(distances &lt; thr)
+            list2.append(distances_random &lt; thr)
+        elif rng == &#39;greater than&#39;:
+            list1.append(distances &gt; thr)
+            list2.append(distances_random &gt; thr)
+        #end if
+    #end for
+    if grouping_type == &#39;union&#39;:
+        truth1 = np.any(list1, axis=0)
+        truth2 = np.any(list2, axis=0)
+    elif grouping_type == &#39;intersection&#39;:
+        truth1 = np.all(list1, axis=0)
+        truth2 = np.all(list2, axis=0)
+    #end if
+    return truth1, truth2
+#end func
+
+def compute_parameters_for_p_test(real, random, n_points):
+    &#34;&#34;&#34;
+    Computes parameters for the Poisson p test.
+    
+    
+    Parameters
+    ----------
+    real: numpy array
+        2D rray of truth values representing whether or not a deposit location
+        satisfies all criteria, for each depth.
+        
+    random: numpy array
+        3D Array of truth values representing whether or not a random location
+        satisfies all criteria, for each repeat, for each depth.
+        
+    n_points: integer
+        The number of deposit locationsused.
+        
+        
+    Returns
+    -------
+    xvals: numpy array
+        1D array, containing the proportion of points at each depth which 
+        satisfied all criteria.
+        
+    rvals: numpy array
+        2D array, containing the proportion of points for each repeat and for
+        each depth which satisfied all criteria.
+        
+    mvals: numpy array
+        1D array containing the mean value of rvals at each depth.
+        
+    svals: numpy array
+        1D array containing the standard deviation of rvals at each depth.
+    
+    
+    &#34;&#34;&#34;
+    xvals = np.sum(real, axis=1)/n_points
+    rvals = np.sum(random, axis=2)/n_points
+    mvals = np.mean(rvals, axis=1)
+    svals = np.std(rvals, axis=1)
+    return xvals, mvals, svals, rvals
+#end func
+    
+def compute_cdf(distance_array, cdf_array):
+    &#34;&#34;&#34;
+    Computes the cumulative distribution function for the distances from 
+    deposit locations and random locations to a feature.
+    
+    
+    Parameters
+    ----------
+    distance_array: numpy array
+        Structured array containing the distances from deposits and random 
+        locations to the feature.
+        
+    cdf_array: numpy array
+        Structured array to enter the CDF into.
+        
+        
+    Returns
+    -------
+    cdf_array: numpy array
+        Structured array to with CDF entered into it.
+        
+    
+    &#34;&#34;&#34;
+    distances = distance_array[&#39;distance&#39;]
+    distance_random = distance_array[&#39;distance_random&#39;]
+    
+    for i in range(distances.shape[0]):
+        
+        hist_kwargs = dict(cumulative=True, bins=cdf_array[&#39;bins&#39;][i], 
+                           histtype=&#39;step&#39;, density=False)
+        rhist_kwargs = dict(cumulative=True, bins=cdf_array[&#39;bins&#39;][i], 
+                            histtype=&#39;step&#39;, density=False)
+  
+        if not np.all(distances[i] == 0):
+            cdf_array[&#39;cdf&#39;][i], _, _= \
+                plt.hist(distances[i], **hist_kwargs)
+        #end if
+
+        for j in range(distance_random.shape[1]):
+            cdf_array[&#39;cdf_random&#39;][i, j], _, _ = \
+                plt.hist(distance_random[i, j], **rhist_kwargs)
+        #end if
+    #end for
+    plt.close()
+    return cdf_array
+#end func
+
+def compute_normed_cdf(cdf_array, n_deposits, correlation):
+    &#34;&#34;&#34;
+    Computes a normed cumulative distribution function from an already existing
+    CDF, and computes the maximum distance (d value) between the CDFs for real 
+    deposit locations and random locations.
+    
+    
+    Parameters
+    ----------
+    cdf_array: numpy array
+        Structured array containing the CDF.
+        
+    n_deposits: integer
+        Number of deposits used.
+        
+    correlation: string
+        Either &#39;Positive&#39;, &#39;Negative&#39;, or &#39;Neutral&#39; to describe whether we want
+        the d value for a positive or negative correlation, or any.
+        
+    
+    Returns
+    -------
+    cdf_normed: numpy array
+        2D array containing the normed CDF for real deposits at each depth.
+    
+    cdf_random_normed: numpy array
+        2D array containing the mean of the normed CDF for random locations for 
+        each repeat at each depth.
+    
+    cdf_random_std: numpy array
+        2D array containing the standard deviation for cdf_random_normed at 
+        each depth.
+    
+    dvalues: numpy array
+        The difference between cdf_normed and cdf_random_normed at each depth.
+    
+    dmax: numpy array
+        The maximum value of dvalues at each depth.
+    
+    
+    &#34;&#34;&#34;
+
+    cdf_normed = cdf_array[&#39;cdf&#39;]/n_deposits
+    cdf_random_normed = np.mean(cdf_array[&#39;cdf_random&#39;], axis=1)/n_deposits
+    cdf_random_std = np.std(cdf_array[&#39;cdf_random&#39;], axis=1)/n_deposits        
+
+    if correlation == &#39;Positive&#39;:
+        dvalues = cdf_normed - cdf_random_normed
+    elif correlation == &#39;Negative&#39;:
+        dvalues = cdf_random_normed - cdf_normed
+    elif correlation == &#39;Neutral&#39;:
+        dvalues = np.abs(cdf_normed - cdf_random_normed)
+    #end if
+
+    dmax = np.nanmax(dvalues, axis=1)
+    return cdf_normed, cdf_random_normed, cdf_random_std, dvalues, dmax
+#end func 
+    
+def compute_normed_pdf(cdf_array, n_deposits):
+    &#34;&#34;&#34;
+    Computes a normed probability density function from an already existing 
+    PDF, for real deposit locations and random locations.
+    
+    
+    Parameters
+    ----------
+    cdf_array: numpy array
+        Structured array containing the PDF.
+        
+    n_deposits: integer
+        Number of deposits used.
+        
+    
+    Returns
+    -------
+    pdf_normed: numpy array
+        2D array containing the normed PDF for real deposits at each depth.
+    
+    pdf_random_normed: numpy array
+        2D array containing the mean of the normed PDF for random locations for 
+        each repeat at each depth.
+    
+    pdf_random_std: numpy array
+        2D array containing the standard deviation for pdf_random_normed at 
+        each depth.
+    
+    
+    &#34;&#34;&#34;
+
+    pdf_normed = cdf_array[&#39;pdf&#39;]/n_deposits
+    pdf_random_normed = np.mean(cdf_array[&#39;pdf_random&#39;], axis=1)/n_deposits
+    pdf_random_std = np.std(cdf_array[&#39;pdf_random&#39;], axis=1)/n_deposits        
+
+    return pdf_normed, pdf_random_normed, pdf_random_std
+#end func 
+    
+def compute_pdf(distance_array, cdf_array):
+    &#34;&#34;&#34;
+    Computes the probability density function for the distances from deposit 
+    locations and random locations to a feature.
+    
+    
+    Parameters
+    ----------
+    distance_array: numpy array
+        Structured array containing the distances from deposits and random 
+        locations to the feature.
+        
+    cdf_array: numpy array
+        Structured array to enter the PDF into.
+        
+        
+    Returns
+    -------
+    cdf_array: numpy array
+        Structured array to with CDF entered into it.
+        
+    
+    &#34;&#34;&#34;
+    distances = distance_array[&#39;distance&#39;]
+    distance_random = distance_array[&#39;distance_random&#39;]
+    
+    for i in range(distances.shape[0]):
+        
+        hist_kwargs = dict(cumulative=False, bins=cdf_array[&#39;bins&#39;][i], 
+                           histtype=&#39;step&#39;, density=False)
+        rhist_kwargs = dict(cumulative=False, bins=cdf_array[&#39;bins&#39;][i], 
+                            histtype=&#39;step&#39;, density=False)
+  
+        if not np.all(distances[i] == 0):
+            cdf_array[&#39;pdf&#39;][i], _, _= \
+                plt.hist(distances[i], **hist_kwargs)
+        #end if
+
+        for j in range(distance_random.shape[1]):
+            cdf_array[&#39;pdf_random&#39;][i, j], _, _ = \
+                plt.hist(distance_random[i, j], **rhist_kwargs)
+        #end if
+    #end for
+    plt.close()
+    return cdf_array
+#end func
+
+def initialise_bins(binsize, distance_array):
+    &#34;&#34;&#34;
+    Takes a distance array and computes the bins needed for a histogram, to 
+    compute the PDF and CDF for the distances.
+    
+    
+    Parameters
+    ----------
+    binsize: float
+        Width of bin in histogram.
+        
+    distance_array: numpy array
+        Structured array containing distance to feature information.
+        
+        
+    Returns
+    -------
+    bins: numpy array
+        The values at the edges of each bin. Will have length nbins + 1.
+        
+    binc: numpy array
+        The value at the centre of each bin. Will have length nbins.
+        
+    
+    &#34;&#34;&#34;
+    if binsize is None:
+        binsize = 2e3
+    #end if
+    min_random = distance_array[&#39;distance_random&#39;].min()
+    min_real =distance_array[&#39;distance&#39;].min()
+    max_random = distance_array[&#39;distance_random&#39;].max()
+    max_real = distance_array[&#39;distance&#39;].max()
+    min_val = min(min_random, min_real)
+    max_val = max(max_random, max_real)
+    bins = np.arange((np.floor(min_val/binsize)-1.0), 
+                     (np.ceil(max_val/binsize)+1.0),
+                     1.0)*binsize
+    binc = np.mean([bins[:-1], bins[1:]],axis=0) 
+    return bins, binc    
+#end func
+    
+def initialise_cdf_array(distance_array, binsize):
+    &#34;&#34;&#34;
+    Creates a structured array to store computed CDFs and PDFs.
+    
+    
+    Parameters
+    ----------
+    distance_array: numpy array
+        Structured array containing distance to feature information.
+        
+    binsize: float
+        Width of bin in histogram.
+        
+        
+    Returns
+    -------
+    array: numpy array
+        Structured array designed to contain CDF and PDF information.
+        
+    n_deposits: integer
+        Number of deposits used for analysis.
+        
+    
+    Calls
+    -----
+    initialise_bins
+    
+    
+    &#34;&#34;&#34;
+    
+    bins, binc = initialise_bins(binsize, distance_array)
+    # initialise an array to contain cdf
+    n_bins = binc.shape[0]
+    n_repeats = distance_array[&#39;distance_random&#39;].shape[1]
+    array = np.zeros(len(distance_array[&#39;distance&#39;]),
+                     dtype=[(&#39;depth&#39;, np.float), 
+                            (&#39;binc&#39;, np.float, binc.shape),
+                            (&#39;bins&#39;, np.float, bins.shape),
+                            (&#39;cdf_random&#39;, np.float, (n_repeats, n_bins)),
+                            (&#39;cdf&#39;, np.float, binc.shape),
+                            (&#39;pdf_random&#39;, np.float, (n_repeats, n_bins)),
+                            (&#39;pdf&#39;, np.float, binc.shape)])
+    array[&#39;depth&#39;] = distance_array[&#39;depth&#39;]
+    for i in range(distance_array[&#39;distance&#39;].shape[0]):
+        array[&#39;bins&#39;][i] = bins
+        array[&#39;binc&#39;][i] = binc
+    #end for
+    n_deposits = distance_array[&#39;distance&#39;].shape[1]
+    return array, n_deposits
+#end func
+    
+def Poisson_test(x, m, n_points):
+    &#34;&#34;&#34;
+    Performs a test to determine the probability of a given result occurring
+    if the Poisson distribution is followed.
+    
+    
+    Parameters
+    ----------
+    x: numpy array
+        1D array containing the observed number of points which fulfilled a set
+        of criteria at each depth.
+        
+    m: numpy array
+        1D array containing the observed number of random locations which 
+        fulfilled the same set of criteria as x at each depth.
+        
+    n_points: integer
+        The number of points used.
+        
+    
+    Returns
+    -------
+    pvals: numpy array
+        1D array containing the probability that &#39;x&#39; could occur with mean &#39;m&#39; 
+        for each depth.
+        
+        
+    Calls
+    -----
+    functions.Poisson
+    
+    
+    &#34;&#34;&#34;
+    pvals = list()
+    for i in range(len(x)):
+        p = fn.Poisson(x[i]*n_points, m[i]*n_points)
+        pvals.append(p)
+    #end func
+    return np.array(pvals)
+#end func
+    
+def Binomial_test(x, m, n_points):
+    &#34;&#34;&#34;
+    Performs a test to determine the probability of a given result occurring
+    if the Binomial distribution is followed.
+    
+    
+    Parameters
+    ----------
+    x: numpy array
+        1D array containing the observed number of points which fulfilled a set
+        of criteria at each depth.
+        
+    m: numpy array
+        1D array containing the observed number of random locations which 
+        fulfilled the same set of criteria as x at each depth.
+        
+    n_points: integer
+        The number of points used.
+        
+    
+    Returns
+    -------
+    pvals: numpy array
+        1D array containing the probability that &#39;x&#39; could occur with mean &#39;m&#39; 
+        for each depth.
+        
+        
+    Calls
+    -----
+    functions.binomial
+    
+    
+    &#34;&#34;&#34;
+    pvals = list()
+    for i in range(len(x)):
+        p = fn.binomial(x[i]*n_points, m[i]*n_points, n_points)
+        pvals.append(p)
+    #end func
+    return np.array(pvals)
+#end func
+    
+def make_distance_array(feature, point_data, n_repeats, points_random=None, 
+                        RPManager=None):
+    &#34;&#34;&#34;
+    Make and populate an array to contain distances to contour.
+    
+    
+    Parameters
+    ----------
+    point_data_xy : array
+        Array of projected coordinates of deposit locations for which distances 
+        are to be computed.
+    
+    gcz : array
+        Array of depth values for which geophysical model was created.
+    
+    n_repeats : int
+        Number of repeats of the analysis to perform for random points.
+        
+    
+    Returns
+    -------
+    distance_array : array
+        Structured array to contain distance-to-contour data.
+    
+        
+    &#34;&#34;&#34;
+    
+    # initialise structured array to contain distance-to-contour data  
+    gcz = feature.gcz
+    n_points = len(point_data)
+    distance_array = np.array(np.zeros(len(gcz)),
+                              dtype=[(&#39;depth&#39;, np.float),
+                                     (&#39;lon&#39;,np.float, n_points),
+                                     (&#39;lat&#39;,np.float, n_points),
+                                     (&#39;distance_random&#39;, np.float, \
+                                      (n_repeats, n_points)),
+                                     (&#39;distance&#39;, np.float, n_points)])
+    distance_array[&#39;depth&#39;] = gcz
+    distance_array[&#39;lon&#39;] = point_data[:,0]
+    distance_array[&#39;lat&#39;] = point_data[:,1]
+    if points_random is None:
+        points_random = RPManager.seed_random_points(n_repeats=n_repeats)
+    #end if
+    if len(gcz) == 1:
+        distance_array[&#39;distance&#39;][0] = \
+            feature.fun((point_data[:,0], point_data[:,1]))
+        distance_array[&#39;distance_random&#39;][0] = \
+            feature.fun((points_random[:,:,0], points_random[:,:,1]))
+    else:
+        for i in range(len(gcz)):
+            distance_array[&#39;distance&#39;][i] = \
+                feature.fun((point_data[:,0], point_data[:,1], 
+                             gcz[i]*np.ones_like(point_data[:,0])))
+            distance_array[&#39;distance_random&#39;][i] = \
+                feature.fun((points_random[:,:,0], points_random[:,:,1], 
+                             gcz[i]*np.ones_like(points_random[:,:,0])))
+        #end for
+    #end if
+    return distance_array
+#end func</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="toolkit.stat_corr.Binomial_test"><code class="name flex">
+<span>def <span class="ident">Binomial_test</span></span>(<span>x, m, n_points)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs a test to determine the probability of a given result occurring
+if the Binomial distribution is followed.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the observed number of points which fulfilled a set
+of criteria at each depth.</dd>
+<dt><strong><code>m</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the observed number of random locations which
+fulfilled the same set of criteria as x at each depth.</dd>
+<dt><strong><code>n_points</code></strong> :&ensp;<code>integer</code></dt>
+<dd>The number of points used.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>pvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the probability that 'x' could occur with mean 'm'
+for each depth.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.binomial</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Binomial_test(x, m, n_points):
+    &#34;&#34;&#34;
+    Performs a test to determine the probability of a given result occurring
+    if the Binomial distribution is followed.
+    
+    
+    Parameters
+    ----------
+    x: numpy array
+        1D array containing the observed number of points which fulfilled a set
+        of criteria at each depth.
+        
+    m: numpy array
+        1D array containing the observed number of random locations which 
+        fulfilled the same set of criteria as x at each depth.
+        
+    n_points: integer
+        The number of points used.
+        
+    
+    Returns
+    -------
+    pvals: numpy array
+        1D array containing the probability that &#39;x&#39; could occur with mean &#39;m&#39; 
+        for each depth.
+        
+        
+    Calls
+    -----
+    functions.binomial
+    
+    
+    &#34;&#34;&#34;
+    pvals = list()
+    for i in range(len(x)):
+        p = fn.binomial(x[i]*n_points, m[i]*n_points, n_points)
+        pvals.append(p)
+    #end func
+    return np.array(pvals)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Poisson_test"><code class="name flex">
+<span>def <span class="ident">Poisson_test</span></span>(<span>x, m, n_points)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs a test to determine the probability of a given result occurring
+if the Poisson distribution is followed.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>x</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the observed number of points which fulfilled a set
+of criteria at each depth.</dd>
+<dt><strong><code>m</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the observed number of random locations which
+fulfilled the same set of criteria as x at each depth.</dd>
+<dt><strong><code>n_points</code></strong> :&ensp;<code>integer</code></dt>
+<dd>The number of points used.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>pvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the probability that 'x' could occur with mean 'm'
+for each depth.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.Poisson</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Poisson_test(x, m, n_points):
+    &#34;&#34;&#34;
+    Performs a test to determine the probability of a given result occurring
+    if the Poisson distribution is followed.
+    
+    
+    Parameters
+    ----------
+    x: numpy array
+        1D array containing the observed number of points which fulfilled a set
+        of criteria at each depth.
+        
+    m: numpy array
+        1D array containing the observed number of random locations which 
+        fulfilled the same set of criteria as x at each depth.
+        
+    n_points: integer
+        The number of points used.
+        
+    
+    Returns
+    -------
+    pvals: numpy array
+        1D array containing the probability that &#39;x&#39; could occur with mean &#39;m&#39; 
+        for each depth.
+        
+        
+    Calls
+    -----
+    functions.Poisson
+    
+    
+    &#34;&#34;&#34;
+    pvals = list()
+    for i in range(len(x)):
+        p = fn.Poisson(x[i]*n_points, m[i]*n_points)
+        pvals.append(p)
+    #end func
+    return np.array(pvals)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.chi_squared_test"><code class="name flex">
+<span>def <span class="ident">chi_squared_test</span></span>(<span>rvals, n_points, distribution)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs the chi squared test to determine whether or not a data set
+follows a given distribution.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>rvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array with dimensions (n_depths, n_repeats) representing the
+proportions of points which fulfil the criteria of the statistical
+test.</dd>
+<dt><strong><code>n_points</code></strong> :&ensp;<code>integer</code></dt>
+<dd>The number of deposit locations used.</dd>
+<dt><strong><code>distribution</code></strong> :&ensp;<code>string</code></dt>
+<dd>Flag representing which distribution to test the data against.
+Supported values are 'Poisson' and 'Binomial'.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>tvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D numpy array representing the test statistic values calculated for
+each depth.</dd>
+<dt><strong><code>pvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D numpy array representing the p values at each depth.</dd>
+<dt><strong><code>kvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D numpy array representing degrees of freedom at each depth.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.Poisson</p>
+<p>functions.binomial</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def chi_squared_test(rvals, n_points, distribution):
+    &#34;&#34;&#34;
+    Performs the chi squared test to determine whether or not a data set
+    follows a given distribution.
+    
+    
+    Parameters
+    ----------
+    rvals: numpy array
+        2D array with dimensions (n_depths, n_repeats) representing the 
+        proportions of points which fulfil the criteria of the statistical 
+        test.
+        
+    n_points: integer
+        The number of deposit locations used.
+        
+    distribution: string
+        Flag representing which distribution to test the data against. 
+        Supported values are &#39;Poisson&#39; and &#39;Binomial&#39;.
+        
+        
+    Returns
+    -------
+    tvals: numpy array
+        1D numpy array representing the test statistic values calculated for
+        each depth.
+        
+    pvals: numpy array
+        1D numpy array representing the p values at each depth.
+        
+    kvals: numpy array
+        1D numpy array representing degrees of freedom at each depth.
+        
+        
+    Calls
+    -----
+    functions.Poisson
+    
+    functions.binomial
+    
+    
+   &#34;&#34;&#34;
+    tvals = list()
+    pvals = list()
+    kvals = list()
+    for i in range(len(rvals)):
+        r = rvals[i]*n_points
+        freqs, binedges = np.histogram(r, bins=n_points+1, 
+                                       range=(0, n_points+1))
+        x = binedges[:-1]
+        m = np.mean(r)
+        if distribution == &#39;Poisson&#39;:
+            y = fn.Poisson(x, m)*len(r)
+        elif distribution == &#39;Binomial&#39;:
+            y = fn.binomial(x, m, n_points)*len(r)
+        #end if
+        #Maybe make smallest allowable expectation value an input?
+        #maxind = np.max(np.where(y &gt;= np.max([5, 0.01*len(r)]))[0])
+        bins = np.where(y &gt;= 5)[0]
+        minind = np.min(bins)
+        maxind = np.max(bins)
+        #DoF = Number of bins minus 1, minus 1 because of assumed mean
+        if len(bins) &gt; 2:
+            k = len(bins) - 2
+            freqs = freqs[minind:maxind]
+            y = y[minind:maxind]
+            O = np.hstack([freqs, np.array([len(r) - np.sum(freqs)])])
+            E = np.hstack([y, np.array([len(r) - np.sum(y)])])
+            chi2 = np.sum((O-E)**2/E)
+            p = 1 - gammainc(k/2, chi2/2)
+            tvals.append(chi2)
+            pvals.append(p)
+            kvals.append(k)
+        else:
+            tvals.append(np.nan)
+            pvals.append(np.nan)
+            kvals.append(np.nan)
+        #end if
+    #end for
+    return np.array(tvals), np.array(pvals), np.array(kvals)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.compute_cdf"><code class="name flex">
+<span>def <span class="ident">compute_cdf</span></span>(<span>distance_array, cdf_array)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the cumulative distribution function for the distances from
+deposit locations and random locations to a feature.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>distance_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array containing the distances from deposits and random
+locations to the feature.</dd>
+<dt><strong><code>cdf_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array to enter the CDF into.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>cdf_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array to with CDF entered into it.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_cdf(distance_array, cdf_array):
+    &#34;&#34;&#34;
+    Computes the cumulative distribution function for the distances from 
+    deposit locations and random locations to a feature.
+    
+    
+    Parameters
+    ----------
+    distance_array: numpy array
+        Structured array containing the distances from deposits and random 
+        locations to the feature.
+        
+    cdf_array: numpy array
+        Structured array to enter the CDF into.
+        
+        
+    Returns
+    -------
+    cdf_array: numpy array
+        Structured array to with CDF entered into it.
+        
+    
+    &#34;&#34;&#34;
+    distances = distance_array[&#39;distance&#39;]
+    distance_random = distance_array[&#39;distance_random&#39;]
+    
+    for i in range(distances.shape[0]):
+        
+        hist_kwargs = dict(cumulative=True, bins=cdf_array[&#39;bins&#39;][i], 
+                           histtype=&#39;step&#39;, density=False)
+        rhist_kwargs = dict(cumulative=True, bins=cdf_array[&#39;bins&#39;][i], 
+                            histtype=&#39;step&#39;, density=False)
+  
+        if not np.all(distances[i] == 0):
+            cdf_array[&#39;cdf&#39;][i], _, _= \
+                plt.hist(distances[i], **hist_kwargs)
+        #end if
+
+        for j in range(distance_random.shape[1]):
+            cdf_array[&#39;cdf_random&#39;][i, j], _, _ = \
+                plt.hist(distance_random[i, j], **rhist_kwargs)
+        #end if
+    #end for
+    plt.close()
+    return cdf_array</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.compute_normed_cdf"><code class="name flex">
+<span>def <span class="ident">compute_normed_cdf</span></span>(<span>cdf_array, n_deposits, correlation)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes a normed cumulative distribution function from an already existing
+CDF, and computes the maximum distance (d value) between the CDFs for real
+deposit locations and random locations.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>cdf_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array containing the CDF.</dd>
+<dt><strong><code>n_deposits</code></strong> :&ensp;<code>integer</code></dt>
+<dd>Number of deposits used.</dd>
+<dt><strong><code>correlation</code></strong> :&ensp;<code>string</code></dt>
+<dd>Either 'Positive', 'Negative', or 'Neutral' to describe whether we want
+the d value for a positive or negative correlation, or any.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>cdf_normed</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array containing the normed CDF for real deposits at each depth.</dd>
+<dt><strong><code>cdf_random_normed</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array containing the mean of the normed CDF for random locations for
+each repeat at each depth.</dd>
+<dt><strong><code>cdf_random_std</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array containing the standard deviation for cdf_random_normed at
+each depth.</dd>
+<dt><strong><code>dvalues</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>The difference between cdf_normed and cdf_random_normed at each depth.</dd>
+<dt><strong><code>dmax</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>The maximum value of dvalues at each depth.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_normed_cdf(cdf_array, n_deposits, correlation):
+    &#34;&#34;&#34;
+    Computes a normed cumulative distribution function from an already existing
+    CDF, and computes the maximum distance (d value) between the CDFs for real 
+    deposit locations and random locations.
+    
+    
+    Parameters
+    ----------
+    cdf_array: numpy array
+        Structured array containing the CDF.
+        
+    n_deposits: integer
+        Number of deposits used.
+        
+    correlation: string
+        Either &#39;Positive&#39;, &#39;Negative&#39;, or &#39;Neutral&#39; to describe whether we want
+        the d value for a positive or negative correlation, or any.
+        
+    
+    Returns
+    -------
+    cdf_normed: numpy array
+        2D array containing the normed CDF for real deposits at each depth.
+    
+    cdf_random_normed: numpy array
+        2D array containing the mean of the normed CDF for random locations for 
+        each repeat at each depth.
+    
+    cdf_random_std: numpy array
+        2D array containing the standard deviation for cdf_random_normed at 
+        each depth.
+    
+    dvalues: numpy array
+        The difference between cdf_normed and cdf_random_normed at each depth.
+    
+    dmax: numpy array
+        The maximum value of dvalues at each depth.
+    
+    
+    &#34;&#34;&#34;
+
+    cdf_normed = cdf_array[&#39;cdf&#39;]/n_deposits
+    cdf_random_normed = np.mean(cdf_array[&#39;cdf_random&#39;], axis=1)/n_deposits
+    cdf_random_std = np.std(cdf_array[&#39;cdf_random&#39;], axis=1)/n_deposits        
+
+    if correlation == &#39;Positive&#39;:
+        dvalues = cdf_normed - cdf_random_normed
+    elif correlation == &#39;Negative&#39;:
+        dvalues = cdf_random_normed - cdf_normed
+    elif correlation == &#39;Neutral&#39;:
+        dvalues = np.abs(cdf_normed - cdf_random_normed)
+    #end if
+
+    dmax = np.nanmax(dvalues, axis=1)
+    return cdf_normed, cdf_random_normed, cdf_random_std, dvalues, dmax</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.compute_normed_pdf"><code class="name flex">
+<span>def <span class="ident">compute_normed_pdf</span></span>(<span>cdf_array, n_deposits)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes a normed probability density function from an already existing
+PDF, for real deposit locations and random locations.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>cdf_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array containing the PDF.</dd>
+<dt><strong><code>n_deposits</code></strong> :&ensp;<code>integer</code></dt>
+<dd>Number of deposits used.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>pdf_normed</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array containing the normed PDF for real deposits at each depth.</dd>
+<dt><strong><code>pdf_random_normed</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array containing the mean of the normed PDF for random locations for
+each repeat at each depth.</dd>
+<dt><strong><code>pdf_random_std</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array containing the standard deviation for pdf_random_normed at
+each depth.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_normed_pdf(cdf_array, n_deposits):
+    &#34;&#34;&#34;
+    Computes a normed probability density function from an already existing 
+    PDF, for real deposit locations and random locations.
+    
+    
+    Parameters
+    ----------
+    cdf_array: numpy array
+        Structured array containing the PDF.
+        
+    n_deposits: integer
+        Number of deposits used.
+        
+    
+    Returns
+    -------
+    pdf_normed: numpy array
+        2D array containing the normed PDF for real deposits at each depth.
+    
+    pdf_random_normed: numpy array
+        2D array containing the mean of the normed PDF for random locations for 
+        each repeat at each depth.
+    
+    pdf_random_std: numpy array
+        2D array containing the standard deviation for pdf_random_normed at 
+        each depth.
+    
+    
+    &#34;&#34;&#34;
+
+    pdf_normed = cdf_array[&#39;pdf&#39;]/n_deposits
+    pdf_random_normed = np.mean(cdf_array[&#39;pdf_random&#39;], axis=1)/n_deposits
+    pdf_random_std = np.std(cdf_array[&#39;pdf_random&#39;], axis=1)/n_deposits        
+
+    return pdf_normed, pdf_random_normed, pdf_random_std</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.compute_parameters_for_p_test"><code class="name flex">
+<span>def <span class="ident">compute_parameters_for_p_test</span></span>(<span>real, random, n_points)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes parameters for the Poisson p test.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>real</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D rray of truth values representing whether or not a deposit location
+satisfies all criteria, for each depth.</dd>
+<dt><strong><code>random</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>3D Array of truth values representing whether or not a random location
+satisfies all criteria, for each repeat, for each depth.</dd>
+<dt><strong><code>n_points</code></strong> :&ensp;<code>integer</code></dt>
+<dd>The number of deposit locationsused.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>xvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array, containing the proportion of points at each depth which
+satisfied all criteria.</dd>
+<dt><strong><code>rvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>2D array, containing the proportion of points for each repeat and for
+each depth which satisfied all criteria.</dd>
+<dt><strong><code>mvals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the mean value of rvals at each depth.</dd>
+<dt><strong><code>svals</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>1D array containing the standard deviation of rvals at each depth.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_parameters_for_p_test(real, random, n_points):
+    &#34;&#34;&#34;
+    Computes parameters for the Poisson p test.
+    
+    
+    Parameters
+    ----------
+    real: numpy array
+        2D rray of truth values representing whether or not a deposit location
+        satisfies all criteria, for each depth.
+        
+    random: numpy array
+        3D Array of truth values representing whether or not a random location
+        satisfies all criteria, for each repeat, for each depth.
+        
+    n_points: integer
+        The number of deposit locationsused.
+        
+        
+    Returns
+    -------
+    xvals: numpy array
+        1D array, containing the proportion of points at each depth which 
+        satisfied all criteria.
+        
+    rvals: numpy array
+        2D array, containing the proportion of points for each repeat and for
+        each depth which satisfied all criteria.
+        
+    mvals: numpy array
+        1D array containing the mean value of rvals at each depth.
+        
+    svals: numpy array
+        1D array containing the standard deviation of rvals at each depth.
+    
+    
+    &#34;&#34;&#34;
+    xvals = np.sum(real, axis=1)/n_points
+    rvals = np.sum(random, axis=2)/n_points
+    mvals = np.mean(rvals, axis=1)
+    svals = np.std(rvals, axis=1)
+    return xvals, mvals, svals, rvals</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.compute_pdf"><code class="name flex">
+<span>def <span class="ident">compute_pdf</span></span>(<span>distance_array, cdf_array)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the probability density function for the distances from deposit
+locations and random locations to a feature.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>distance_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array containing the distances from deposits and random
+locations to the feature.</dd>
+<dt><strong><code>cdf_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array to enter the PDF into.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>cdf_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array to with CDF entered into it.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_pdf(distance_array, cdf_array):
+    &#34;&#34;&#34;
+    Computes the probability density function for the distances from deposit 
+    locations and random locations to a feature.
+    
+    
+    Parameters
+    ----------
+    distance_array: numpy array
+        Structured array containing the distances from deposits and random 
+        locations to the feature.
+        
+    cdf_array: numpy array
+        Structured array to enter the PDF into.
+        
+        
+    Returns
+    -------
+    cdf_array: numpy array
+        Structured array to with CDF entered into it.
+        
+    
+    &#34;&#34;&#34;
+    distances = distance_array[&#39;distance&#39;]
+    distance_random = distance_array[&#39;distance_random&#39;]
+    
+    for i in range(distances.shape[0]):
+        
+        hist_kwargs = dict(cumulative=False, bins=cdf_array[&#39;bins&#39;][i], 
+                           histtype=&#39;step&#39;, density=False)
+        rhist_kwargs = dict(cumulative=False, bins=cdf_array[&#39;bins&#39;][i], 
+                            histtype=&#39;step&#39;, density=False)
+  
+        if not np.all(distances[i] == 0):
+            cdf_array[&#39;pdf&#39;][i], _, _= \
+                plt.hist(distances[i], **hist_kwargs)
+        #end if
+
+        for j in range(distance_random.shape[1]):
+            cdf_array[&#39;pdf_random&#39;][i, j], _, _ = \
+                plt.hist(distance_random[i, j], **rhist_kwargs)
+        #end if
+    #end for
+    plt.close()
+    return cdf_array</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.compute_truth_arrays"><code class="name flex">
+<span>def <span class="ident">compute_truth_arrays</span></span>(<span>distance_arrays, conditions, grouping_type='intersection')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Determines whether or not a set of points fulfils the given conditions.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>distance_arrays</code></strong> :&ensp;<code>list</code></dt>
+<dd>List of structured numpy arrays containing distances from deposit
+locations and random locations from features under investigation.</dd>
+<dt><strong><code>conditions</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of lists. Each sub list is to contain two elements:
+1. "range" to use, e.g. 'less than', 'greater than'
+2. Threshold value to compare to.</dd>
+<dt><strong><code>grouping_type</code></strong> :&ensp;<code>string</code></dt>
+<dd>Either 'intersection' or 'union'. If 'intersection', all criteria must
+be fulfilled. If 'union', any criterion must be fulfilled.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>truth1</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Array of truth values representing whether or not deposit locations
+fulfil the criteria.</dd>
+<dt><strong><code>truth2</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Array of truth values representing whether or not random locations
+fulfil the criteria.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_truth_arrays(distance_arrays, conditions, 
+                         grouping_type=&#39;intersection&#39;):
+    &#34;&#34;&#34;
+    Determines whether or not a set of points fulfils the given conditions.
+    
+    
+    Parameters
+    ----------
+    distance_arrays: list
+        List of structured numpy arrays containing distances from deposit 
+        locations and random locations from features under investigation.
+        
+    conditions: list
+        A list of lists. Each sub list is to contain two elements:
+            1. &#34;range&#34; to use, e.g. &#39;less than&#39;, &#39;greater than&#39;
+            2. Threshold value to compare to.
+            
+    grouping_type: string
+        Either &#39;intersection&#39; or &#39;union&#39;. If &#39;intersection&#39;, all criteria must
+        be fulfilled. If &#39;union&#39;, any criterion must be fulfilled.
+        
+        
+    Returns
+    -------
+    truth1: numpy array
+        Array of truth values representing whether or not deposit locations 
+        fulfil the criteria.
+        
+    truth2: numpy array
+        Array of truth values representing whether or not random locations 
+        fulfil the criteria.
+    
+    
+    &#34;&#34;&#34;
+    list1 = list()
+    list2 = list()
+    for i in range(len(distance_arrays)):
+        condition = conditions[i]
+        thr = condition[1]
+        rng = condition[0]
+        distance_array = distance_arrays[i]
+        distances = distance_array[&#39;distance&#39;]
+        distances_random = distance_array[&#39;distance_random&#39;]
+        if rng == &#39;less than&#39;:
+            list1.append(distances &lt; thr)
+            list2.append(distances_random &lt; thr)
+        elif rng == &#39;greater than&#39;:
+            list1.append(distances &gt; thr)
+            list2.append(distances_random &gt; thr)
+        #end if
+    #end for
+    if grouping_type == &#39;union&#39;:
+        truth1 = np.any(list1, axis=0)
+        truth2 = np.any(list2, axis=0)
+    elif grouping_type == &#39;intersection&#39;:
+        truth1 = np.all(list1, axis=0)
+        truth2 = np.all(list2, axis=0)
+    #end if
+    return truth1, truth2</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.initialise_bins"><code class="name flex">
+<span>def <span class="ident">initialise_bins</span></span>(<span>binsize, distance_array)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Takes a distance array and computes the bins needed for a histogram, to
+compute the PDF and CDF for the distances.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>binsize</code></strong> :&ensp;<code>float</code></dt>
+<dd>Width of bin in histogram.</dd>
+<dt><strong><code>distance_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array containing distance to feature information.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>bins</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>The values at the edges of each bin. Will have length nbins + 1.</dd>
+<dt><strong><code>binc</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>The value at the centre of each bin. Will have length nbins.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialise_bins(binsize, distance_array):
+    &#34;&#34;&#34;
+    Takes a distance array and computes the bins needed for a histogram, to 
+    compute the PDF and CDF for the distances.
+    
+    
+    Parameters
+    ----------
+    binsize: float
+        Width of bin in histogram.
+        
+    distance_array: numpy array
+        Structured array containing distance to feature information.
+        
+        
+    Returns
+    -------
+    bins: numpy array
+        The values at the edges of each bin. Will have length nbins + 1.
+        
+    binc: numpy array
+        The value at the centre of each bin. Will have length nbins.
+        
+    
+    &#34;&#34;&#34;
+    if binsize is None:
+        binsize = 2e3
+    #end if
+    min_random = distance_array[&#39;distance_random&#39;].min()
+    min_real =distance_array[&#39;distance&#39;].min()
+    max_random = distance_array[&#39;distance_random&#39;].max()
+    max_real = distance_array[&#39;distance&#39;].max()
+    min_val = min(min_random, min_real)
+    max_val = max(max_random, max_real)
+    bins = np.arange((np.floor(min_val/binsize)-1.0), 
+                     (np.ceil(max_val/binsize)+1.0),
+                     1.0)*binsize
+    binc = np.mean([bins[:-1], bins[1:]],axis=0) 
+    return bins, binc    </code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.initialise_cdf_array"><code class="name flex">
+<span>def <span class="ident">initialise_cdf_array</span></span>(<span>distance_array, binsize)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a structured array to store computed CDFs and PDFs.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>distance_array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array containing distance to feature information.</dd>
+<dt><strong><code>binsize</code></strong> :&ensp;<code>float</code></dt>
+<dd>Width of bin in histogram.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>array</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Structured array designed to contain CDF and PDF information.</dd>
+<dt><strong><code>n_deposits</code></strong> :&ensp;<code>integer</code></dt>
+<dd>Number of deposits used for analysis.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>initialise_bins</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialise_cdf_array(distance_array, binsize):
+    &#34;&#34;&#34;
+    Creates a structured array to store computed CDFs and PDFs.
+    
+    
+    Parameters
+    ----------
+    distance_array: numpy array
+        Structured array containing distance to feature information.
+        
+    binsize: float
+        Width of bin in histogram.
+        
+        
+    Returns
+    -------
+    array: numpy array
+        Structured array designed to contain CDF and PDF information.
+        
+    n_deposits: integer
+        Number of deposits used for analysis.
+        
+    
+    Calls
+    -----
+    initialise_bins
+    
+    
+    &#34;&#34;&#34;
+    
+    bins, binc = initialise_bins(binsize, distance_array)
+    # initialise an array to contain cdf
+    n_bins = binc.shape[0]
+    n_repeats = distance_array[&#39;distance_random&#39;].shape[1]
+    array = np.zeros(len(distance_array[&#39;distance&#39;]),
+                     dtype=[(&#39;depth&#39;, np.float), 
+                            (&#39;binc&#39;, np.float, binc.shape),
+                            (&#39;bins&#39;, np.float, bins.shape),
+                            (&#39;cdf_random&#39;, np.float, (n_repeats, n_bins)),
+                            (&#39;cdf&#39;, np.float, binc.shape),
+                            (&#39;pdf_random&#39;, np.float, (n_repeats, n_bins)),
+                            (&#39;pdf&#39;, np.float, binc.shape)])
+    array[&#39;depth&#39;] = distance_array[&#39;depth&#39;]
+    for i in range(distance_array[&#39;distance&#39;].shape[0]):
+        array[&#39;bins&#39;][i] = bins
+        array[&#39;binc&#39;][i] = binc
+    #end for
+    n_deposits = distance_array[&#39;distance&#39;].shape[1]
+    return array, n_deposits</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.make_distance_array"><code class="name flex">
+<span>def <span class="ident">make_distance_array</span></span>(<span>feature, point_data, n_repeats, points_random=None, RPManager=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Make and populate an array to contain distances to contour.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>point_data_xy</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array of projected coordinates of deposit locations for which distances
+are to be computed.</dd>
+<dt><strong><code>gcz</code></strong> :&ensp;<code>array</code></dt>
+<dd>Array of depth values for which geophysical model was created.</dd>
+<dt><strong><code>n_repeats</code></strong> :&ensp;<code>int</code></dt>
+<dd>Number of repeats of the analysis to perform for random points.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><strong><code>distance_array</code></strong> :&ensp;<code>array</code></dt>
+<dd>Structured array to contain distance-to-contour data.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_distance_array(feature, point_data, n_repeats, points_random=None, 
+                        RPManager=None):
+    &#34;&#34;&#34;
+    Make and populate an array to contain distances to contour.
+    
+    
+    Parameters
+    ----------
+    point_data_xy : array
+        Array of projected coordinates of deposit locations for which distances 
+        are to be computed.
+    
+    gcz : array
+        Array of depth values for which geophysical model was created.
+    
+    n_repeats : int
+        Number of repeats of the analysis to perform for random points.
+        
+    
+    Returns
+    -------
+    distance_array : array
+        Structured array to contain distance-to-contour data.
+    
+        
+    &#34;&#34;&#34;
+    
+    # initialise structured array to contain distance-to-contour data  
+    gcz = feature.gcz
+    n_points = len(point_data)
+    distance_array = np.array(np.zeros(len(gcz)),
+                              dtype=[(&#39;depth&#39;, np.float),
+                                     (&#39;lon&#39;,np.float, n_points),
+                                     (&#39;lat&#39;,np.float, n_points),
+                                     (&#39;distance_random&#39;, np.float, \
+                                      (n_repeats, n_points)),
+                                     (&#39;distance&#39;, np.float, n_points)])
+    distance_array[&#39;depth&#39;] = gcz
+    distance_array[&#39;lon&#39;] = point_data[:,0]
+    distance_array[&#39;lat&#39;] = point_data[:,1]
+    if points_random is None:
+        points_random = RPManager.seed_random_points(n_repeats=n_repeats)
+    #end if
+    if len(gcz) == 1:
+        distance_array[&#39;distance&#39;][0] = \
+            feature.fun((point_data[:,0], point_data[:,1]))
+        distance_array[&#39;distance_random&#39;][0] = \
+            feature.fun((points_random[:,:,0], points_random[:,:,1]))
+    else:
+        for i in range(len(gcz)):
+            distance_array[&#39;distance&#39;][i] = \
+                feature.fun((point_data[:,0], point_data[:,1], 
+                             gcz[i]*np.ones_like(point_data[:,0])))
+            distance_array[&#39;distance_random&#39;][i] = \
+                feature.fun((points_random[:,:,0], points_random[:,:,1], 
+                             gcz[i]*np.ones_like(points_random[:,:,0])))
+        #end for
+    #end if
+    return distance_array</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="toolkit.stat_corr.Binomial_p_test"><code class="flex name class">
+<span>class <span class="ident">Binomial_p_test</span></span>
+<span>(</span><span>feature_dict, point_data, RPManager, node)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to perform a p test on a dataset assuming it follows the
+Binomial distribution, and to perform the chi squared test to determine
+if the Binomial distribution is followed.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>feature_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary of feat_eng.feature_object objects, containing each
+feature needed for the analysis.</dd>
+<dt><strong><code>point_data_xy</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Array of deposit locations.</dd>
+<dt><strong><code>RPManager</code></strong> :&ensp;<code>IO.DataManager.RandomPointsManager object</code></dt>
+<dd>Object which facilitates the generation of random locations to
+compare to actual deposit locations.</dd>
+<dt><strong><code>node</code></strong> :&ensp;<code>xml.ElementTree node</code></dt>
+<dd>Node which contains commands and information about the test to be
+performed.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.changetype</p>
+<p>IO.DataManager.RandomPointsManager.seed_random_points</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Binomial_p_test():
+    def __init__(self, feature_dict, point_data, RPManager, node):
+        &#34;&#34;&#34;
+        A class used to perform a p test on a dataset assuming it follows the 
+        Binomial distribution, and to perform the chi squared test to determine
+        if the Binomial distribution is followed.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feat_eng.feature_object objects, containing each
+            feature needed for the analysis.
+            
+        point_data_xy: numpy array
+            Array of deposit locations.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            Object which facilitates the generation of random locations to 
+            compare to actual deposit locations.
+            
+        node: xml.ElementTree node
+            Node which contains commands and information about the test to be 
+            performed.
+        
+        
+        Calls
+        -----
+        functions.changetype
+        
+        IO.DataManager.RandomPointsManager.seed_random_points
+        
+        
+        &#34;&#34;&#34;       
+        self.distribution = &#39;Binomial&#39;         
+        self.n_repeats = fn.changetype(node.attrib[&#34;n_repeats&#34;], int)
+        self.name = node.attrib[&#34;name&#34;]
+        self.dtf_dict = {}
+        self.conditions = list()
+        self.features = list()
+        self.distance_arrays = list()
+        self.n_points = len(point_data)
+        self.node = node
+        depths_type = self.node.attrib[&#34;depths_type&#34;]
+        depths = fn.changetype(self.node.attrib[&#34;depths&#34;], &#34;array&#34;, 
+                               dtype=float)
+        if depths_type == &#39;range&#39;:
+            self.depths = list(np.arange(depths[0], depths[1], depths[2]))
+        else:
+            self.depths = depths
+        #end if
+        criteria = self.node.findall(&#34;criterion&#34;)
+        points_random = \
+            RPManager.seed_random_points(n_repeats=self.n_repeats)
+        for criterion in criteria:
+            feature_key = criterion.attrib[&#34;feature&#34;]
+            feature = feature_dict[feature_key]
+            self.features.append(feature)
+            
+            distance_array = make_distance_array(feature, point_data, 
+                                                 self.n_repeats, 
+                                                 points_random=points_random)
+            self.distance_arrays.append(distance_array)
+            _, rng, thr = fn.changetype(criterion.attrib[&#34;description&#34;], list,
+                                        dtype=str)
+            self.conditions.append([rng, float(thr)])
+        #end for
+        
+        if &#34;pros_map&#34; in node.attrib:
+            self.prospectivity_map = fn.changetype(node.attrib[&#34;pros_map&#34;],
+                                                   bool)
+        else:
+            self.prospectivity_map = False
+        #end if
+        
+        self.Binomial_p_test()
+        self.chi_squared_test()
+        self.print_results()
+    #end func
+    
+    def compute_truth_arrays(self):
+        &#34;&#34;&#34;
+        Used to determine if data points fulfil all conditions required.
+        
+        
+        Calls
+        -----
+        compute_truth_arrays
+        
+        
+        &#34;&#34;&#34;
+        self.real_truth_array, self.random_truth_array = \
+            compute_truth_arrays(self.distance_arrays, self.conditions)
+    #end func
+    
+    def compute_parameters_for_binomial_test(self):
+        &#34;&#34;&#34;
+        Computes parameters required for the Poisson p test.
+        
+        
+        Calls
+        -----
+        compute_parameters_for_p_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;real_truth_array&#39;):
+            self.compute_truth_arrays()
+        #end if
+        self.xvals, self.mvals, self.svals, self.rvals = \
+            compute_parameters_for_p_test(self.real_truth_array,
+                                          self.random_truth_array, 
+                                          self.n_points)
+    #end func
+    
+    def chi_squared_test(self):
+        &#34;&#34;&#34;
+        Performs the chi squared test to determine if the random point dataset
+        follows the Poisson distribution.
+        
+        
+        Calls
+        -----
+        chi_squared_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;pvals&#39;):
+            self.Binomial_p_test()
+        #end if
+        self.chi_t_vals, self.chi_p_vals, self.chi_k_vals = \
+            chi_squared_test(self.rvals, self.n_points, self.distribution)
+        #end func
+    #end func
+    
+    def Binomial_p_test(self):
+        &#34;&#34;&#34;
+        Performs a p test to determine if a result is statistically 
+        significant, if the data is assumed to follow the Binomial 
+        distribution.
+        
+        
+        Calls
+        -----
+        Binomial_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;xvals&#39;):
+            self.compute_parameters_for_binomial_test()
+        #end if
+        self.pvals = Binomial_test(self.xvals, self.mvals, self.n_points)
+    #end func
+    
+    def Plots(self, wd_images):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Parameters
+        ----------
+        wd_images: string
+            Directory in which to save figures.
+        
+        
+        Calls
+        -----
+        plotting.plot_distribution_at_depth_slice
+        
+        plotting.plot_Binomial_p_values
+        
+        
+        &#34;&#34;&#34;
+        pt.plot_distribution_at_depth_slice(self, self.depths, wd_images)
+        if len(self.depths) &gt; 1:
+            pt.plot_Binomial_p_values(self, wd_images)
+        #end if
+    #end func
+    
+    def print_results(self):
+        &#34;&#34;&#34;
+        Function to print results of the statistical test to the console, or to
+        stdout. This function is called to print information to an output file.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Test =&#39;, self.name)
+        print(&#39;Test distribution type =&#39;, self.distribution)
+        print(&#39;Number of deposits =&#39;, self.n_points)
+        print(&#39;Number of repeats =&#39;, self.n_repeats)
+        print(&#39;Depths =&#39;, self.depths)
+        print(&#39;Criteria:&#39;)
+        criteria = self.node.findall(&#34;criterion&#34;)
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            _, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            feature = criterion.attrib[&#34;feature&#34;]
+            print(&#39;%s:&#39;%name, &#39;distance&#39;, target_range, target_value, &#39;from&#39;,
+                  feature)
+        #end for
+        print(self.distribution, &#39;distribution probability test results:&#39;)
+        print(&#39;Proportion of deposits satisfying criteria, x =&#39;, self.xvals)
+        print(&#39;Proportion of random points satisfying criteria, m =&#39;, 
+              self.mvals)
+        print(&#39;Probability of obtaining x with mean m, p =&#39;, self.pvals)
+        print(&#39;Chi squared test results:&#39;)
+        print(&#39;t values =&#39;, self.chi_t_vals)
+        print(&#39;p values =&#39;, self.chi_p_vals)
+        print(&#39;k values =&#39;, self.chi_k_vals)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.stat_corr.Binomial_p_test.Binomial_p_test"><code class="name flex">
+<span>def <span class="ident">Binomial_p_test</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs a p test to determine if a result is statistically
+significant, if the data is assumed to follow the Binomial
+distribution.</p>
+<h2 id="calls">Calls</h2>
+<p>Binomial_test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Binomial_p_test(self):
+    &#34;&#34;&#34;
+    Performs a p test to determine if a result is statistically 
+    significant, if the data is assumed to follow the Binomial 
+    distribution.
+    
+    
+    Calls
+    -----
+    Binomial_test
+    
+    
+    &#34;&#34;&#34;
+    if not hasattr(self, &#39;xvals&#39;):
+        self.compute_parameters_for_binomial_test()
+    #end if
+    self.pvals = Binomial_test(self.xvals, self.mvals, self.n_points)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Binomial_p_test.Plots"><code class="name flex">
+<span>def <span class="ident">Plots</span></span>(<span>self, wd_images)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates plots.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>wd_images</code></strong> :&ensp;<code>string</code></dt>
+<dd>Directory in which to save figures.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>plotting.plot_distribution_at_depth_slice</p>
+<p>plotting.plot_Binomial_p_values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Plots(self, wd_images):
+    &#34;&#34;&#34;
+    Generates plots.
+    
+    
+    Parameters
+    ----------
+    wd_images: string
+        Directory in which to save figures.
+    
+    
+    Calls
+    -----
+    plotting.plot_distribution_at_depth_slice
+    
+    plotting.plot_Binomial_p_values
+    
+    
+    &#34;&#34;&#34;
+    pt.plot_distribution_at_depth_slice(self, self.depths, wd_images)
+    if len(self.depths) &gt; 1:
+        pt.plot_Binomial_p_values(self, wd_images)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Binomial_p_test.chi_squared_test"><code class="name flex">
+<span>def <span class="ident">chi_squared_test</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs the chi squared test to determine if the random point dataset
+follows the Poisson distribution.</p>
+<h2 id="calls">Calls</h2>
+<p>chi_squared_test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def chi_squared_test(self):
+    &#34;&#34;&#34;
+    Performs the chi squared test to determine if the random point dataset
+    follows the Poisson distribution.
+    
+    
+    Calls
+    -----
+    chi_squared_test
+    
+    
+    &#34;&#34;&#34;
+    if not hasattr(self, &#39;pvals&#39;):
+        self.Binomial_p_test()
+    #end if
+    self.chi_t_vals, self.chi_p_vals, self.chi_k_vals = \
+        chi_squared_test(self.rvals, self.n_points, self.distribution)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Binomial_p_test.compute_parameters_for_binomial_test"><code class="name flex">
+<span>def <span class="ident">compute_parameters_for_binomial_test</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes parameters required for the Poisson p test.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_parameters_for_p_test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_parameters_for_binomial_test(self):
+    &#34;&#34;&#34;
+    Computes parameters required for the Poisson p test.
+    
+    
+    Calls
+    -----
+    compute_parameters_for_p_test
+    
+    
+    &#34;&#34;&#34;
+    if not hasattr(self, &#39;real_truth_array&#39;):
+        self.compute_truth_arrays()
+    #end if
+    self.xvals, self.mvals, self.svals, self.rvals = \
+        compute_parameters_for_p_test(self.real_truth_array,
+                                      self.random_truth_array, 
+                                      self.n_points)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Binomial_p_test.compute_truth_arrays"><code class="name flex">
+<span>def <span class="ident">compute_truth_arrays</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Used to determine if data points fulfil all conditions required.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_truth_arrays</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_truth_arrays(self):
+    &#34;&#34;&#34;
+    Used to determine if data points fulfil all conditions required.
+    
+    
+    Calls
+    -----
+    compute_truth_arrays
+    
+    
+    &#34;&#34;&#34;
+    self.real_truth_array, self.random_truth_array = \
+        compute_truth_arrays(self.distance_arrays, self.conditions)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Binomial_p_test.print_results"><code class="name flex">
+<span>def <span class="ident">print_results</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to print results of the statistical test to the console, or to
+stdout. This function is called to print information to an output file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_results(self):
+    &#34;&#34;&#34;
+    Function to print results of the statistical test to the console, or to
+    stdout. This function is called to print information to an output file.
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Test =&#39;, self.name)
+    print(&#39;Test distribution type =&#39;, self.distribution)
+    print(&#39;Number of deposits =&#39;, self.n_points)
+    print(&#39;Number of repeats =&#39;, self.n_repeats)
+    print(&#39;Depths =&#39;, self.depths)
+    print(&#39;Criteria:&#39;)
+    criteria = self.node.findall(&#34;criterion&#34;)
+    for criterion in criteria:
+        name = criterion.attrib[&#34;name&#34;]
+        _, target_range, target_value = \
+            fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+        feature = criterion.attrib[&#34;feature&#34;]
+        print(&#39;%s:&#39;%name, &#39;distance&#39;, target_range, target_value, &#39;from&#39;,
+              feature)
+    #end for
+    print(self.distribution, &#39;distribution probability test results:&#39;)
+    print(&#39;Proportion of deposits satisfying criteria, x =&#39;, self.xvals)
+    print(&#39;Proportion of random points satisfying criteria, m =&#39;, 
+          self.mvals)
+    print(&#39;Probability of obtaining x with mean m, p =&#39;, self.pvals)
+    print(&#39;Chi squared test results:&#39;)
+    print(&#39;t values =&#39;, self.chi_t_vals)
+    print(&#39;p values =&#39;, self.chi_p_vals)
+    print(&#39;k values =&#39;, self.chi_k_vals)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test"><code class="flex name class">
+<span>class <span class="ident">Kolmogorov_Smirnov_p_test</span></span>
+<span>(</span><span>feature_dict, point_data, RPManager, node)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to perform the Kolmogorov-Smirnov p test on a dataset.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>feature_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary of feat_eng.feature_object objects, containing each
+feature needed for the analysis.</dd>
+<dt><strong><code>point_data_xy</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Array of deposit locations.</dd>
+<dt><strong><code>RPManager</code></strong> :&ensp;<code>IO.DataManager.RandomPointsManager object</code></dt>
+<dd>Object which facilitates the generation of random locations to
+compare to actual deposit locations.</dd>
+<dt><strong><code>node</code></strong> :&ensp;<code>xml.ElementTree node</code></dt>
+<dd>Node which contains commands and information about the test to be
+performed.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Kolmogorov_Smirnov_p_test():
+    def __init__(self, feature_dict, point_data, RPManager, node):
+        &#34;&#34;&#34;
+        A class used to perform the Kolmogorov-Smirnov p test on a dataset.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feat_eng.feature_object objects, containing each
+            feature needed for the analysis.
+            
+        point_data_xy: numpy array
+            Array of deposit locations.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            Object which facilitates the generation of random locations to 
+            compare to actual deposit locations.
+            
+        node: xml.ElementTree node
+            Node which contains commands and information about the test to be 
+            performed.
+        
+        
+        &#34;&#34;&#34;
+        self.name = node.attrib[&#34;name&#34;]                
+        self.feature_key = node.attrib[&#34;feature&#34;]
+        self.correlation = node.attrib[&#34;correlation&#34;]
+        self.binsize = fn.changetype(node.attrib[&#34;binsize&#34;], float)
+        self.n_repeats = fn.changetype(node.attrib[&#34;n_repeats&#34;], int)
+        feature = feature_dict[self.feature_key]
+        self.cdf = False
+        self.pdf = False
+        depths_type = node.attrib[&#34;depths_type&#34;]
+        depths = fn.changetype(node.attrib[&#34;depths&#34;], &#34;array&#34;, dtype=float)
+        if depths_type == &#39;range&#39;:
+            self.depths = list(np.arange(depths[0], depths[1], depths[2]))
+        else:
+            self.depths = depths
+        #end if
+        
+        if &#34;pros_map&#34; in node.attrib:
+            self.prospectivity_map = fn.changetype(node.attrib[&#34;pros_map&#34;], 
+                                                   bool)
+        else:
+            self.prospectivity_map = False
+        #end if
+        
+        self.distance_array = make_distance_array(feature, point_data, 
+                                                  self.n_repeats, 
+                                                  RPManager=RPManager)
+        self.Kolmogorov_Smirnov_p_test()
+        self.print_results()
+    #end func
+    
+    def compute_cdf(self):
+        &#34;&#34;&#34;
+        Computes the cumulative distribution function for input dataset.
+        
+        
+        Calls
+        -----
+        compute_cdf
+        
+        initialise_cdf_array
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Computing CDF&#39;)
+        if not hasattr(self, &#39;cdf_array&#39;):
+            self.cdf_array, self.n_deposits = \
+                initialise_cdf_array(self.distance_array, self.binsize)
+        #end if
+        self.cdf_array = compute_cdf(self.distance_array, self.cdf_array)
+        self.cdf = True
+        print(&#39;Completed computing CDF&#39;)
+    #end func
+    
+    def compute_pdf(self):
+        &#34;&#34;&#34;
+        Computes the probability density function for input dataset.
+        
+        
+        Calls
+        -----
+        compute_pdf
+        
+        initialise_cdf_array
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Computing PDF&#39;)
+        if not hasattr(self, &#39;cdf_array&#39;):
+            self.cdf_array, self.n_deposits = \
+                initialise_cdf_array(self.distance_array, self.binsize)
+        #end if
+        self.cdf_array = compute_pdf(self.distance_array, self.cdf_array)
+        self.pdf = True
+        print(&#39;Completed computing PDF&#39;)
+    #end func
+    
+    def compute_normed_cdf(self):
+        &#34;&#34;&#34;
+        Computes the normalised cumulative distribution function from an
+        already existing CDF.
+        
+        
+        Calls
+        -----
+        compute_normed_cdf
+        
+        
+        &#34;&#34;&#34;
+        if not self.cdf:
+            self.compute_cdf()
+        #end if
+        print(&#39;Computing normed cdf&#39;)
+        self.cdf_normed, self.cdf_random_normed, self.cdf_random_std, \
+            self.dvalues, self.dmax = \
+            compute_normed_cdf(self.cdf_array, self.n_deposits, 
+                               self.correlation)
+        print(&#39;Completed computing normed cdf&#39;)
+    #end func
+    
+    def compute_normed_pdf(self):
+        &#34;&#34;&#34;
+        Computes the normalised probability density function from an already 
+        existing PDF.
+        
+        
+        Calls
+        -----
+        compute_normed_pdf
+        
+        
+        &#34;&#34;&#34;
+        if not self.pdf:
+            self.compute_pdf()
+        #end if
+        print(&#39;Computing normed pdf&#39;)
+        self.pdf_normed, self.pdf_random_normed, self.pdf_random_std = \
+            compute_normed_pdf(self.cdf_array, self.n_deposits)
+        print(&#39;Completed computing normed pdf&#39;)
+    #end func
+    
+    def Kolmogorov_Smirnov_p_test(self):
+        &#34;&#34;&#34;
+        Performs the Kolmogorov-Smirnov &#34;p&#34; test to determine the statistical
+        significance of the results.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Computing Kolmogorov-Smirnov values&#39;)
+        if not hasattr(self, &#39;dmax&#39;):
+            self.compute_normed_cdf()
+        #end if
+        self.kolmogorov_smirnov = \
+            np.exp(-2.*(self.n_deposits**2)*(self.dmax**2)/(2*self.n_deposits))
+        print(&#39;Completed computing Kolmogorov-Smirnov values&#39;)
+    #end func
+    
+    def Plots(self, wd_images):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Parameters
+        ----------
+        wd_images: string
+            Path in which to save the figure.
+        
+        
+        Calls
+        -----
+        plotting.plot_cdf_at_depth_slice
+        
+        plotting.plot_heat_map
+        
+        plotting.plot_kolmogorov_smirnov_values
+        
+        
+        &#34;&#34;&#34;
+        pt.plot_cdf_at_depth_slice(self.depths, wd_images, obj=self)
+        #pt.plot_pdf_at_depth_slice(self.depths, wd_images, obj=self)
+        if len(self.depths) &gt; 1:
+            pt.plot_heat_map(wd_images, obj=self)
+            pt.plot_kolmogorov_smirnov_values(wd_images, obj=self)
+        #end if
+    #end func
+    
+    def print_results(self):
+        &#34;&#34;&#34;
+        Function to print results of the statistical test to the console, or to
+        stdout. This function is called to print information to an output file.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Test =&#39;, self.name)
+        print(&#39;Number of deposits =&#39;, self.n_deposits)
+        print(&#39;Number of repeats =&#39;, self.n_repeats)
+        print(&#39;Depths =&#39;, self.depths)
+        print(&#39;d values =&#39;, self.dmax)
+        print(&#39;p values =&#39;, self.kolmogorov_smirnov)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.Kolmogorov_Smirnov_p_test"><code class="name flex">
+<span>def <span class="ident">Kolmogorov_Smirnov_p_test</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs the Kolmogorov-Smirnov "p" test to determine the statistical
+significance of the results.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Kolmogorov_Smirnov_p_test(self):
+    &#34;&#34;&#34;
+    Performs the Kolmogorov-Smirnov &#34;p&#34; test to determine the statistical
+    significance of the results.
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Computing Kolmogorov-Smirnov values&#39;)
+    if not hasattr(self, &#39;dmax&#39;):
+        self.compute_normed_cdf()
+    #end if
+    self.kolmogorov_smirnov = \
+        np.exp(-2.*(self.n_deposits**2)*(self.dmax**2)/(2*self.n_deposits))
+    print(&#39;Completed computing Kolmogorov-Smirnov values&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.Plots"><code class="name flex">
+<span>def <span class="ident">Plots</span></span>(<span>self, wd_images)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates plots.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>wd_images</code></strong> :&ensp;<code>string</code></dt>
+<dd>Path in which to save the figure.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>plotting.plot_cdf_at_depth_slice</p>
+<p>plotting.plot_heat_map</p>
+<p>plotting.plot_kolmogorov_smirnov_values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Plots(self, wd_images):
+    &#34;&#34;&#34;
+    Generates plots.
+    
+    
+    Parameters
+    ----------
+    wd_images: string
+        Path in which to save the figure.
+    
+    
+    Calls
+    -----
+    plotting.plot_cdf_at_depth_slice
+    
+    plotting.plot_heat_map
+    
+    plotting.plot_kolmogorov_smirnov_values
+    
+    
+    &#34;&#34;&#34;
+    pt.plot_cdf_at_depth_slice(self.depths, wd_images, obj=self)
+    #pt.plot_pdf_at_depth_slice(self.depths, wd_images, obj=self)
+    if len(self.depths) &gt; 1:
+        pt.plot_heat_map(wd_images, obj=self)
+        pt.plot_kolmogorov_smirnov_values(wd_images, obj=self)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_cdf"><code class="name flex">
+<span>def <span class="ident">compute_cdf</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the cumulative distribution function for input dataset.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_cdf</p>
+<p>initialise_cdf_array</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_cdf(self):
+    &#34;&#34;&#34;
+    Computes the cumulative distribution function for input dataset.
+    
+    
+    Calls
+    -----
+    compute_cdf
+    
+    initialise_cdf_array
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Computing CDF&#39;)
+    if not hasattr(self, &#39;cdf_array&#39;):
+        self.cdf_array, self.n_deposits = \
+            initialise_cdf_array(self.distance_array, self.binsize)
+    #end if
+    self.cdf_array = compute_cdf(self.distance_array, self.cdf_array)
+    self.cdf = True
+    print(&#39;Completed computing CDF&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_normed_cdf"><code class="name flex">
+<span>def <span class="ident">compute_normed_cdf</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the normalised cumulative distribution function from an
+already existing CDF.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_normed_cdf</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_normed_cdf(self):
+    &#34;&#34;&#34;
+    Computes the normalised cumulative distribution function from an
+    already existing CDF.
+    
+    
+    Calls
+    -----
+    compute_normed_cdf
+    
+    
+    &#34;&#34;&#34;
+    if not self.cdf:
+        self.compute_cdf()
+    #end if
+    print(&#39;Computing normed cdf&#39;)
+    self.cdf_normed, self.cdf_random_normed, self.cdf_random_std, \
+        self.dvalues, self.dmax = \
+        compute_normed_cdf(self.cdf_array, self.n_deposits, 
+                           self.correlation)
+    print(&#39;Completed computing normed cdf&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_normed_pdf"><code class="name flex">
+<span>def <span class="ident">compute_normed_pdf</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the normalised probability density function from an already
+existing PDF.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_normed_pdf</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_normed_pdf(self):
+    &#34;&#34;&#34;
+    Computes the normalised probability density function from an already 
+    existing PDF.
+    
+    
+    Calls
+    -----
+    compute_normed_pdf
+    
+    
+    &#34;&#34;&#34;
+    if not self.pdf:
+        self.compute_pdf()
+    #end if
+    print(&#39;Computing normed pdf&#39;)
+    self.pdf_normed, self.pdf_random_normed, self.pdf_random_std = \
+        compute_normed_pdf(self.cdf_array, self.n_deposits)
+    print(&#39;Completed computing normed pdf&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_pdf"><code class="name flex">
+<span>def <span class="ident">compute_pdf</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes the probability density function for input dataset.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_pdf</p>
+<p>initialise_cdf_array</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_pdf(self):
+    &#34;&#34;&#34;
+    Computes the probability density function for input dataset.
+    
+    
+    Calls
+    -----
+    compute_pdf
+    
+    initialise_cdf_array
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Computing PDF&#39;)
+    if not hasattr(self, &#39;cdf_array&#39;):
+        self.cdf_array, self.n_deposits = \
+            initialise_cdf_array(self.distance_array, self.binsize)
+    #end if
+    self.cdf_array = compute_pdf(self.distance_array, self.cdf_array)
+    self.pdf = True
+    print(&#39;Completed computing PDF&#39;)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.print_results"><code class="name flex">
+<span>def <span class="ident">print_results</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to print results of the statistical test to the console, or to
+stdout. This function is called to print information to an output file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_results(self):
+    &#34;&#34;&#34;
+    Function to print results of the statistical test to the console, or to
+    stdout. This function is called to print information to an output file.
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Test =&#39;, self.name)
+    print(&#39;Number of deposits =&#39;, self.n_deposits)
+    print(&#39;Number of repeats =&#39;, self.n_repeats)
+    print(&#39;Depths =&#39;, self.depths)
+    print(&#39;d values =&#39;, self.dmax)
+    print(&#39;p values =&#39;, self.kolmogorov_smirnov)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="toolkit.stat_corr.Poisson_p_test"><code class="flex name class">
+<span>class <span class="ident">Poisson_p_test</span></span>
+<span>(</span><span>feature_dict, point_data, RPManager, node)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class used to perform a p test on a dataset assuming it follows the
+Poisson distribution, and to perform the chi squared test to determine
+if the Poisson distribution is followed.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>feature_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary of feat_eng.feature_object objects, containing each
+feature needed for the analysis.</dd>
+<dt><strong><code>point_data_xy</code></strong> :&ensp;<code>numpy array</code></dt>
+<dd>Array of deposit locations.</dd>
+<dt><strong><code>RPManager</code></strong> :&ensp;<code>IO.DataManager.RandomPointsManager object</code></dt>
+<dd>Object which facilitates the generation of random locations to
+compare to actual deposit locations.</dd>
+<dt><strong><code>node</code></strong> :&ensp;<code>xml.ElementTree node</code></dt>
+<dd>Node which contains commands and information about the test to be
+performed.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.changetype</p>
+<p>IO.DataManager.RandomPointsManager.seed_random_points</p>
+<h2 id="called-by">Called By</h2>
+<p>StatsManager.Process</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Poisson_p_test():
+    def __init__(self, feature_dict, point_data, RPManager, node):
+        &#34;&#34;&#34;
+        A class used to perform a p test on a dataset assuming it follows the 
+        Poisson distribution, and to perform the chi squared test to determine
+        if the Poisson distribution is followed.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feat_eng.feature_object objects, containing each
+            feature needed for the analysis.
+            
+        point_data_xy: numpy array
+            Array of deposit locations.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            Object which facilitates the generation of random locations to 
+            compare to actual deposit locations.
+            
+        node: xml.ElementTree node
+            Node which contains commands and information about the test to be 
+            performed.
+        
+        
+        Calls
+        -----
+        functions.changetype
+        
+        IO.DataManager.RandomPointsManager.seed_random_points
+        
+        
+        Called by
+        ---------
+        StatsManager.Process
+        
+        
+        &#34;&#34;&#34;                
+        self.distribution = &#39;Poisson&#39;
+        self.n_repeats = fn.changetype(node.attrib[&#34;n_repeats&#34;], int)
+        self.name = node.attrib[&#34;name&#34;]
+        self.dtf_dict = {}
+        self.conditions = list()
+        self.distance_arrays = list()
+        self.n_points = len(point_data)
+        depths_type = node.attrib[&#34;depths_type&#34;]
+        depths = fn.changetype(node.attrib[&#34;depths&#34;], &#34;array&#34;, dtype=float)
+        if depths_type == &#39;range&#39;:
+            self.depths = np.arange(depths[0], depths[1], depths[2])
+        else:
+            self.depths = depths
+        #end if
+        criteria = node.findall(&#34;criterion&#34;)
+        points_random = \
+            RPManager.seed_random_points(n_repeats=self.n_repeats)
+        for criterion in criteria:
+            feature_key = node.attrib[&#34;feature_key&#34;]
+            feature = feature_dict[feature_key]
+            
+            distance_array = make_distance_array(feature, point_data, 
+                                                 self.n_repeats, 
+                                                 points_random=points_random)
+            self.distance_arrays.append(distance_array)
+            _, rng, thr = fn.changetype(criterion.attrib[&#34;description&#34;], list, 
+                                        dtype=str)
+            self.conditions.append([rng, float(thr)])
+        #end for
+        if len(criteria) == 1:
+            self.feature_key = feature_key
+        #end if
+        
+        if &#34;pros_map&#34; in node.attrib:
+            self.prospectivity_map = fn.changetype(node.attrib[&#34;pros_map&#34;], 
+                                                   bool)
+        else:
+            self.prospectivity_map = False
+        #end if
+        
+        self.Poisson_p_test()
+        self.chi_squared_test()
+        self.print_results()
+    #end func
+    
+    def compute_truth_arrays(self):
+        &#34;&#34;&#34;
+        Used to determine if data points fulfil all conditions required.
+        
+        
+        Calls
+        -----
+        compute_truth_arrays
+        
+        
+        &#34;&#34;&#34;
+        self.real_truth_array, self.random_truth_array = \
+            compute_truth_arrays(self.distance_arrays, self.conditions)
+    #end func
+    
+    def compute_parameters_for_Poisson_test(self):
+        &#34;&#34;&#34;
+        Computes parameters required for the Poisson p test.
+        
+        
+        Calls
+        -----
+        compute_parameters_for_p_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;real_truth_array&#39;):
+            self.compute_truth_arrays()
+        #end if
+        self.xvals, self.mvals, self.svals, self.rvals = \
+            compute_parameters_for_p_test(self.real_truth_array,
+                                          self.random_truth_array, 
+                                          self.n_points)
+    #end func
+    
+    def chi_squared_test(self):
+        &#34;&#34;&#34;
+        Performs the chi squared test to determine if the random point dataset
+        follows the Poisson distribution.
+        
+        
+        Calls
+        -----
+        chi_squared_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;pvals&#39;):
+            self.Poisson_p_test()
+        #end if
+        self.chi_t_vals, self.chi_p_vals, self.chi_k_vals = \
+            chi_squared_test(self.rvals, self.n_points, self.distribution)
+        #end func
+    #end func
+    
+    def Poisson_p_test(self):
+        &#34;&#34;&#34;
+        Performs a p test to determine if a result is statistically 
+        significant, if the data is assumed to follow the Poisson distribution.
+        
+        
+        Calls
+        -----
+        Poisson_test
+        
+        
+        &#34;&#34;&#34;
+        if not hasattr(self, &#39;xvals&#39;):
+            self.compute_parameters_for_Poisson_test()
+        #end if
+        self.pvals = Poisson_test(self.xvals, self.mvals, self.n_points)
+    #end func
+    
+    def Plots(self, wd_images):
+        &#34;&#34;&#34;
+        Generates plots.
+        
+        
+        Parameters
+        ----------
+        wd_images: string
+            Directory in which to save figures.
+        
+        
+        Calls
+        -----
+        plotting.plot_distribution_at_depth_slice
+        
+        plotting.plot_Poisson_p_values
+        
+        
+        &#34;&#34;&#34;
+        pt.plot_distribution_at_depth_slice(self, self.depths, wd_images)
+        if len(self.depths) &gt; 1:
+            pt.plot_Poisson_p_values(self, wd_images)
+        #end if
+    #end func
+    
+    def print_results(self):
+        &#34;&#34;&#34;
+        Function to print results of the statistical test to the console, or to
+        stdout. This function is called to print information to an output file.
+        
+        
+        &#34;&#34;&#34;
+        print(&#39;Test =&#39;, self.name)
+        print(&#39;Test distribution type =&#39;, self.distribution)
+        print(&#39;Number of deposits =&#39;, self.n_points)
+        print(&#39;Number of repeats =&#39;, self.n_repeats)
+        print(&#39;Depths =&#39;, self.depths)
+        print(&#39;Criteria:&#39;)
+        criteria = self.node.findall(&#34;criterion&#34;)
+        for criterion in criteria:
+            name = criterion.attrib[&#34;name&#34;]
+            _, target_range, target_value = \
+                fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+            feature = criterion.attrib[&#34;feature&#34;]
+            print(&#39;%s:&#39;%name, &#39;distance&#39;, target_range, target_value, &#39;from&#39;,
+                  feature)
+        #end for
+        print(self.distribution, &#39;distribution probability test results:&#39;)
+        print(&#39;Proportion of deposits satisfying criteria, x =&#39;, self.xvals)
+        print(&#39;Proportion of random points satisfying criteria, m =&#39;, 
+              self.mvals)
+        print(&#39;Probability of obtaining x with mean m, p =&#39;, self.pvals)
+        print(&#39;Chi squared test results:&#39;)
+        print(&#39;t values =&#39;, self.chi_t_vals)
+        print(&#39;p values =&#39;, self.chi_p_vals)
+        print(&#39;k values =&#39;, self.chi_k_vals)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.stat_corr.Poisson_p_test.Plots"><code class="name flex">
+<span>def <span class="ident">Plots</span></span>(<span>self, wd_images)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates plots.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>wd_images</code></strong> :&ensp;<code>string</code></dt>
+<dd>Directory in which to save figures.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>plotting.plot_distribution_at_depth_slice</p>
+<p>plotting.plot_Poisson_p_values</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Plots(self, wd_images):
+    &#34;&#34;&#34;
+    Generates plots.
+    
+    
+    Parameters
+    ----------
+    wd_images: string
+        Directory in which to save figures.
+    
+    
+    Calls
+    -----
+    plotting.plot_distribution_at_depth_slice
+    
+    plotting.plot_Poisson_p_values
+    
+    
+    &#34;&#34;&#34;
+    pt.plot_distribution_at_depth_slice(self, self.depths, wd_images)
+    if len(self.depths) &gt; 1:
+        pt.plot_Poisson_p_values(self, wd_images)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Poisson_p_test.Poisson_p_test"><code class="name flex">
+<span>def <span class="ident">Poisson_p_test</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs a p test to determine if a result is statistically
+significant, if the data is assumed to follow the Poisson distribution.</p>
+<h2 id="calls">Calls</h2>
+<p>Poisson_test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Poisson_p_test(self):
+    &#34;&#34;&#34;
+    Performs a p test to determine if a result is statistically 
+    significant, if the data is assumed to follow the Poisson distribution.
+    
+    
+    Calls
+    -----
+    Poisson_test
+    
+    
+    &#34;&#34;&#34;
+    if not hasattr(self, &#39;xvals&#39;):
+        self.compute_parameters_for_Poisson_test()
+    #end if
+    self.pvals = Poisson_test(self.xvals, self.mvals, self.n_points)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Poisson_p_test.chi_squared_test"><code class="name flex">
+<span>def <span class="ident">chi_squared_test</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Performs the chi squared test to determine if the random point dataset
+follows the Poisson distribution.</p>
+<h2 id="calls">Calls</h2>
+<p>chi_squared_test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def chi_squared_test(self):
+    &#34;&#34;&#34;
+    Performs the chi squared test to determine if the random point dataset
+    follows the Poisson distribution.
+    
+    
+    Calls
+    -----
+    chi_squared_test
+    
+    
+    &#34;&#34;&#34;
+    if not hasattr(self, &#39;pvals&#39;):
+        self.Poisson_p_test()
+    #end if
+    self.chi_t_vals, self.chi_p_vals, self.chi_k_vals = \
+        chi_squared_test(self.rvals, self.n_points, self.distribution)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Poisson_p_test.compute_parameters_for_Poisson_test"><code class="name flex">
+<span>def <span class="ident">compute_parameters_for_Poisson_test</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Computes parameters required for the Poisson p test.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_parameters_for_p_test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_parameters_for_Poisson_test(self):
+    &#34;&#34;&#34;
+    Computes parameters required for the Poisson p test.
+    
+    
+    Calls
+    -----
+    compute_parameters_for_p_test
+    
+    
+    &#34;&#34;&#34;
+    if not hasattr(self, &#39;real_truth_array&#39;):
+        self.compute_truth_arrays()
+    #end if
+    self.xvals, self.mvals, self.svals, self.rvals = \
+        compute_parameters_for_p_test(self.real_truth_array,
+                                      self.random_truth_array, 
+                                      self.n_points)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Poisson_p_test.compute_truth_arrays"><code class="name flex">
+<span>def <span class="ident">compute_truth_arrays</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Used to determine if data points fulfil all conditions required.</p>
+<h2 id="calls">Calls</h2>
+<p>compute_truth_arrays</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_truth_arrays(self):
+    &#34;&#34;&#34;
+    Used to determine if data points fulfil all conditions required.
+    
+    
+    Calls
+    -----
+    compute_truth_arrays
+    
+    
+    &#34;&#34;&#34;
+    self.real_truth_array, self.random_truth_array = \
+        compute_truth_arrays(self.distance_arrays, self.conditions)</code></pre>
+</details>
+</dd>
+<dt id="toolkit.stat_corr.Poisson_p_test.print_results"><code class="name flex">
+<span>def <span class="ident">print_results</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to print results of the statistical test to the console, or to
+stdout. This function is called to print information to an output file.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def print_results(self):
+    &#34;&#34;&#34;
+    Function to print results of the statistical test to the console, or to
+    stdout. This function is called to print information to an output file.
+    
+    
+    &#34;&#34;&#34;
+    print(&#39;Test =&#39;, self.name)
+    print(&#39;Test distribution type =&#39;, self.distribution)
+    print(&#39;Number of deposits =&#39;, self.n_points)
+    print(&#39;Number of repeats =&#39;, self.n_repeats)
+    print(&#39;Depths =&#39;, self.depths)
+    print(&#39;Criteria:&#39;)
+    criteria = self.node.findall(&#34;criterion&#34;)
+    for criterion in criteria:
+        name = criterion.attrib[&#34;name&#34;]
+        _, target_range, target_value = \
+            fn.changetype(criterion.attrib[&#34;description&#34;], list, dtype=str)
+        feature = criterion.attrib[&#34;feature&#34;]
+        print(&#39;%s:&#39;%name, &#39;distance&#39;, target_range, target_value, &#39;from&#39;,
+              feature)
+    #end for
+    print(self.distribution, &#39;distribution probability test results:&#39;)
+    print(&#39;Proportion of deposits satisfying criteria, x =&#39;, self.xvals)
+    print(&#39;Proportion of random points satisfying criteria, m =&#39;, 
+          self.mvals)
+    print(&#39;Probability of obtaining x with mean m, p =&#39;, self.pvals)
+    print(&#39;Chi squared test results:&#39;)
+    print(&#39;t values =&#39;, self.chi_t_vals)
+    print(&#39;p values =&#39;, self.chi_p_vals)
+    print(&#39;k values =&#39;, self.chi_k_vals)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="toolkit.stat_corr.StatsManager"><code class="flex name class">
+<span>class <span class="ident">StatsManager</span></span>
+<span>(</span><span>commandList, statnodes)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A class to facilitate any statistical calculations which need to be
+performed.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>commandList</code></strong> :&ensp;<code>list</code></dt>
+<dd>A list of commands read from XML config file.</dd>
+<dt><strong><code>statnodes</code></strong> :&ensp;<code>xml.ElementTree node</code></dt>
+<dd>A node, which contains within it nodes representing each statistial
+computation that must be performed.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>functions.changetype</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class StatsManager():
+    def __init__(self, commandList, statnodes):
+        &#34;&#34;&#34;
+        A class to facilitate any statistical calculations which need to be 
+        performed.
+        
+        
+        Parameters
+        ----------
+        commandList: list
+            A list of commands read from XML config file.
+            
+        statnodes: xml.ElementTree node
+            A node, which contains within it nodes representing each statistial
+            computation that must be performed.
+            
+        
+        Calls
+        -----
+        functions.changetype
+        
+        
+        &#34;&#34;&#34;
+        
+        self.statnodes = statnodes
+
+        for row in commandList:
+            if hasattr(self, row[0]):
+                tp = type(getattr(self, row[0]))
+                val = fn.changetype(row[1], tp)
+                setattr(self, row[0], val)
+            #end if
+        #end for
+    #end func
+    
+    def Process(self, feature_dict, points_dict, RPManager):
+        &#34;&#34;&#34;
+        Process to perform statistical computations.
+        
+        
+        Parameters
+        ----------
+        feature_dict: dictionary
+            Dictionary of feature objects which were generated by the feature
+            engineering module.
+            
+        points_dict: dictionary
+            Dictionary containing deposit locations which have been read in and
+            filtered by the data input module.
+            
+        RPManager: IO.DataManager.RandomPointsManager object
+            RandomPointsManager object which is given to the run_analysis 
+            function to provide a set of randomly generated locations.
+            
+        
+        Calls
+        -----
+        Kolmogorov_Smirnov_p_test
+        
+        Poisson_p_test
+        
+        Binomial_p_test
+        
+        
+        &#34;&#34;&#34;
+        point_data = points_dict[&#39;point_data_filt&#39;]
+        
+        self.stat_obj_dict = {}
+        for node in self.statnodes:
+            key = node.attrib[&#34;name&#34;]
+            test_type = node.attrib[&#34;test&#34;]
+            if test_type == &#34;Kolmogorov-Smirnov p test&#34;:
+                stat = Kolmogorov_Smirnov_p_test(feature_dict, point_data, 
+                                                 RPManager, node)
+                self.stat_obj_dict[key] = stat
+            elif test_type == &#34;Poisson p test&#34;:
+                stat = Poisson_p_test(feature_dict, point_data, RPManager, 
+                                      node)
+                self.stat_obj_dict[key] = stat
+            #end if
+            elif test_type == &#34;Binomial p test&#34;:
+                stat = Binomial_p_test(feature_dict, point_data, RPManager, 
+                                       node)
+                self.stat_obj_dict[key] = stat</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="toolkit.stat_corr.StatsManager.Process"><code class="name flex">
+<span>def <span class="ident">Process</span></span>(<span>self, feature_dict, points_dict, RPManager)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Process to perform statistical computations.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>feature_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary of feature objects which were generated by the feature
+engineering module.</dd>
+<dt><strong><code>points_dict</code></strong> :&ensp;<code>dictionary</code></dt>
+<dd>Dictionary containing deposit locations which have been read in and
+filtered by the data input module.</dd>
+<dt><strong><code>RPManager</code></strong> :&ensp;<code>IO.DataManager.RandomPointsManager object</code></dt>
+<dd>RandomPointsManager object which is given to the run_analysis
+function to provide a set of randomly generated locations.</dd>
+</dl>
+<h2 id="calls">Calls</h2>
+<p>Kolmogorov_Smirnov_p_test</p>
+<p>Poisson_p_test</p>
+<p>Binomial_p_test</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Process(self, feature_dict, points_dict, RPManager):
+    &#34;&#34;&#34;
+    Process to perform statistical computations.
+    
+    
+    Parameters
+    ----------
+    feature_dict: dictionary
+        Dictionary of feature objects which were generated by the feature
+        engineering module.
+        
+    points_dict: dictionary
+        Dictionary containing deposit locations which have been read in and
+        filtered by the data input module.
+        
+    RPManager: IO.DataManager.RandomPointsManager object
+        RandomPointsManager object which is given to the run_analysis 
+        function to provide a set of randomly generated locations.
+        
+    
+    Calls
+    -----
+    Kolmogorov_Smirnov_p_test
+    
+    Poisson_p_test
+    
+    Binomial_p_test
+    
+    
+    &#34;&#34;&#34;
+    point_data = points_dict[&#39;point_data_filt&#39;]
+    
+    self.stat_obj_dict = {}
+    for node in self.statnodes:
+        key = node.attrib[&#34;name&#34;]
+        test_type = node.attrib[&#34;test&#34;]
+        if test_type == &#34;Kolmogorov-Smirnov p test&#34;:
+            stat = Kolmogorov_Smirnov_p_test(feature_dict, point_data, 
+                                             RPManager, node)
+            self.stat_obj_dict[key] = stat
+        elif test_type == &#34;Poisson p test&#34;:
+            stat = Poisson_p_test(feature_dict, point_data, RPManager, 
+                                  node)
+            self.stat_obj_dict[key] = stat
+        #end if
+        elif test_type == &#34;Binomial p test&#34;:
+            stat = Binomial_p_test(feature_dict, point_data, RPManager, 
+                                   node)
+            self.stat_obj_dict[key] = stat</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul>
+<li><a href="#statistics-module">Statistics module</a></li>
+<li><a href="#contacts">Contacts</a></li>
+</ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="toolkit" href="index.html">toolkit</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="toolkit.stat_corr.Binomial_test" href="#toolkit.stat_corr.Binomial_test">Binomial_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Poisson_test" href="#toolkit.stat_corr.Poisson_test">Poisson_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.chi_squared_test" href="#toolkit.stat_corr.chi_squared_test">chi_squared_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.compute_cdf" href="#toolkit.stat_corr.compute_cdf">compute_cdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.compute_normed_cdf" href="#toolkit.stat_corr.compute_normed_cdf">compute_normed_cdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.compute_normed_pdf" href="#toolkit.stat_corr.compute_normed_pdf">compute_normed_pdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.compute_parameters_for_p_test" href="#toolkit.stat_corr.compute_parameters_for_p_test">compute_parameters_for_p_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.compute_pdf" href="#toolkit.stat_corr.compute_pdf">compute_pdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.compute_truth_arrays" href="#toolkit.stat_corr.compute_truth_arrays">compute_truth_arrays</a></code></li>
+<li><code><a title="toolkit.stat_corr.initialise_bins" href="#toolkit.stat_corr.initialise_bins">initialise_bins</a></code></li>
+<li><code><a title="toolkit.stat_corr.initialise_cdf_array" href="#toolkit.stat_corr.initialise_cdf_array">initialise_cdf_array</a></code></li>
+<li><code><a title="toolkit.stat_corr.make_distance_array" href="#toolkit.stat_corr.make_distance_array">make_distance_array</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="toolkit.stat_corr.Binomial_p_test" href="#toolkit.stat_corr.Binomial_p_test">Binomial_p_test</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.stat_corr.Binomial_p_test.Binomial_p_test" href="#toolkit.stat_corr.Binomial_p_test.Binomial_p_test">Binomial_p_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Binomial_p_test.Plots" href="#toolkit.stat_corr.Binomial_p_test.Plots">Plots</a></code></li>
+<li><code><a title="toolkit.stat_corr.Binomial_p_test.chi_squared_test" href="#toolkit.stat_corr.Binomial_p_test.chi_squared_test">chi_squared_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Binomial_p_test.compute_parameters_for_binomial_test" href="#toolkit.stat_corr.Binomial_p_test.compute_parameters_for_binomial_test">compute_parameters_for_binomial_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Binomial_p_test.compute_truth_arrays" href="#toolkit.stat_corr.Binomial_p_test.compute_truth_arrays">compute_truth_arrays</a></code></li>
+<li><code><a title="toolkit.stat_corr.Binomial_p_test.print_results" href="#toolkit.stat_corr.Binomial_p_test.print_results">print_results</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test">Kolmogorov_Smirnov_p_test</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.Kolmogorov_Smirnov_p_test" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test.Kolmogorov_Smirnov_p_test">Kolmogorov_Smirnov_p_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.Plots" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test.Plots">Plots</a></code></li>
+<li><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_cdf" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_cdf">compute_cdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_normed_cdf" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_normed_cdf">compute_normed_cdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_normed_pdf" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_normed_pdf">compute_normed_pdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_pdf" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test.compute_pdf">compute_pdf</a></code></li>
+<li><code><a title="toolkit.stat_corr.Kolmogorov_Smirnov_p_test.print_results" href="#toolkit.stat_corr.Kolmogorov_Smirnov_p_test.print_results">print_results</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="toolkit.stat_corr.Poisson_p_test" href="#toolkit.stat_corr.Poisson_p_test">Poisson_p_test</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.stat_corr.Poisson_p_test.Plots" href="#toolkit.stat_corr.Poisson_p_test.Plots">Plots</a></code></li>
+<li><code><a title="toolkit.stat_corr.Poisson_p_test.Poisson_p_test" href="#toolkit.stat_corr.Poisson_p_test.Poisson_p_test">Poisson_p_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Poisson_p_test.chi_squared_test" href="#toolkit.stat_corr.Poisson_p_test.chi_squared_test">chi_squared_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Poisson_p_test.compute_parameters_for_Poisson_test" href="#toolkit.stat_corr.Poisson_p_test.compute_parameters_for_Poisson_test">compute_parameters_for_Poisson_test</a></code></li>
+<li><code><a title="toolkit.stat_corr.Poisson_p_test.compute_truth_arrays" href="#toolkit.stat_corr.Poisson_p_test.compute_truth_arrays">compute_truth_arrays</a></code></li>
+<li><code><a title="toolkit.stat_corr.Poisson_p_test.print_results" href="#toolkit.stat_corr.Poisson_p_test.print_results">print_results</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="toolkit.stat_corr.StatsManager" href="#toolkit.stat_corr.StatsManager">StatsManager</a></code></h4>
+<ul class="">
+<li><code><a title="toolkit.stat_corr.StatsManager.Process" href="#toolkit.stat_corr.StatsManager.Process">Process</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
