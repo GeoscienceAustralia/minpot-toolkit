@@ -1,6 +1,6 @@
 # Input data
 
-All user inputs are facilitated using the config.xml file in this directory, which will overwrite any default values for any module in the toolkit.
+All user inputs are facilitated using a config.xml file, such as the example within in this directory, which will overwrite any default values for any module in the toolkit.
 
 A user must provide, along with any input commands:
 - Input geophysical model.
