@@ -11,6 +11,7 @@ dependencies:
   - cartopy=0.18.0=py36h80a4efb_1
   - certifi=2021.5.30=py36haa95532_0
   - cfitsio=3.470=h2bbff1b_7
+  - cftime=1.5.0=py36h080aedc_0
   - click=7.1.2=pyhd3eb1b0_0
   - click-plugins=1.1.1=pyhd3eb1b0_0
   - cligj=0.7.2=py36haa95532_0
@@ -80,6 +81,7 @@ dependencies:
   - msys2-conda-epoch=20160418=1
   - munch=2.5.0=pyhd3eb1b0_0
   - nest-asyncio=1.5.1=pyhd3eb1b0_0
+  - netcdf4=1.5.7=py36hb33177a_0
   - numpy=1.19.5=py36h4b40d73_2
   - olefile=0.46=py36_0
   - openjpeg=2.4.0=h4fc8c34_0
@@ -131,4 +133,8 @@ dependencies:
   - zipp=3.6.0=pyhd3eb1b0_0
   - zlib=1.2.13=h8cc25b3_0
   - zstd=1.5.5=hd43e919_0
+  - pip:
+      - configparser==5.2.0
+      - mtpy==1.1.5
+      - pyyaml==6.0
 prefix: ./env/minpot_env
