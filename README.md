@@ -1,6 +1,25 @@
 # minpot-toolkit
 Tools to facilitate mineral potential analysis, from spatial associations to feature engineering and fully integrated mineral potential mapping.
 
+## Setup
+
+Currently, the environment list to run the minpot-toolkit is difficult to setup. To assist, the repository has been packaged with a preferred environment which can be activated using Conda:
+
+`conda env create -f minpot_env.yml`
+`conda activate minpot_env`
+
+Ensure to add the minpot-toolkit directory into the PYTHONPATH user environment variable. For instance, from Windows call (updating "<path_to_minpot-toolkit>"):
+
+`set PYTHONPATH=%PYTHONPATH%;C:\<path_to_minpot-toolkit>`
+
+or for Unix call (updating "<path_to_minpot-toolkit>"):
+
+`export PYTHONPATH=$PYTHONPATH:<path_to_minpot-toolkit>`
+
+To use the environment within the Jupyter Notebook tutorials it will need to be installed as a kernel. With the environment activated, run the following command:
+
+`ipython kernel install --user --name=minpot_env`
+
 ## Acknowledgements
 
 ©  Commonwealth  of  Australia  (Geoscience  Australia)  2023
