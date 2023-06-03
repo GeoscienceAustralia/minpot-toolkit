@@ -5,7 +5,7 @@ Boilerplate
 import numpy as np
 import os
 from toolkit.stat_corr import compute_normed_cdf
-from main import MineralPotential #Used to unpickle save files.
+from toolkit.main import MineralPotential #Used to unpickle save files.
 
 def check_cdf_equivalence(cdf_array1, cdf_array2):
     """
