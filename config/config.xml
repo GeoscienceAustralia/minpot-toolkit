@@ -1,13 +1,14 @@
 <config>
+	
 	<commands
 		generate_output="True"
-		bgimage="C:\Users\U37509\Pictures\NE1_50M_SR_W\NE1_50M_SR_W.tif"
+		bgimage="./Pictures/NE1_50M_SR_W/NE1_50M_SR_W.tif"
 		model_savefile="model_savefile.npy"
 		domain_savefile="domain_savefile.npy"
 		data_savefile="data_savefile.npy"
-		inside_polygon_file="C:\Users\U37509\Documents\Mineral_Potential\GIS_data\Thin_sediments_OzSEEBASE.shp"
-		input_path="C:\Users\U37509\Documents\mineral-potential-toolkit\data"
-		output_path="C:\Users\U37509\Documents\Mineral_Potential\outputs"
+		inside_polygon_file="./GIS_data/Thin_sediments.shp"
+		input_path="./Mineral_Potential/data"
+		output_path="./Mineral_Potential/outputs"
 		make_plots="True"
 		model_from_savefile="False"
 		model_to_savefile="False"
@@ -18,13 +19,7 @@
 		point_properties="Au"
 		bounds="140, 155, -45, -32"
 	/>
-	<!--read_columns="Deposit group, Deposit type, Tonnage (Mt)"-->
-	<!--inside_polygon_file="C:\Users\U37509\Documents\Mineral_Potential\GIS_data\Thin_sediments_OzSEEBASE.shp"-->
 
-	<!--
-	depths="0, 400, 100; 500, 3750, 250; 4000, 5000, 1000"
-	depths_type="range"
-	-->
     <models
 		depths="0, 150000, 2000"
 		depths_type="range"
@@ -39,123 +34,17 @@
 			proj_str="+proj=utm +zone=55 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs "
 			model_file_name="AusLAMP_NSW_Vic.rho"
 			stationxy_fn="Station_XY.txt"
-			path="C:\Users\U37509\Documents\Mineral_Potential\resistivity_models\Kirkby2020"
+			path="./Mineral_Potential/resistivity_models/Kirkby2020"
 		/>
-		<!--
-		<model
-			name="Robertson2020"
-			type="ModEM"
-			model_format="ModEM"
-			centre="366832.99996643455, 6428315.2838392835"
-			station_buffer="0.7"
-			proj_str="+proj=utm +zone=54 +south +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs "
-			model_file_name="Delamerian_AusLAMP_cropped.rho"
-			stationxy_fn="Station_XY.txt"
-			path="C:\Users\U37509\Documents\mineral-potential-toolkit\data\resistivity_models\Robertson2020"
-		/>
-		<model
-			name="Grav1"
-			type="Grav"
-			model_format="MagGrav"
-			dims="2730, 1880"
-			cellsize="1000, 1000"
-			bottomleft="-1190000, -2900000, -1500"
-			nzlst="20, 14, 8, 9, 10"
-			dzlst="100, 250, 1000, 2000, 4000"
-			nanval="-100"
-			epsg="3577"
-			model_file_name="NAC_gzinv3d.den"
-			path="C:\Users\U37509\Documents\Mineral_Potential\grav_v3_masked\6_recombined_models"
-		/>
-		<model
-			name="Mag1"
-			type="Mag"
-			model_format="MagGrav"
-			dims="2730, 1880"
-			cellsize="1000, 1000"
-			bottomleft="-1190000, -2900000, -1500"
-			nzlst="20, 14, 8, 9, 10"
-			dzlst="100, 250, 1000, 2000, 4000"
-			nanval="-100"
-			epsg="3577"
-			model_file_name="NAC_maginv3d.sus"
-			path="C:\Users\U37509\Documents\Mineral_Potential\grav_v3_masked\6_recombined_models"
-		/>
-		-->
-		<!--
-		<model
-			name="Mag2"
-			type="MagInt"
-			model_format="netcdf"
-			nanval="-99999.0"
-			x_var_name="lon"
-			y_var_name="lat"
-			values_var_name="Band1"
-			epsg="4283"
-			model_file_name="Magmap2019-grid-tmi-AWAGS_MAG_2019.nc"
-			path="C:\Users\U37509\Documents\Mineral_Potential\magnetic"
-			interval="12"
-		/>
-		<model
-			name="Model1"
-			type="Lit_thickness"
-			model_format="netcdf"
-			nanval="-999.0"
-			x_var_name="lon"
-			y_var_name="lat"
-			values_var_name="z"
-			proj_str="+proj=longlat +ellps=WGS84 +lon_wrap=180 +datum=WGS84 +no_defs"
-			model_file_name="CAM2016.nc"
-			path="C:\Users\U37509\Documents\Mineral_Potential\Lithosphere_thickness\lithospheric_thickness_maps"
-			interval="1"
-		/>
-		-->
 	</models>
 	
 	<dataset>
-	<!--
-		<deposits
-			name="NT"
-			type="IOCG"
-			sheet_name="Northern Territory"
-			lon_col_name="Longitude"
-			lat_col_name="Latitude"
-			file_name="Appendix A - Australian deposits - all v2.xlsx"
-			path="C:\Users\U37509\Documents\Mineral_Potential\Deposits"
-		/>
-		<deposits
-			name="WA"
-			type="IOCG"
-			sheet_name="Western Australia"
-			lon_col_name="Longitude"
-			lat_col_name="Latitude"
-			file_name="Appendix A - Australian deposits - all v2.xlsx"
-			path="C:\Users\U37509\Documents\Mineral_Potential\Deposits"
-		/>
-		-->
-		<!--
-		<deposits
-			name="Qld"
-			type="IOCG"
-			sheet_name="Queensland"
-			lon_col_name="Longitude"
-			lat_col_name="Latitude"
-			file_name="Appendix A - Australian deposits - all v2.xlsx"
-			path="C:\Users\U37509\Documents\Mineral_Potential\Deposits"
-		/>
-		-->
-		<!--
-		<property
-			name="prop1"
-			description="Deposit group, ==, Iron oxide copper-gold"
-		/>
-		-->
 		<deposits
 			name="Example"
 			type="Copper-Gold"
 			columns="latitude, longitude, Au, Cu, Age_Ga"
 			file_name="test_points.txt"
-			path="C:\Users\U37509\Documents\Mineral_Potential\mineral-potential-toolkit-original\data\inputs"
+			path="./Mineral_Potential/data/inputs"
 		/>
 		<property
 			name="prop1"
@@ -172,174 +61,6 @@
 	</randomdataset>
 	
 	<features>
-		<!--
-		<feature name="C1" model_types="MagInt" use_existing_features="False" generate_plots="True">
-			<criterion
-				name="criterion1"
-				model_type="MagInt"
-				description="Value, greater than, 1500.0"
-			/>
-		</feature>
-		<feature name="C2" model_types="MagInt" use_existing_features="False" generate_plots="True">
-			<criterion
-				name="criterion1"
-				model_type="MagInt"
-				description="Value, greater than, 1000.0"
-			/>
-		</feature>
-		<feature name="C3" model_types="MagInt" use_existing_features="False" generate_plots="True">
-			<criterion
-				name="criterion1"
-				model_type="MagInt"
-				description="Value, greater than, 500.0"
-			/>
-		</feature>
-		<feature name="C4" model_types="MagInt" use_existing_features="False" generate_plots="True">
-			<criterion
-				name="criterion1"
-				model_type="MagInt"
-				description="Value, greater than, 0.0"
-			/>
-		</feature>
-		-->
-		<!--
-		<feature name="A1" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.0"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, greater than, 0.03"
-			/>
-		</feature>
-		-->
-		<!--
-		<feature name="A2" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.0"
-				project_to_surface="0, 5000"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, greater than, 0.025"
-				project_to_surface="0, 5000"
-			/>
-		</feature>
-		-->
-		<!--
-		<feature name="A3" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.0"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, greater than, 0.025"
-			/>
-		</feature>
-		-->
-		<!--
-		<feature name="A4" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.0"
-				project_to_surface="0, 5000"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, greater than, 0.015"
-				project_to_surface="0, 5000"
-			/>
-		</feature>
-		-->
-		<!--
-		<feature name="B1" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.05"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, less than, 0.01"
-			/>
-		</feature>		
-		<feature name="B2" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.04"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, less than, 0.01"
-			/>
-		</feature>		
-		<feature name="B3" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.03"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, less than, 0.01"
-			/>
-		</feature>		
-		<feature name="B4" model_types="Mag, Grav" use_existing_features="False" generate_plots="False">
-			<criterion
-				name="criterion1"
-				model_type="Grav"
-				description="Value, greater than, 0.02"
-			/>
-			<criterion
-				name="criterion2"
-				model_type="Mag"
-				description="Value, less than, 0.01"
-			/>
-		</feature>
-		-->
-		<!--
-		<feature name="Magnetite" model_types="Mag" use_existing_features="True" generate_plots="True">
-			<criterion
-				name="criterion1"
-				feature_name="A2"
-				description="Distance, less than, 5000"
-			/>
-			<criterion
-				name="criterion2"
-				feature_name="A4"
-				description="Distance, less than, 0"
-			/>
-		</feature>
-		-->
-		<!--
-		<feature name="Mag_Haem_boundary" model_types="Mag, Grav" use_existing_features="True" generate_plots="True">
-			<criterion
-				name="criterion1"
-				feature_name="B4"
-				description="Distance, less than, 1000"
-			/>
-			<criterion
-				name="criterion2"
-				feature_name="A4"
-				description="Distance, less than, 1000"
-			/>
-		</feature>
-		-->
 		<feature name="Lowres" model_types="ModEM" use_existing_featues="False" generate_plots="False">
 			<criterion
 				name="criterion1"
@@ -350,196 +71,8 @@
 	</features>
 	
 	<statistics>
-		<!--
 		<statsnode
 			name="test1"
-			test="Kolmogorov-Smirnov p test"
-			feature="Magnetite"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="values"
-			depths="0"
-			pros_map="True"
-		/>
-		<statsnode 
-			name="test2"
-			test="Binomial p test"
-			n_repeats="1000"
-			depths_type="values"
-			depths="0">
-			<criterion
-				name="criterion1"
-				feature="Magnetite"
-				description="Distance, less than, 0"
-			/>
-		</statsnode>
-		-->
-		<!--
-		<statsnode
-			name="test3"
-			test="Kolmogorov-Smirnov p test"
-			feature="Mag_Haem_boundary"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="values"
-			depths="0"
-			pros_map="True"
-		/>
-		<statsnode 
-			name="test4"
-			test="Binomial p test"
-			n_repeats="1000"
-			depths_type="values"
-			depths="0">
-			<criterion
-				name="criterion1"
-				feature="Mag_Haem_boundary"
-				description="Distance, less than, 0"
-			/>
-		</statsnode>
-		-->
-		<!--
-		<statsnode
-			name="test5"
-			test="Kolmogorov-Smirnov p test"
-			feature="A1"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>		
-		<statsnode
-			name="test6"
-			test="Kolmogorov-Smirnov p test"
-			feature="A2"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>		
-		<statsnode
-			name="test7"
-			test="Kolmogorov-Smirnov p test"
-			feature="A3"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>		
-		<statsnode
-			name="test8"
-			test="Kolmogorov-Smirnov p test"
-			feature="A4"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>		
-		<statsnode
-			name="test9"
-			test="Kolmogorov-Smirnov p test"
-			feature="B1"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>		
-		<statsnode
-			name="test10"
-			test="Kolmogorov-Smirnov p test"
-			feature="B2"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>		
-		<statsnode
-			name="test11"
-			test="Kolmogorov-Smirnov p test"
-			feature="B3"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>		
-		<statsnode
-			name="test12"
-			test="Kolmogorov-Smirnov p test"
-			feature="B4"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="range"
-			depths="0, 5000, 100"
-			pros_map="False"
-		/>
-		-->
-		<!--
-		<statsnode
-			name="test13"
-			test="Kolmogorov-Smirnov p test"
-			feature="C3"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="values"
-			depths="0"
-			pros_map="False"
-		/>
-		<statsnode 
-			name="test14"
-			test="Binomial p test"
-			n_repeats="1000"
-			depths_type="values"
-			depths="0">
-			<criterion
-				name="criterion1"
-				feature="C3"
-				description="Distance, less than, 2500"
-			/>
-		</statsnode>
-		<statsnode
-			name="test15"
-			test="Kolmogorov-Smirnov p test"
-			feature="C4"
-			correlation="Positive"
-			binsize="2000"
-			n_repeats="100"
-			depths_type="values"
-			depths="0"
-			pros_map="False"
-		/>
-		<statsnode 
-			name="test16"
-			test="Binomial p test"
-			n_repeats="1000"
-			depths_type="values"
-			depths="0">
-			<criterion
-				name="criterion1"
-				feature="C4"
-				description="Distance, less than, 0"
-			/>
-		</statsnode>
-		-->
-		<statsnode
-			name="test17"
 			test="Kolmogorov-Smirnov p test"
 			feature="Lowres"
 			correlation="Positive"
@@ -550,4 +83,5 @@
 			pros_map="False"
 		/>
 	</statistics>
+
 </config>
