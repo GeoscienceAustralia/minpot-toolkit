@@ -106,6 +106,7 @@ dependencies:
   - pywin32=228=py36hbaba5e8_1
   - pyzmq=22.2.1=py36hd77b12b_1
   - rasterio=1.1.0=py36h039b02d_0
+  - requests=2.12.5=py36_0
   - rtree=0.9.7=py36h2eaa2aa_1
   - scikit-learn=0.24.2=py36hf11a4ad_1
   - scipy=1.5.3=py36h27d303f_1
