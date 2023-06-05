@@ -5,7 +5,7 @@ The mineral potential toolkit (aka minpot-toolkit) provides tools to facilitate 
 
 Currently, the environment list to run the minpot-toolkit is difficult to setup. To assist, the repository has been packaged with a preferred environment which can be activated using Conda:
 
-`conda env create -f minpot_env.yml`
+`conda env create -f minpot_env.yaml`
 
 `conda activate minpot_env`
 
