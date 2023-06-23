@@ -1,15 +1,24 @@
+# Copyright (C) 2021-2023 Geoscience Australia
+# 
+# The minpot-toolkit is released under the Apache License, Version 2.0 
+# (the "License");you may not use this software except in compliance with 
+# the License. You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# 
+# The project uses third party components which may have different licenses. 
+# Please refer to individual components for more details.
 """
 Plotting module
 -----------------
 This module is used to generate plots representing the results of tests 
 performed using the statistics module.
-
-
-Contacts
---------
-Lachlan Adams
-    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
-    
     
 """
 
@@ -609,11 +618,15 @@ def plot_feature(feature, points_dict, depth, wd_images, bgimage="", save=True):
     gl.ylabels_right = False
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
-    ax.set_extent([lonmin, lonmax, latmin, latmax])
     #plt.colorbar(im2, ax=ax, label='Feature T/F')
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
+    if latmin < -60.:
+        ax.set_extent([lonmin, lonmax, -60, latmax], ccrs.PlateCarree())
+    else:
+        ax.set_extent([lonmin, lonmax, latmin, latmax], ccrs.PlateCarree())
     plt.title('%s km %s'%(depth/1000, feature.name))
+    plt.draw()
     if save:
         plt.savefig(filename)
     #end if
@@ -828,7 +841,10 @@ def plot_quantile_map(obj, bgimage="", wd_images='.'):
     gl.ylabels_right = False
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
-    ax.set_extent([lonmin, lonmax, latmin, latmax])
+    if latmin < -60.:
+        ax.set_extent([lonmin, lonmax, -60, latmax], ccrs.PlateCarree())
+    else:
+        ax.set_extent([lonmin, lonmax, latmin, latmax], ccrs.PlateCarree())
     plt.colorbar(im2, ax=ax, label='Quantile')
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')
@@ -891,7 +907,10 @@ def plot_pdf_map(obj, bgimage="", wd_images='.'):
     gl.ylabels_right = False
     gl.xformatter = LONGITUDE_FORMATTER
     gl.yformatter = LATITUDE_FORMATTER
-    ax.set_extent([lonmin, lonmax, latmin, latmax])
+    if latmin < -60.:
+        ax.set_extent([lonmin, lonmax, -60, latmax], ccrs.PlateCarree())
+    else:
+        ax.set_extent([lonmin, lonmax, latmin, latmax], ccrs.PlateCarree())
     plt.colorbar(im2, ax=ax, label='Normed probability density')
     plt.xlabel('Longitude')
     plt.ylabel('Latitude')

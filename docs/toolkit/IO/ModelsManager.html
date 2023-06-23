@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="generator" content="pdoc 0.9.2" />
 <title>toolkit.IO.ModelsManager API documentation</title>
 <meta name="description" content="Model input module
 This module is used to import geophysical models from various input formats.
@@ -27,25 +27,32 @@ Supported formats are comma separated values (.csv), …" />
 <h2 id="model-input-module">Model Input Module</h2>
 <p>This module is used to import geophysical models from various input formats.
 Supported formats are comma separated values (.csv), ModEM, and netcdf (.nc).</p>
-<h2 id="contacts">Contacts</h2>
-<p>Lachlan Adams
-- Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;
+<pre><code class="python"># Copyright (C) 2021-2023 Geoscience Australia
+# 
+# The minpot-toolkit is released under the Apache License, Version 2.0 
+# (the &#34;License&#34;);you may not use this software except in compliance with 
+# the License. You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# 
+# The project uses third party components which may have different licenses. 
+# Please refer to individual components for more details.
+
+&#34;&#34;&#34;
 Model input module
 -----------------
 This module is used to import geophysical models from various input formats.
 Supported formats are comma separated values (.csv), ModEM, and netcdf (.nc).
-
-
-Contacts
---------
-Lachlan Adams
-    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
-    
     
 &#34;&#34;&#34;
 
@@ -263,6 +270,7 @@ class GeophysicalModel():
         self.cellsize = 0.1
         self.depth_list = depth_list
         self.bounds = [110, 155, -45, -10]
+        self.epsg = False
         
         for key in kwargs.keys():
             if hasattr(self, key):
@@ -307,6 +315,36 @@ class GeophysicalModel():
                 self.model_dict[name] = read_csv_model(model)
             elif model.attrib[&#39;model_format&#39;] == &#39;netcdf&#39;:
                 self.model_dict[name] = read_netcdf_model(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;geotiff&#39;:
+                print(name)
+                self.model_dict[name] = read_geotiff_model(model)
+            # Correct for longitude wrap-around
+            if np.any(self.model_dict[name].gclon &gt; 180):
+                # Extract subset for longitude wrapping
+                wrapBool = self.model_dict[name].gclon &gt; 180
+                boolShape    = (wrapBool.shape[0], wrapBool[0].sum())
+                invBoolShape = (wrapBool.shape[0], (wrapBool==False)[0].sum())
+                wrapLon  = self.model_dict[name].gclon[wrapBool] - 360
+                wrapLon = wrapLon.reshape(boolShape)
+                # Re-arange model arrays
+                gclon  = np.hstack((wrapLon, 
+                                    self.model_dict[name].gclon[wrapBool==False].reshape(invBoolShape)))
+                gclat  = np.hstack((self.model_dict[name].gclat[wrapBool].reshape(boolShape), 
+                                    self.model_dict[name].gclat[wrapBool==False].reshape(invBoolShape)))
+                values = np.hstack((self.model_dict[name].values[wrapBool].reshape(boolShape), 
+                                    self.model_dict[name].values[wrapBool==False].reshape(invBoolShape)))
+                self.model_dict[name].gclon  = gclon
+                self.model_dict[name].gclat  = gclat
+                self.model_dict[name].values  = np.expand_dims(values, 2)
+                gcxBool = (self.model_dict[name].gcx &gt;= 180) &amp; (self.model_dict[name].gcx &lt; 360)
+                self.model_dict[name].gcx = np.hstack((self.model_dict[name].gcx[gcxBool] - 360,
+                                                       self.model_dict[name].gcx[self.model_dict[name].gcx &lt;= 180]))
+                # Update model bounds
+                minLon = np.min(self.model_dict[name].gclon)
+                minLat = np.min(self.model_dict[name].gclat)
+                maxLon = np.max(self.model_dict[name].gclon)
+                maxLat = np.max(self.model_dict[name].gclat)
+                self.model_dict[name].bounds = [minLon, maxLon, minLat, maxLat]
             #end if
         #end for
     #end func
@@ -396,8 +434,8 @@ def compute_coverage_polygon(model):
     gclat = model.gclat
     values = model.values
     arr = np.any(~np.isnan(values), axis=2)
-    grad = (fn.gradient(gclon, gclat, np.array([0]), 
-                        1.0*np.expand_dims(arr, 3))[:,:,0] != 0)*1
+    grad = (fn.gradient(gclon, gclat, np.array([0]),
+                        1.0*np.expand_dims(arr, 2))[:,:,0] != 0)*1
     iindices = np.arange(len(grad[:, 0]))
     jindices = np.arange(len(grad[0, :]))
     grad1 = np.zeros_like(grad)
@@ -496,7 +534,8 @@ def interpolate_to_grid(cellsize, depth_list, model_dict, model_type, bounds,
                             int((globMaxLon-globMinLon)/cellsize+1))
     latitude = np.linspace(globMinLat, globMaxLat, 
                            int((globMaxLat-globMinLat)/cellsize+1))
-    values = np.zeros((longitude.size, latitude.size, depth_list.size))*np.nan
+    values = np.zeros((longitude.size, latitude.size, depth_list.size))
+    values[:] = np.nan
     
     # dictionary to store min/max lat/lon in each model
     for key in model_dict.keys():
@@ -587,10 +626,11 @@ def interpolate_to_grid(cellsize, depth_list, model_dict, model_type, bounds,
         #end if
     #end for
     
-    longitude[longitude &gt;= 180] = longitude[longitude &gt;= 180] - 360
+    while np.any(longitude[longitude &gt; 180]):
+        longitude[longitude &gt; 180] = longitude[longitude &gt; 180] - 360
     
     values = values.transpose(1,0,2)
-    
+
     return longitude, latitude, values
 #end func
     
@@ -802,7 +842,29 @@ def read_netcdf_model(model):
     modObj.epsg = epsg
     modObj.proj_str = proj_str
     return modObj
-#end func</code></pre>
+#end func
+
+def read_geotiff_model(model):
+    from toolkit.IO.geotiff_Model import geotiff_model
+
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = os.path.join(wd, model.attrib[&#34;model_file_name&#34;])
+
+    if &#34;interval&#34; in model.attrib:
+        interval = fn.changetype(model.attrib[&#34;interval&#34;], int)
+    else:
+        interval = 1
+    #end if
+    
+    if &#39;epsg&#39; in model.attrib:
+        epsg = int(model.attrib[&#39;epsg&#39;])
+    else:
+        epsg = False
+    #end if
+    modObj = geotiff_model(model_fn, interval=interval, force_epsg=epsg)
+
+    return modObj
+# end func</code></pre>
 </details>
 </section>
 <section>
@@ -872,8 +934,8 @@ tensor (3rd dimension may be 1).</dd>
     gclat = model.gclat
     values = model.values
     arr = np.any(~np.isnan(values), axis=2)
-    grad = (fn.gradient(gclon, gclat, np.array([0]), 
-                        1.0*np.expand_dims(arr, 3))[:,:,0] != 0)*1
+    grad = (fn.gradient(gclon, gclat, np.array([0]),
+                        1.0*np.expand_dims(arr, 2))[:,:,0] != 0)*1
     iindices = np.arange(len(grad[:, 0]))
     jindices = np.arange(len(grad[0, :]))
     grad1 = np.zeros_like(grad)
@@ -1014,7 +1076,8 @@ tensor (3rd dimension may be 1).</dd>
                             int((globMaxLon-globMinLon)/cellsize+1))
     latitude = np.linspace(globMinLat, globMaxLat, 
                            int((globMaxLat-globMinLat)/cellsize+1))
-    values = np.zeros((longitude.size, latitude.size, depth_list.size))*np.nan
+    values = np.zeros((longitude.size, latitude.size, depth_list.size))
+    values[:] = np.nan
     
     # dictionary to store min/max lat/lon in each model
     for key in model_dict.keys():
@@ -1105,10 +1168,11 @@ tensor (3rd dimension may be 1).</dd>
         #end if
     #end for
     
-    longitude[longitude &gt;= 180] = longitude[longitude &gt;= 180] - 360
+    while np.any(longitude[longitude &gt; 180]):
+        longitude[longitude &gt; 180] = longitude[longitude &gt; 180] - 360
     
     values = values.transpose(1,0,2)
-    
+
     return longitude, latitude, values</code></pre>
 </details>
 </dd>
@@ -1175,6 +1239,37 @@ tensor (3rd dimension may be 1).</dd>
     
     modObj.epsg = epsg
     modObj.proj_str = proj_str
+    return modObj</code></pre>
+</details>
+</dd>
+<dt id="toolkit.IO.ModelsManager.read_geotiff_model"><code class="name flex">
+<span>def <span class="ident">read_geotiff_model</span></span>(<span>model)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read_geotiff_model(model):
+    from toolkit.IO.geotiff_Model import geotiff_model
+
+    wd = model.attrib[&#34;path&#34;]
+    model_fn = os.path.join(wd, model.attrib[&#34;model_file_name&#34;])
+
+    if &#34;interval&#34; in model.attrib:
+        interval = fn.changetype(model.attrib[&#34;interval&#34;], int)
+    else:
+        interval = 1
+    #end if
+    
+    if &#39;epsg&#39; in model.attrib:
+        epsg = int(model.attrib[&#39;epsg&#39;])
+    else:
+        epsg = False
+    #end if
+    modObj = geotiff_model(model_fn, interval=interval, force_epsg=epsg)
+
     return modObj</code></pre>
 </details>
 </dd>
@@ -1443,6 +1538,7 @@ correct information from the models dictionary.</dd>
         self.cellsize = 0.1
         self.depth_list = depth_list
         self.bounds = [110, 155, -45, -10]
+        self.epsg = False
         
         for key in kwargs.keys():
             if hasattr(self, key):
@@ -1487,6 +1583,36 @@ correct information from the models dictionary.</dd>
                 self.model_dict[name] = read_csv_model(model)
             elif model.attrib[&#39;model_format&#39;] == &#39;netcdf&#39;:
                 self.model_dict[name] = read_netcdf_model(model)
+            elif model.attrib[&#39;model_format&#39;] == &#39;geotiff&#39;:
+                print(name)
+                self.model_dict[name] = read_geotiff_model(model)
+            # Correct for longitude wrap-around
+            if np.any(self.model_dict[name].gclon &gt; 180):
+                # Extract subset for longitude wrapping
+                wrapBool = self.model_dict[name].gclon &gt; 180
+                boolShape    = (wrapBool.shape[0], wrapBool[0].sum())
+                invBoolShape = (wrapBool.shape[0], (wrapBool==False)[0].sum())
+                wrapLon  = self.model_dict[name].gclon[wrapBool] - 360
+                wrapLon = wrapLon.reshape(boolShape)
+                # Re-arange model arrays
+                gclon  = np.hstack((wrapLon, 
+                                    self.model_dict[name].gclon[wrapBool==False].reshape(invBoolShape)))
+                gclat  = np.hstack((self.model_dict[name].gclat[wrapBool].reshape(boolShape), 
+                                    self.model_dict[name].gclat[wrapBool==False].reshape(invBoolShape)))
+                values = np.hstack((self.model_dict[name].values[wrapBool].reshape(boolShape), 
+                                    self.model_dict[name].values[wrapBool==False].reshape(invBoolShape)))
+                self.model_dict[name].gclon  = gclon
+                self.model_dict[name].gclat  = gclat
+                self.model_dict[name].values  = np.expand_dims(values, 2)
+                gcxBool = (self.model_dict[name].gcx &gt;= 180) &amp; (self.model_dict[name].gcx &lt; 360)
+                self.model_dict[name].gcx = np.hstack((self.model_dict[name].gcx[gcxBool] - 360,
+                                                       self.model_dict[name].gcx[self.model_dict[name].gcx &lt;= 180]))
+                # Update model bounds
+                minLon = np.min(self.model_dict[name].gclon)
+                minLat = np.min(self.model_dict[name].gclat)
+                maxLon = np.max(self.model_dict[name].gclon)
+                maxLat = np.max(self.model_dict[name].gclat)
+                self.model_dict[name].bounds = [minLon, maxLon, minLat, maxLat]
             #end if
         #end for
     #end func
@@ -1674,7 +1800,37 @@ and places all models on the same grid.</p></div>
         elif model.attrib[&#39;model_format&#39;] == &#39;csv&#39;:
             self.model_dict[name] = read_csv_model(model)
         elif model.attrib[&#39;model_format&#39;] == &#39;netcdf&#39;:
-            self.model_dict[name] = read_netcdf_model(model)</code></pre>
+            self.model_dict[name] = read_netcdf_model(model)
+        elif model.attrib[&#39;model_format&#39;] == &#39;geotiff&#39;:
+            print(name)
+            self.model_dict[name] = read_geotiff_model(model)
+        # Correct for longitude wrap-around
+        if np.any(self.model_dict[name].gclon &gt; 180):
+            # Extract subset for longitude wrapping
+            wrapBool = self.model_dict[name].gclon &gt; 180
+            boolShape    = (wrapBool.shape[0], wrapBool[0].sum())
+            invBoolShape = (wrapBool.shape[0], (wrapBool==False)[0].sum())
+            wrapLon  = self.model_dict[name].gclon[wrapBool] - 360
+            wrapLon = wrapLon.reshape(boolShape)
+            # Re-arange model arrays
+            gclon  = np.hstack((wrapLon, 
+                                self.model_dict[name].gclon[wrapBool==False].reshape(invBoolShape)))
+            gclat  = np.hstack((self.model_dict[name].gclat[wrapBool].reshape(boolShape), 
+                                self.model_dict[name].gclat[wrapBool==False].reshape(invBoolShape)))
+            values = np.hstack((self.model_dict[name].values[wrapBool].reshape(boolShape), 
+                                self.model_dict[name].values[wrapBool==False].reshape(invBoolShape)))
+            self.model_dict[name].gclon  = gclon
+            self.model_dict[name].gclat  = gclat
+            self.model_dict[name].values  = np.expand_dims(values, 2)
+            gcxBool = (self.model_dict[name].gcx &gt;= 180) &amp; (self.model_dict[name].gcx &lt; 360)
+            self.model_dict[name].gcx = np.hstack((self.model_dict[name].gcx[gcxBool] - 360,
+                                                   self.model_dict[name].gcx[self.model_dict[name].gcx &lt;= 180]))
+            # Update model bounds
+            minLon = np.min(self.model_dict[name].gclon)
+            minLat = np.min(self.model_dict[name].gclat)
+            maxLon = np.max(self.model_dict[name].gclon)
+            maxLat = np.max(self.model_dict[name].gclat)
+            self.model_dict[name].bounds = [minLon, maxLon, minLat, maxLat]</code></pre>
 </details>
 </dd>
 </dl>
@@ -2089,7 +2245,6 @@ improve the speed of the filtering of random points by location.</p></div>
 <div class="toc">
 <ul>
 <li><a href="#model-input-module">Model input module</a></li>
-<li><a href="#contacts">Contacts</a></li>
 </ul>
 </div>
 <ul id="index">
@@ -2104,6 +2259,7 @@ improve the speed of the filtering of random points by location.</p></div>
 <li><code><a title="toolkit.IO.ModelsManager.get_polygon" href="#toolkit.IO.ModelsManager.get_polygon">get_polygon</a></code></li>
 <li><code><a title="toolkit.IO.ModelsManager.interpolate_to_grid" href="#toolkit.IO.ModelsManager.interpolate_to_grid">interpolate_to_grid</a></code></li>
 <li><code><a title="toolkit.IO.ModelsManager.read_csv_model" href="#toolkit.IO.ModelsManager.read_csv_model">read_csv_model</a></code></li>
+<li><code><a title="toolkit.IO.ModelsManager.read_geotiff_model" href="#toolkit.IO.ModelsManager.read_geotiff_model">read_geotiff_model</a></code></li>
 <li><code><a title="toolkit.IO.ModelsManager.read_maggrav" href="#toolkit.IO.ModelsManager.read_maggrav">read_maggrav</a></code></li>
 <li><code><a title="toolkit.IO.ModelsManager.read_modem" href="#toolkit.IO.ModelsManager.read_modem">read_modem</a></code></li>
 <li><code><a title="toolkit.IO.ModelsManager.read_netcdf_model" href="#toolkit.IO.ModelsManager.read_netcdf_model">read_netcdf_model</a></code></li>
@@ -2136,7 +2292,7 @@ improve the speed of the filtering of random points by location.</p></div>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
 </footer>
 </body>
 </html>

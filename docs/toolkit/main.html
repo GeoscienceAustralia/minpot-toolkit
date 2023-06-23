@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-<meta name="generator" content="pdoc 0.10.0" />
+<meta name="generator" content="pdoc 0.9.2" />
 <title>toolkit.main API documentation</title>
 <meta name="description" content="Mineral Potential Toolkit
 This repository is designed to facilitate statistical appraisal of the
@@ -32,20 +32,27 @@ integration of multiple models together to generate mineral prospectivity
 assessments.</p>
 <h2 id="usage">Usage</h2>
 <p>python main.py &ndash;config_file &hellip;/config.xml</p>
-<h2 id="contacts">Contacts</h2>
-<p>Lachlan Adams
-- Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com</p>
-<p>Marcus Haynes
-- Marcus.Haynes@ga.gov.au</p>
-<p>Alison Kirkby
-- Alison.Kirkby@ga.gov.au</p>
-<p>Fei Zhang
-- Fei.Zhang@ga.gov.au</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">&#34;&#34;&#34;
+<pre><code class="python"># Copyright (C) 2021-2023 Geoscience Australia
+# 
+# The minpot-toolkit is released under the Apache License, Version 2.0 
+# (the &#34;License&#34;);you may not use this software except in compliance with 
+# the License. You may obtain a copy of the License at
+# 
+#     http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# 
+# The project uses third party components which may have different licenses. 
+# Please refer to individual components for more details.
+&#34;&#34;&#34;
 Mineral Potential Toolkit
 -------------------------
 This repository is designed to facilitate statistical appraisal of the 
@@ -54,27 +61,10 @@ mineral deposits. In the future the repository will be developed to enable the
 integration of multiple models together to generate mineral prospectivity 
 assessments.
 
-
 Usage
 -----
 python main.py --config_file .../config.xml
 
-
-Contacts
---------
-Lachlan Adams
-    - Lachlan.Adams@ga.gov.au or Lachlan.Adams.1996@outlook.com
-
-Marcus Haynes
-    - Marcus.Haynes@ga.gov.au
-    
-Alison Kirkby
-    - Alison.Kirkby@ga.gov.au
-    
-Fei Zhang
-    - Fei.Zhang@ga.gov.au
-    
-    
 &#34;&#34;&#34;
 
 import toolkit.functions as fn
@@ -83,6 +73,7 @@ import numpy as np
 import os, warnings, argparse
 from matplotlib.image import imread
 import xml.etree.ElementTree as ElementTree
+from time import time
 
 from toolkit.feat_eng import FeatureManager
 from toolkit.IO.DataManager import DataManager, RandomPointsManager
@@ -141,6 +132,7 @@ class MineralPotential():
         self.model_to_savefile = False
         self.data_from_savefile = False
         self.data_to_savefile = False
+        self.stats_flag = False
         self.model_savefile=&#34;model_savefile.npy&#34;
         self.domain_savefile=&#34;domain_savefile.npy&#34;
         self.data_savefile=&#34;data_savefile.npy&#34;
@@ -206,8 +198,11 @@ class MineralPotential():
         # Input commands for analysis
         featEngNode = rootNode.find(&#34;features&#34;)
         self.featureNodes = featEngNode.findall(&#34;feature&#34;)
-        statCorrNode = rootNode.find(&#34;statistics&#34;)
-        self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)
+        if( not (rootNode.find(&#39;statistics&#39;) is None) ):
+            statCorrNode = rootNode.find(&#34;statistics&#34;)
+            self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)
+            self.stats_flag = True
+        #end if
     #end func
     
     def Prepare(self):
@@ -284,14 +279,18 @@ class MineralPotential():
         self.FeatureManager = FeatureManager(self.commandList, 
                                              self.featureNodes)
         self.FeatureManager.Process(self.ModelsManager.model_dict)
-        print(&#39;Completed engineering features, running analysis&#39;)
-        self.StatsManager = StatsManager(self.commandList, self.statnodes)
-        self.StatsManager.Process(self.FeatureManager.feature_dict, 
-                                  self.DataManager.points_dict, self.RPManager)
-        print(&#39;Completed running analysis, generating prospectivity maps&#39;)
-        self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
-                                           self.FeatureManager.feature_dict)
-        print(&#39;Completed generating prospectivity maps&#39;)
+        print(&#39;Completed engineering features,&#39;,)
+        if self.stats_flag:
+            print(&#39; running analysis&#39;)
+            self.StatsManager = StatsManager(self.commandList, self.statnodes)
+            self.StatsManager.Process(self.FeatureManager.feature_dict, 
+                                      self.DataManager.points_dict, self.RPManager)
+            print(&#39;Completed running analysis, generating prospectivity maps&#39;)
+            self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
+                                               self.FeatureManager.feature_dict)
+            print(&#39;Completed generating prospectivity maps&#39;)
+        #end if
+        print(&#39;Finished&#39;)
     #end func
     
     def Plots(self):
@@ -312,19 +311,21 @@ class MineralPotential():
         
         &#34;&#34;&#34;
         print(&#39;Generating plots&#39;)
-        if self.bgimage is not None:
+        if len(self.bgimage):
             self.bgimage = imread(self.bgimage)
         #end if
         pt.plot_coverage_region(self.ModelsManager.domain, self.output_path,
                                 bgimage=self.bgimage)
-        for key in self.StatsManager.stat_obj_dict.keys():
-            test = self.StatsManager.stat_obj_dict[key]
-            path = os.path.join(self.output_path, &#39;Stats&#39;)
-            if not os.path.exists(path):
-                os.mkdir(path)
-            #end if
-            test.Plots(path)
-        #end for
+        if self.stats_flag:
+            for key in self.StatsManager.stat_obj_dict.keys():
+                test = self.StatsManager.stat_obj_dict[key]
+                path = os.path.join(self.output_path, &#39;Stats&#39;)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                #end if
+                test.Plots(path)
+            #end for
+        #end if
         for key in self.FeatureManager.feature_dict.keys():
             feat = self.FeatureManager.feature_dict[key]
             path = os.path.join(self.output_path, &#39;Features&#39;)
@@ -356,15 +357,17 @@ class MineralPotential():
         if self.make_plots:
             self.Plots()
         #end if
-        keys = self.StatsManager.stat_obj_dict.keys()
-        for key in keys:
-            stat_obj = self.StatsManager.stat_obj_dict[key]
-            path = os.path.join(self.output_path, &#39;Stats&#39;)
-            if not os.path.exists(path):
-                os.mkdir(path)
-            #end if
-            results_to_file(stat_obj, path)
-        #end for
+        if self.stats_flag:
+            keys = self.StatsManager.stat_obj_dict.keys()
+            for key in keys:
+                stat_obj = self.StatsManager.stat_obj_dict[key]
+                path = os.path.join(self.output_path, &#39;Stats&#39;)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                #end if
+                results_to_file(stat_obj, path)
+            #end for
+        #end if
         keys = self.FeatureManager.feature_dict.keys()
         for key in keys:
             feat_obj = self.FeatureManager.feature_dict[key]
@@ -374,8 +377,12 @@ class MineralPotential():
             #end if
             print_to_file(feat_obj, path)
         #end for
-        np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, 
-                allow_pickle=True)
+
+        try:
+            np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, allow_pickle=True)
+        except Exception as e:
+            print(&#39;Warning: Failed to save model file with error ({})&#39;.format(str(e)))
+        # end try
     #end func
     
     def __call__(self):
@@ -385,6 +392,7 @@ class MineralPotential():
         
         
         &#34;&#34;&#34;
+        t1 = time()
         # Data and models are initialised during XML parsing
         self.Prepare()
         
@@ -395,6 +403,8 @@ class MineralPotential():
         if self.generate_output:
             self.Output()
         #end if
+        t2 = time()
+        print(&#39;Completed in&#39;,t2-t1,&#39;seconds.&#39;)
     #end func
 #end class
 
@@ -499,6 +509,7 @@ if __name__==&#39;__main__&#39;:
         self.model_to_savefile = False
         self.data_from_savefile = False
         self.data_to_savefile = False
+        self.stats_flag = False
         self.model_savefile=&#34;model_savefile.npy&#34;
         self.domain_savefile=&#34;domain_savefile.npy&#34;
         self.data_savefile=&#34;data_savefile.npy&#34;
@@ -564,8 +575,11 @@ if __name__==&#39;__main__&#39;:
         # Input commands for analysis
         featEngNode = rootNode.find(&#34;features&#34;)
         self.featureNodes = featEngNode.findall(&#34;feature&#34;)
-        statCorrNode = rootNode.find(&#34;statistics&#34;)
-        self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)
+        if( not (rootNode.find(&#39;statistics&#39;) is None) ):
+            statCorrNode = rootNode.find(&#34;statistics&#34;)
+            self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)
+            self.stats_flag = True
+        #end if
     #end func
     
     def Prepare(self):
@@ -642,14 +656,18 @@ if __name__==&#39;__main__&#39;:
         self.FeatureManager = FeatureManager(self.commandList, 
                                              self.featureNodes)
         self.FeatureManager.Process(self.ModelsManager.model_dict)
-        print(&#39;Completed engineering features, running analysis&#39;)
-        self.StatsManager = StatsManager(self.commandList, self.statnodes)
-        self.StatsManager.Process(self.FeatureManager.feature_dict, 
-                                  self.DataManager.points_dict, self.RPManager)
-        print(&#39;Completed running analysis, generating prospectivity maps&#39;)
-        self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
-                                           self.FeatureManager.feature_dict)
-        print(&#39;Completed generating prospectivity maps&#39;)
+        print(&#39;Completed engineering features,&#39;,)
+        if self.stats_flag:
+            print(&#39; running analysis&#39;)
+            self.StatsManager = StatsManager(self.commandList, self.statnodes)
+            self.StatsManager.Process(self.FeatureManager.feature_dict, 
+                                      self.DataManager.points_dict, self.RPManager)
+            print(&#39;Completed running analysis, generating prospectivity maps&#39;)
+            self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
+                                               self.FeatureManager.feature_dict)
+            print(&#39;Completed generating prospectivity maps&#39;)
+        #end if
+        print(&#39;Finished&#39;)
     #end func
     
     def Plots(self):
@@ -670,19 +688,21 @@ if __name__==&#39;__main__&#39;:
         
         &#34;&#34;&#34;
         print(&#39;Generating plots&#39;)
-        if self.bgimage is not None:
+        if len(self.bgimage):
             self.bgimage = imread(self.bgimage)
         #end if
         pt.plot_coverage_region(self.ModelsManager.domain, self.output_path,
                                 bgimage=self.bgimage)
-        for key in self.StatsManager.stat_obj_dict.keys():
-            test = self.StatsManager.stat_obj_dict[key]
-            path = os.path.join(self.output_path, &#39;Stats&#39;)
-            if not os.path.exists(path):
-                os.mkdir(path)
-            #end if
-            test.Plots(path)
-        #end for
+        if self.stats_flag:
+            for key in self.StatsManager.stat_obj_dict.keys():
+                test = self.StatsManager.stat_obj_dict[key]
+                path = os.path.join(self.output_path, &#39;Stats&#39;)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                #end if
+                test.Plots(path)
+            #end for
+        #end if
         for key in self.FeatureManager.feature_dict.keys():
             feat = self.FeatureManager.feature_dict[key]
             path = os.path.join(self.output_path, &#39;Features&#39;)
@@ -714,15 +734,17 @@ if __name__==&#39;__main__&#39;:
         if self.make_plots:
             self.Plots()
         #end if
-        keys = self.StatsManager.stat_obj_dict.keys()
-        for key in keys:
-            stat_obj = self.StatsManager.stat_obj_dict[key]
-            path = os.path.join(self.output_path, &#39;Stats&#39;)
-            if not os.path.exists(path):
-                os.mkdir(path)
-            #end if
-            results_to_file(stat_obj, path)
-        #end for
+        if self.stats_flag:
+            keys = self.StatsManager.stat_obj_dict.keys()
+            for key in keys:
+                stat_obj = self.StatsManager.stat_obj_dict[key]
+                path = os.path.join(self.output_path, &#39;Stats&#39;)
+                if not os.path.exists(path):
+                    os.mkdir(path)
+                #end if
+                results_to_file(stat_obj, path)
+            #end for
+        #end if
         keys = self.FeatureManager.feature_dict.keys()
         for key in keys:
             feat_obj = self.FeatureManager.feature_dict[key]
@@ -732,8 +754,12 @@ if __name__==&#39;__main__&#39;:
             #end if
             print_to_file(feat_obj, path)
         #end for
-        np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, 
-                allow_pickle=True)
+
+        try:
+            np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, allow_pickle=True)
+        except Exception as e:
+            print(&#39;Warning: Failed to save model file with error ({})&#39;.format(str(e)))
+        # end try
     #end func
     
     def __call__(self):
@@ -743,6 +769,7 @@ if __name__==&#39;__main__&#39;:
         
         
         &#34;&#34;&#34;
+        t1 = time()
         # Data and models are initialised during XML parsing
         self.Prepare()
         
@@ -751,7 +778,10 @@ if __name__==&#39;__main__&#39;:
         
         # Outputs and visualisation
         if self.generate_output:
-            self.Output()</code></pre>
+            self.Output()
+        #end if
+        t2 = time()
+        print(&#39;Completed in&#39;,t2-t1,&#39;seconds.&#39;)</code></pre>
 </details>
 <h3>Methods</h3>
 <dl>
@@ -785,15 +815,17 @@ and prospectivity modelling modules.</p>
     if self.make_plots:
         self.Plots()
     #end if
-    keys = self.StatsManager.stat_obj_dict.keys()
-    for key in keys:
-        stat_obj = self.StatsManager.stat_obj_dict[key]
-        path = os.path.join(self.output_path, &#39;Stats&#39;)
-        if not os.path.exists(path):
-            os.mkdir(path)
-        #end if
-        results_to_file(stat_obj, path)
-    #end for
+    if self.stats_flag:
+        keys = self.StatsManager.stat_obj_dict.keys()
+        for key in keys:
+            stat_obj = self.StatsManager.stat_obj_dict[key]
+            path = os.path.join(self.output_path, &#39;Stats&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            results_to_file(stat_obj, path)
+        #end for
+    #end if
     keys = self.FeatureManager.feature_dict.keys()
     for key in keys:
         feat_obj = self.FeatureManager.feature_dict[key]
@@ -803,8 +835,11 @@ and prospectivity modelling modules.</p>
         #end if
         print_to_file(feat_obj, path)
     #end for
-    np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, 
-            allow_pickle=True)</code></pre>
+
+    try:
+        np.save(os.path.join(self.output_path, &#39;savefile.npy&#39;), self, allow_pickle=True)
+    except Exception as e:
+        print(&#39;Warning: Failed to save model file with error ({})&#39;.format(str(e)))</code></pre>
 </details>
 </dd>
 <dt id="toolkit.main.MineralPotential.ParseXMLNode"><code class="name flex">
@@ -884,8 +919,10 @@ be used by all modules required by the workflow.</p>
     # Input commands for analysis
     featEngNode = rootNode.find(&#34;features&#34;)
     self.featureNodes = featEngNode.findall(&#34;feature&#34;)
-    statCorrNode = rootNode.find(&#34;statistics&#34;)
-    self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)</code></pre>
+    if( not (rootNode.find(&#39;statistics&#39;) is None) ):
+        statCorrNode = rootNode.find(&#34;statistics&#34;)
+        self.statnodes = statCorrNode.findall(&#34;statsnode&#34;)
+        self.stats_flag = True</code></pre>
 </details>
 </dd>
 <dt id="toolkit.main.MineralPotential.Plots"><code class="name flex">
@@ -920,19 +957,21 @@ be used by all modules required by the workflow.</p>
     
     &#34;&#34;&#34;
     print(&#39;Generating plots&#39;)
-    if self.bgimage is not None:
+    if len(self.bgimage):
         self.bgimage = imread(self.bgimage)
     #end if
     pt.plot_coverage_region(self.ModelsManager.domain, self.output_path,
                             bgimage=self.bgimage)
-    for key in self.StatsManager.stat_obj_dict.keys():
-        test = self.StatsManager.stat_obj_dict[key]
-        path = os.path.join(self.output_path, &#39;Stats&#39;)
-        if not os.path.exists(path):
-            os.mkdir(path)
-        #end if
-        test.Plots(path)
-    #end for
+    if self.stats_flag:
+        for key in self.StatsManager.stat_obj_dict.keys():
+            test = self.StatsManager.stat_obj_dict[key]
+            path = os.path.join(self.output_path, &#39;Stats&#39;)
+            if not os.path.exists(path):
+                os.mkdir(path)
+            #end if
+            test.Plots(path)
+        #end for
+    #end if
     for key in self.FeatureManager.feature_dict.keys():
         feat = self.FeatureManager.feature_dict[key]
         path = os.path.join(self.output_path, &#39;Features&#39;)
@@ -1051,14 +1090,18 @@ computations.</p>
     self.FeatureManager = FeatureManager(self.commandList, 
                                          self.featureNodes)
     self.FeatureManager.Process(self.ModelsManager.model_dict)
-    print(&#39;Completed engineering features, running analysis&#39;)
-    self.StatsManager = StatsManager(self.commandList, self.statnodes)
-    self.StatsManager.Process(self.FeatureManager.feature_dict, 
-                              self.DataManager.points_dict, self.RPManager)
-    print(&#39;Completed running analysis, generating prospectivity maps&#39;)
-    self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
-                                       self.FeatureManager.feature_dict)
-    print(&#39;Completed generating prospectivity maps&#39;)</code></pre>
+    print(&#39;Completed engineering features,&#39;,)
+    if self.stats_flag:
+        print(&#39; running analysis&#39;)
+        self.StatsManager = StatsManager(self.commandList, self.statnodes)
+        self.StatsManager.Process(self.FeatureManager.feature_dict, 
+                                  self.DataManager.points_dict, self.RPManager)
+        print(&#39;Completed running analysis, generating prospectivity maps&#39;)
+        self.Prospectivity = Prospectivity(self.StatsManager.stat_obj_dict,
+                                           self.FeatureManager.feature_dict)
+        print(&#39;Completed generating prospectivity maps&#39;)
+    #end if
+    print(&#39;Finished&#39;)</code></pre>
 </details>
 </dd>
 </dl>
@@ -1072,7 +1115,6 @@ computations.</p>
 <ul>
 <li><a href="#mineral-potential-toolkit">Mineral Potential Toolkit</a></li>
 <li><a href="#usage">Usage</a></li>
-<li><a href="#contacts">Contacts</a></li>
 </ul>
 </div>
 <ul id="index">
@@ -1099,7 +1141,7 @@ computations.</p>
 </nav>
 </main>
 <footer id="footer">
-<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
 </footer>
 </body>
 </html>
