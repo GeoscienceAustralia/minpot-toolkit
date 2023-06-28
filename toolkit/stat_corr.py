@@ -1206,13 +1206,13 @@ def initialise_cdf_array(distance_array, binsize):
     n_bins = binc.shape[0]
     n_repeats = distance_array['distance_random'].shape[1]
     array = np.zeros(len(distance_array['distance']),
-                     dtype=[('depth', np.float), 
-                            ('binc', np.float, binc.shape),
-                            ('bins', np.float, bins.shape),
-                            ('cdf_random', np.float, (n_repeats, n_bins)),
-                            ('cdf', np.float, binc.shape),
-                            ('pdf_random', np.float, (n_repeats, n_bins)),
-                            ('pdf', np.float, binc.shape)])
+                     dtype=[('depth', np.float64), 
+                            ('binc', np.float64, binc.shape),
+                            ('bins', np.float64, bins.shape),
+                            ('cdf_random', np.float64, (n_repeats, n_bins)),
+                            ('cdf', np.float64, binc.shape),
+                            ('pdf_random', np.float64, (n_repeats, n_bins)),
+                            ('pdf', np.float64, binc.shape)])
     array['depth'] = distance_array['depth']
     for i in range(distance_array['distance'].shape[0]):
         array['bins'][i] = bins
@@ -1335,12 +1335,12 @@ def make_distance_array(feature, point_data, n_repeats, points_random=None,
     gcz = feature.gcz
     n_points = len(point_data)
     distance_array = np.array(np.zeros(len(gcz)),
-                              dtype=[('depth', np.float),
-                                     ('lon',np.float, n_points),
-                                     ('lat',np.float, n_points),
-                                     ('distance_random', np.float, \
+                              dtype=[('depth', np.float64),
+                                     ('lon',np.float64, n_points),
+                                     ('lat',np.float64, n_points),
+                                     ('distance_random', np.float64, \
                                       (n_repeats, n_points)),
-                                     ('distance', np.float, n_points)])
+                                     ('distance', np.float64, n_points)])
     distance_array['depth'] = gcz
     distance_array['lon'] = point_data[:,0]
     distance_array['lat'] = point_data[:,1]
